@@ -10,6 +10,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
+import Grid from '@material-ui/core/Grid';
+import Map from '../googleMapApi';
+import Search from '../SearchBar';
+import Button from '@material-ui/core/Button';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
 const drawerWidth = 240;
@@ -23,11 +27,15 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     width: '100%',
+    marginTop:'5px',
+    
   },
   appBar: {
     position: 'absolute',
     backgroundColor:'white',
-    color:'black'
+    color:'black',
+    
+  
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -45,6 +53,9 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
 });
 
@@ -74,6 +85,7 @@ class Navigation extends React.Component {
       <div className={classes.root}>
         <AppBar className={classes.appBar}>
           <Toolbar>
+          
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -82,9 +94,50 @@ class Navigation extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              Responsive drawer
+            <Grid container spacing={8}> 
+          <Grid item xs={6} md={3}>
+            <Typography variant="body2" color="inherit">
+              <img src={require('../resource/images/smallogo.png')} alt="logo"/>
+              PAKISTAN
             </Typography>
+            </Grid>
+          
+            <Hidden smDown>   
+              <Grid item xs={3} md={3} className="paddingTop">
+                {/* <Map /> */}
+              </Grid>
+              </Hidden>
+              <Grid item xs={5} md={3} className="paddingTop">
+                {/* <Search /> */}
+              </Grid>
+               <Grid item xs={1} md={3} className="paddingTopButton">
+               <Hidden smDown>
+               <Button variant="outlined" size="small" color="primary" className={classes.button}>
+               <i class="material-icons iconSize">
+            search
+            </i>
+                  Search
+                </Button>
+               </Hidden>
+                <Hidden smUp>
+                <Button variant="fab" mini color="secondary" aria-label="Add" className={classes.button}>
+                <i class="material-icons iconFixfield">
+                search
+                 </i>
+                </Button>
+                </Hidden>
+                 <Hidden smDown>
+                 <Button variant="outlined" size="small" color="primary" className={classes.button}>
+                 <i class="material-icons iconSize">
+                  note_add
+                  </i>
+                 Post an Ad
+                </Button>
+                 </Hidden>
+                 
+               </Grid>   
+
+            </Grid>
           </Toolbar>
         </AppBar>
         <Hidden mdUp>

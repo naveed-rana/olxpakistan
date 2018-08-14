@@ -17,7 +17,7 @@ class Footer extends Component {
                 <Grid container spacing={8} > 
                   <Grid item xs={12} sm={12} md={4} >
                  <img src={logo} alt="logo"/>
-                  <Typography  paragraph  className="peraColor">
+                  <Typography  paragraph variant="caption"   className="peraColor">
                   OLX is the world's leading classifieds platform which provides local communities in high-growth markets with vibrant online marketplaces: OLX connects local people to buy, sell or exchange used goods and services by making it fast and easy for anyone to post a listing through their mobile phone or on the web.
               </Typography>
                   </Grid>
@@ -25,7 +25,8 @@ class Footer extends Component {
                   <Typography variant="body2" > 
                        IMPORTANT LINKS
                      </Typography>
-                  <List >
+                     
+                  <List className="fontSizeSet">
                        <ListItem align="center">
                        <ListItemText
                       secondary="Locations Map"
@@ -55,7 +56,7 @@ class Footer extends Component {
                        CONTACTS
                      </Typography>
 
-                       <List>
+                       <List className="fontSizeSet">
                        <ListItem>
                     <ListItemAvatar>
                       <Avatar>
@@ -77,7 +78,7 @@ class Footer extends Component {
                     />
                       </ListItem>
                        </List>
-                       <Typography variant="body2" > 
+                       <Typography variant="caption" > 
                          <img src={require('../resource/images/download.png')} alt="fb"/>
                          <img src={require('../resource/images/download (1).png')} alt="fb"/>
                          <img src={require('../resource/images/insta.jpg')} alt="fb"/>

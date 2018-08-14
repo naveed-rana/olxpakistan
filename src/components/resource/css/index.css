@@ -42,7 +42,27 @@ body{
     position: relative;
     top:9px;
     padding:0 5px; 
+    color:#dbdbdb;
+}
+.iconFixfield{
+    color:#dbdbdb;
 }
 .paddingLeft{
     padding-left: 30px;
+}
+.fontSizeSet p{
+     font-size: 12px !important;
+}
+.mapInput{
+    padding: 20px !important;
+}
+
+.paddingTop{
+    padding-top: 20px !important;
+}
+.paddingTopButton{
+    padding-top: 10px !important;
+}
+.iconSize{
+    font-size: 18px !important;
 }
