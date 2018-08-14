@@ -26,10 +26,8 @@ const styles = theme => ({
   },
   appBar: {
     position: 'absolute',
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
+    backgroundColor:'white',
+    color:'black'
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -105,17 +103,7 @@ class Navigation extends React.Component {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden smDown implementation="css">
-          <Drawer
-            variant="permanent"
-            open
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
+      
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
