@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Map from '../googleMapApi';
 import Search from '../SearchBar';
 import Button from '@material-ui/core/Button';
+import {BrowserRouter as Router,Link} from 'react-router-dom';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
 const drawerWidth = 240;
@@ -82,10 +83,31 @@ class Navigation extends React.Component {
     );
 
     return (
+      <Router>
       <div className={classes.root}>
-        <AppBar className={classes.appBar}>
+            <AppBar className={classes.appBar}>
           <Toolbar>
           
+            
+            <Grid container spacing={8}> 
+          <Grid item xs={6} md={3}>
+            <Typography variant="body2" color="inherit">
+              <img src={require('../resource/images/smallogo.png')} alt="logo"/>
+              PAKISTAN
+            </Typography>
+            </Grid>
+
+            <Hidden mdUp>
+            <Grid item xs={6} md={1} align="right">
+            
+           <Link to=""><i class="material-icons iconFixOnSmile">
+            search
+            </i></Link>
+           
+            <Link to=""><i class="material-icons iconFixOnSmile">
+            note_add
+            </i></Link>
+
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -94,48 +116,34 @@ class Navigation extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Grid container spacing={8}> 
-          <Grid item xs={6} md={3}>
-            <Typography variant="body2" color="inherit">
-              <img src={require('../resource/images/smallogo.png')} alt="logo"/>
-              PAKISTAN
-            </Typography>
             </Grid>
+            
+            </Hidden>
           
             <Hidden smDown>   
               <Grid item xs={3} md={3} className="paddingTop">
                 <Map />
               </Grid>
-              </Hidden>
+             
               <Grid item xs={5} md={3} className="paddingTop">
-                {/* <Search /> */}
+                <Search />
               </Grid>
                <Grid item xs={1} md={3} className="paddingTopButton">
-               <Hidden smDown>
+               
                <Button variant="outlined" size="small" color="primary" className={classes.button}>
                <i class="material-icons iconSize">
             search
             </i>
                   Search
                 </Button>
-               </Hidden>
-                <Hidden smUp>
-                <Button variant="fab" mini color="secondary" aria-label="Add" className={classes.button}>
-                <i class="material-icons iconFixfield">
-                search
-                 </i>
-                </Button>
-                </Hidden>
-                 <Hidden smDown>
                  <Button variant="outlined" size="small" color="primary" className={classes.button}>
                  <i class="material-icons iconSize">
                   note_add
                   </i>
                  Post an Ad
-                </Button>
-                 </Hidden>
-                 
+                </Button>    
                </Grid>   
+               </Hidden>
 
             </Grid>
           </Toolbar>
@@ -161,7 +169,9 @@ class Navigation extends React.Component {
           <div className={classes.toolbar} />
           <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
         </main>
+        
       </div>
+      </Router>
     );
   }
 }

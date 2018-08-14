@@ -44,6 +44,11 @@ body{
     padding:0 5px; 
     color:#dbdbdb;
 }
+.iconFixOnSmile{
+    position: relative;
+    top:9px;
+    padding:0 5px; 
+}
 .iconFixfield{
     color:#dbdbdb;
 }
