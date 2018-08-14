@@ -104,7 +104,7 @@ class Navigation extends React.Component {
           
             <Hidden smDown>   
               <Grid item xs={3} md={3} className="paddingTop">
-                {/* <Map /> */}
+                <Map />
               </Grid>
               </Hidden>
               <Grid item xs={5} md={3} className="paddingTop">
