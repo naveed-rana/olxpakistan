@@ -8,7 +8,7 @@ import * as routes from '../constants';
 function Routes() {
     return (
         <div>
-       
+        <Route exact path={routes.POSTING} component={() => <Posting />}/>
         <Route exact path={routes.SEARCH} component={() => <Search />}/>
         </div>
     )
