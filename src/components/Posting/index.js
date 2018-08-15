@@ -4,6 +4,8 @@ import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import TextField from '@material-ui/core/TextField';
+import Forms from '../PostingForms';
 
 class Posting extends Component {
     render() {
@@ -20,6 +22,8 @@ class Posting extends Component {
                    POST AN ADD
                  </Typography>
                    <Divider />
+
+                     <Forms />
                 </Paper>
               </Grid>
               <Hidden smDown>

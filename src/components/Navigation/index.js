@@ -24,7 +24,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 430,
+    minHeight: 730,
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -102,11 +102,11 @@ class Navigation extends React.Component {
             <Hidden mdUp>
             <Grid item xs={6} md={1} align="right">
             
-           <Link to=""><i class="material-icons iconFixOnSmile">
+           <Link to=""><i className="material-icons iconFixOnSmile">
             search
             </i></Link>
            
-            <Link to=""><i class="material-icons iconFixOnSmile">
+            <Link to=""><i className="material-icons iconFixOnSmile">
             note_add
             </i></Link>
 
@@ -133,13 +133,13 @@ class Navigation extends React.Component {
                <Grid item xs={1} md={3} className="paddingTopButton">
                
                <Button component={Link} to={SEARCH} variant="outlined" size="small" color="primary" className={classes.button}>
-               <i class="material-icons iconSize">
+               <i className="material-icons iconSize">
                 search
                 </i>
                   Search
                 </Button>
                  <Button  component={Link} to={POSTING} variant="outlined" size="small" color="primary" className={classes.button}>
-                 <i class="material-icons iconSize">
+                 <i className="material-icons iconSize">
                   note_add
                   </i>
                  Post an Ad
