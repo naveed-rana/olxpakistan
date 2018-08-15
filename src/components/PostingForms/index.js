@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Map from '../googleMapApi';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const styles = theme => ({
   root: {
@@ -37,110 +38,162 @@ function getStepContent(step) {
   switch (step) {
     case 0:
       return (
-    <Grid container spacing={8} alignItems="flex-end">
-        <Grid
-            item
-            style={{
-            textAlign: 'right'
-        }}
-            md={1}>
-            <i className="material-icons">
-            subtitles
-            </i>
-        </Grid>
-        <Grid item md={11}>
-            <TextField
-                fullWidth={true}
-                required={true}
-                label="Branch Incharge"
-                />
-        </Grid>
-    </Grid>
-      )
-          
-    case 1:
-      return 'An ad group contains one or more ads which target a shared set of keywords.';
-    case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-    case 3:
-      return (
         <Grid container spacing={8}> 
           <Grid item xs={12} md={12} className="paddingTop">
-          <Grid container spacing={8} alignItems="flex-end">
-        <Grid
-            item
-            style={{
-            textAlign: 'right'
-             }}
-            md={1}
-            xs={2}
-            >
-            <i className="material-icons">
-            subtitles
-            </i>
-        </Grid>
-        <Grid item md={11} xs={10}>
-            <TextField
+          <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="material-icons iconFixfield">
+                            account_box
+                         </i>
+                      </InputAdornment>
+                    ),
+                  }}
                 fullWidth={true}
                 required={true}
-                label="Your Name"
+                placeholder="Your Name"
                 />
-        </Grid>
-    </Grid>
           </Grid>
           <Grid item xs={12} md={12}>
-          <Grid container spacing={8} alignItems="flex-end">
-        <Grid
-            item
-            style={{
-            textAlign: 'right'
-             }}
-            md={1}
-            xs={2}
-            >
-            <i className="material-icons">
-            subtitles
-            </i>
-        </Grid>
-        <Grid item md={11} xs={10}> 
-            <TextField
+          <TextField
                    InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <i className="material-icons iconFixfield">
-                        location_on
+                        phone
                         </i>
                       </InputAdornment>
                     ),
                   }}
                 fullWidth={true}
                 required={true}
-                label="Phone"
+                placeholder="Phone Number"
                 />
-        </Grid>
-    </Grid>
           </Grid>
           <Grid item xs={12} md={12} className="paddingTop">
-            <Grid container spacing={8}> 
-            <Grid
-            item
-            style={{
-            textAlign: 'right'
-             }}
-            md={1}
-            xs={2}
-            >
-            <i className="material-icons">
-            subtitles
-            </i>
-        </Grid>
-              <Grid item xs={10} md={11}>
               <Map />
-              </Grid>
-            </Grid>
+          </Grid>
+        </Grid>
+      );
+          
+    case 1:
+      return  (
+        <Grid container spacing={8}> 
+          <Grid item xs={12} md={12} className="paddingTop">
+          <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="material-icons iconFixfield">
+                            account_box
+                         </i>
+                      </InputAdornment>
+                    ),
+                  }}
+                fullWidth={true}
+                required={true}
+                placeholder="Your Name"
+                />
+          </Grid>
+          <Grid item xs={12} md={12}>
+          <TextField
+                   InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i className="material-icons iconFixfield">
+                        phone
+                        </i>
+                      </InputAdornment>
+                    ),
+                  }}
+                fullWidth={true}
+                required={true}
+                placeholder="Phone Number"
+                />
+          </Grid>
+          <Grid item xs={12} md={12} className="paddingTop">
+              <Map />
+          </Grid>
+        </Grid>
+      );
+    case 2:
+      return  (
+        <Grid container spacing={8}> 
+          <Grid item xs={12} md={12} className="paddingTop">
+          <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="material-icons iconFixfield">
+                            account_box
+                         </i>
+                      </InputAdornment>
+                    ),
+                  }}
+                fullWidth={true}
+                required={true}
+                placeholder="Your Name"
+                />
+          </Grid>
+          <Grid item xs={12} md={12}>
+          <TextField
+                   InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i className="material-icons iconFixfield">
+                        phone
+                        </i>
+                      </InputAdornment>
+                    ),
+                  }}
+                fullWidth={true}
+                required={true}
+                placeholder="Phone Number"
+                />
+          </Grid>
+          <Grid item xs={12} md={12} className="paddingTop">
+              <Map />
+          </Grid>
+        </Grid>
+      );
+    case 3:
+      return (
+        <Grid container spacing={8}> 
+          <Grid item xs={12} md={12} className="paddingTop">
+          <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="material-icons iconFixfield">
+                            account_box
+                         </i>
+                      </InputAdornment>
+                    ),
+                  }}
+                fullWidth={true}
+                required={true}
+                placeholder="Your Name"
+                />
+          </Grid>
+          <Grid item xs={12} md={12}>
+          <TextField
+                   InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i className="material-icons iconFixfield">
+                        phone
+                        </i>
+                      </InputAdornment>
+                    ),
+                  }}
+                fullWidth={true}
+                required={true}
+                placeholder="Phone Number"
+                />
+          </Grid>
+          <Grid item xs={12} md={12} className="paddingTop">
+              <Map />
           </Grid>
         </Grid>
       );
