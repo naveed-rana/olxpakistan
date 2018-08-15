@@ -16,6 +16,8 @@ import Search from '../SearchBar';
 import Button from '@material-ui/core/Button';
 import {BrowserRouter as Router,Link} from 'react-router-dom';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
+import Routes from '../Routes';
+import {POSTING,SEARCH} from '../constants';
 
 const drawerWidth = 240;
 
@@ -28,7 +30,7 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     width: '100%',
-    marginTop:'5px',
+    marginTop:'15px',
     
   },
   appBar: {
@@ -130,13 +132,13 @@ class Navigation extends React.Component {
               </Grid>
                <Grid item xs={1} md={3} className="paddingTopButton">
                
-               <Button variant="outlined" size="small" color="primary" className={classes.button}>
+               <Button component={Link} to={SEARCH} variant="outlined" size="small" color="primary" className={classes.button}>
                <i class="material-icons iconSize">
-            search
-            </i>
+                search
+                </i>
                   Search
                 </Button>
-                 <Button variant="outlined" size="small" color="primary" className={classes.button}>
+                 <Button  component={Link} to={POSTING} variant="outlined" size="small" color="primary" className={classes.button}>
                  <i class="material-icons iconSize">
                   note_add
                   </i>
@@ -167,7 +169,8 @@ class Navigation extends React.Component {
       
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+
+          <Routes />
         </main>
         
       </div>

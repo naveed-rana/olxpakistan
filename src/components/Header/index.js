@@ -11,7 +11,7 @@ class HeaderBar extends Component {
         return (
             <div>
                 <Router>
-                <Paper className="headerFix" elevation={1}>
+                <Paper className="headerFix" elevation={5}>
                  <Grid container spacing={8}>
                    <Hidden smDown>
                    <Grid item xs={12} md={9} >
