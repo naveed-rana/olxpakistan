@@ -71,3 +71,6 @@ body{
 .iconSize{
     font-size: 18px !important;
 }
+.postingPaper{
+    padding: 10px;
+}
