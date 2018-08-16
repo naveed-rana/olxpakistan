@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import Map from '../googleMapApi';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Media from './media';
+import addImg from '../resource/images/add_image.png';
 
 const styles = theme => ({
   root: {
@@ -34,147 +35,232 @@ function getSteps() {
   return ['Product Category', 'Product Details','Product Media','Personel Information'];
 }
 
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return (
-        <Grid container spacing={8}> 
-          <Grid item xs={12} md={12} className="paddingTop">
-          <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i className="material-icons iconFixfield">
-                            account_box
-                         </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Your Name"
-                />
-          </Grid>
-          <Grid item xs={12} md={12}>
-          <TextField
-                   InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i className="material-icons iconFixfield">
-                        phone
-                        </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Phone Number"
-                />
-          </Grid>
-          <Grid item xs={12} md={12} className="paddingTop">
-              <Map />
-          </Grid>
-        </Grid>
-      );
-          
-    case 1:
-      return  (
-        <Grid container spacing={8}> 
-          <Grid item xs={12} md={12} className="paddingTop">
-          <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i className="material-icons iconFixfield">
-                            account_box
-                         </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Your Name"
-                />
-          </Grid>
-          <Grid item xs={12} md={12}>
-          <TextField
-                   InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i className="material-icons iconFixfield">
-                        phone
-                        </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Phone Number"
-                />
-          </Grid>
-          <Grid item xs={12} md={12} className="paddingTop">
-              <Map />
-          </Grid>
-        </Grid>
-      );
-    case 2:
-      return  (
-       <Media />
-      );
-    case 3:
-      return (
-        <Grid container spacing={8}> 
-          <Grid item xs={12} md={12} className="paddingTop">
-          <Typography variant="caption" align="center"> 
-                      Please Add Your Personel Information Consciously!
-                    </Typography>
-          <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i class="material-icons iconFixfield">
-                            account_box
-                         </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Your Name"
-                />
-          </Grid>
-          <Grid item xs={12} md={12}>
-          <TextField
-                   InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i className="material-icons iconFixfield">
-                        phone
-                        </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Phone Number"
-                />
-          </Grid>
-          <Grid item xs={12} md={12} className="paddingTop">
-              <Map />
-          </Grid>
-        </Grid>
-      );
-    
-    default:
-      return 'Unknown step';
+class VerticalLinearStepper extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      activeStep: 0,
+      image1:addImg,
+      image2:addImg,
+      image3:addImg,
+      image4:addImg,
+      image5:addImg,
+      image6:addImg
+    };
   }
-}
 
-class VerticalLinearStepper extends React.Component {
-  state = {
-    activeStep: 0,
-  };
+  getStepContent=(step)=> {
+    switch (step) {
+      case 0:
+        return (
+          <Grid container spacing={8}> 
+            <Grid item xs={12} md={12} className="paddingTop">
+            <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                              account_box
+                           </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  required={true}
+                  placeholder="Your Name"
+                  />
+            </Grid>
+            <Grid item xs={12} md={12}>
+            <TextField
+                     InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                          phone
+                          </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  required={true}
+                  placeholder="Phone Number"
+                  />
+            </Grid>
+            <Grid item xs={12} md={12} className="paddingTop">
+                <Map />
+            </Grid>
+          </Grid>
+        );
+            
+      case 1:
+        return  (
+          <Grid container spacing={8}> 
+            <Grid item xs={12} md={12} className="paddingTop">
+            <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                              account_box
+                           </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  required={true}
+                  placeholder="Your Name"
+                  />
+            </Grid>
+            <Grid item xs={12} md={12}>
+            <TextField
+                     InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                          phone
+                          </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  required={true}
+                  placeholder="Phone Number"
+                  />
+            </Grid>
+            <Grid item xs={12} md={12} className="paddingTop">
+                <Map />
+            </Grid>
+          </Grid>
+        );
+      case 2:
+        return  (
+          <div>
+                  <Grid container spacing={8}> 
+                    <Grid item xs={12} md={12}>
+                      <Typography variant="caption" align="center"> 
+                        Please Add Your Products Images That Best Describe Your Product!
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} md={4}>                  
+                    <div className="image-upload">
+                      <label htmlFor="file-input">
+                          <img src={this.state.image1}/>
+                      </label>
+                     <input id="file-input" accept="image/*" capture
+                      name="image1"
+                      type="file"
+                     onChange={this.fileChangeHandler}
+                     />
+                    </div>
+                    </Grid>
+                    <Grid item xs={12} md={4}>                  
+                    <div className="image-upload">
+                      <label htmlFor="file-input1">
+                          <img src={this.state.image2}/>
+                      </label>
+                     <input id="file-input1" accept="image/*" capture type="file"
+                     name="image2"
+                     onChange={this.fileChangeHandler}
+                     />
+                    </div>
+                    </Grid>
+                    <Grid item xs={12} md={4}>                  
+                    <div className="image-upload">
+                      <label htmlFor="file-input2">
+                          <img src={this.state.image3}/>
+                      </label>
+                     <input id="file-input2" accept="image/*" capture 
+                     name="image3"
+                     onChange={this.fileChangeHandler}
+                     type="file"/>
+                    </div>
+                    </Grid>
+                    <Grid item xs={12} md={4}>                  
+                    <div className="image-upload">
+                      <label htmlFor="file-input3">
+                          <img src={this.state.image4}/>
+                      </label>
+                     <input id="file-input3" accept="image/*" capture
+                     name="image4"
+                     onChange={this.fileChangeHandler}
+                     type="file"/>
+                    </div>
+                    </Grid>
+                    <Grid item xs={12} md={4}>                  
+                    <div className="image-upload">
+                      <label htmlFor="file-input4">
+                          <img src={this.state.image5}/>
+                      </label>
+                     <input id="file-input4" accept="image/*" capture
+                     name="image5"
+                     onChange={this.fileChangeHandler}
+                     type="file"/>
+                    </div>
+                    </Grid>
+                    <Grid item xs={12} md={4}>                  
+                    <div className="image-upload">
+                      <label htmlFor="file-input6">
+                          <img src={this.state.image6}/>
+                      </label>
+                     <input id="file-input6" accept="image/*"
+                     name="image6"
+                     onChange={this.fileChangeHandler}
+                     capture type="file"/>
+                    </div>
+                    </Grid>
+                  </Grid>
+              </div>
+        );
+      case 3:
+        return (
+          <Grid container spacing={8}> 
+            <Grid item xs={12} md={12} className="paddingTop">
+            <Typography variant="caption" align="center"> 
+                        Please Add Your Personel Information Consciously!
+                      </Typography>
+            <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i class="material-icons iconFixfield">
+                              account_box
+                           </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  required={true}
+                  placeholder="Your Name"
+                  />
+            </Grid>
+            <Grid item xs={12} md={12}>
+            <TextField
+                     InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                          phone
+                          </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  required={true}
+                  placeholder="Phone Number"
+                  />
+            </Grid>
+            <Grid item xs={12} md={12} className="paddingTop">
+                <Map />
+            </Grid>
+          </Grid>
+        );
+      
+      default:
+        return 'Unknown step';
+    }
+  }
+  
+  
 
   handleNext = () => {
     this.setState(state => ({
@@ -187,6 +273,15 @@ class VerticalLinearStepper extends React.Component {
       activeStep: state.activeStep - 1,
     }));
   };
+
+  fileChangeHandler=(event)=>{
+    const name = event.target.name;
+    if(event.target.files[0]){
+    this.setState({
+         [name]: URL.createObjectURL(event.target.files[0])
+    })
+  }
+   }
 
   handleReset = () => {
     this.setState({
@@ -207,7 +302,7 @@ class VerticalLinearStepper extends React.Component {
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
                 <StepContent>
-                  {getStepContent(index)}
+                  {this.getStepContent(index)}
                   <div className={classes.actionsContainer}>
                     <div className="paddingTop">
                       <Button
