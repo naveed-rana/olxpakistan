@@ -222,7 +222,7 @@ class VerticalLinearStepper extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i class="material-icons iconFixfield">
+                          <i className="material-icons iconFixfield">
                               account_box
                            </i>
                         </InputAdornment>

@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import {BrowserRouter as Router,Link} from 'react-router-dom';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 import Routes from '../Routes';
+import Header from '../Header';
 import {POSTING,SEARCH} from '../constants';
 
 const drawerWidth = 240;
@@ -86,6 +87,7 @@ class Navigation extends React.Component {
 
     return (
       <Router>
+        <div><Header/>
       <div className={classes.root}>
             <AppBar className={classes.appBar}>
           <Toolbar>
@@ -102,11 +104,11 @@ class Navigation extends React.Component {
             <Hidden mdUp>
             <Grid item xs={6} md={1} align="right">
             
-           <Link to=""><i className="material-icons iconFixOnSmile">
+           <Link to={SEARCH}><i className="material-icons iconFixOnSmile">
             search
             </i></Link>
            
-            <Link to=""><i className="material-icons iconFixOnSmile">
+            <Link to={POSTING}><i className="material-icons iconFixOnSmile">
             note_add
             </i></Link>
 
@@ -173,6 +175,7 @@ class Navigation extends React.Component {
           <Routes />
         </main>
         
+      </div>
       </div>
       </Router>
     );

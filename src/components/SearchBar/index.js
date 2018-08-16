@@ -57,7 +57,7 @@ function renderInputComponent(inputProps) {
         disableUnderline:true,
         startAdornment: (
           <InputAdornment position="start">
-            <i class="material-icons iconFixfield">
+            <i className="material-icons iconFixfield">
             search
             </i>
           </InputAdornment>
