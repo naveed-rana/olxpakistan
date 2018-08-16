@@ -4,14 +4,14 @@ import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
-import Icon from '@material-ui/core/Icon';
+import Divider from '@material-ui/core/Divider';
 
 class HeaderBar extends Component {
     render() {
         return (
             <div>
                 <Router>
-                <Paper className="headerFix" elevation={5}>
+                <Paper className="headerFix" elevation={1}>
                  <Grid container spacing={8}>
                    <Hidden smDown>
                    <Grid item xs={12} md={9} >
@@ -28,7 +28,9 @@ class HeaderBar extends Component {
             
                    </Grid>
                  </Grid>
+                 <Divider />
                 </Paper>
+                
                 </Router>
             </div>
         )

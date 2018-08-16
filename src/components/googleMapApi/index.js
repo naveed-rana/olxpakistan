@@ -39,6 +39,7 @@ class LocationSearchInput extends React.Component {
             <TextField
          
          InputProps={{
+          disableUnderline:true,
             startAdornment: (
               <InputAdornment position="start">
                 <i className="material-icons iconFixfield">

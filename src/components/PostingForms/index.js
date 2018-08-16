@@ -55,7 +55,7 @@ class VerticalLinearStepper extends Component {
         return (
           <Grid container spacing={8}> 
             <Grid item xs={12} md={12} className="paddingTop">
-            <TextField
+                <TextField
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">

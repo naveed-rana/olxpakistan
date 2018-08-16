@@ -54,6 +54,7 @@ function renderInputComponent(inputProps) {
     <TextField
       fullWidth
       InputProps={{
+        disableUnderline:true,
         startAdornment: (
           <InputAdornment position="start">
             <i class="material-icons iconFixfield">

@@ -5,25 +5,21 @@ const passport = require('passport')
 var session = require('express-session');
 var mongoose = require('mongoose');
 var setuppassport = require('./server/Passport');
-
-// var indexRouter = require('./server/routes/index');
+var dbURI = require('./server/config');
 var usersRouter = require('./server/routes/users');
 var feedBackRouter = require('./server/routes/feedback');
 var app = express();
-mongoose.connect('mongodb://localhost/local', function (err) {
- 
+
+//db connection
+mongoose.connect(dbURI, function (err) {
    if (err) throw err;
- 
    console.log('Successfully connected');
- 
 });
 
 app.use(bodyParser.urlencoded({
     extended: true
   }));
 app.use(bodyParser.json());
-
-
 
 
 app.use(session({
