@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Map from '../googleMapApi';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Media from './media';
 
 const styles = theme => ({
   root: {
@@ -44,7 +45,7 @@ function getStepContent(step) {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <i class="material-icons iconFixfield">
+                        <i className="material-icons iconFixfield">
                             account_box
                          </i>
                       </InputAdornment>
@@ -85,7 +86,7 @@ function getStepContent(step) {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <i class="material-icons iconFixfield">
+                        <i className="material-icons iconFixfield">
                             account_box
                          </i>
                       </InputAdornment>
@@ -119,43 +120,7 @@ function getStepContent(step) {
       );
     case 2:
       return  (
-        <Grid container spacing={8}> 
-          <Grid item xs={12} md={12} className="paddingTop">
-          <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i class="material-icons iconFixfield">
-                            account_box
-                         </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Your Name"
-                />
-          </Grid>
-          <Grid item xs={12} md={12}>
-          <TextField
-                   InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i className="material-icons iconFixfield">
-                        phone
-                        </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Phone Number"
-                />
-          </Grid>
-          <Grid item xs={12} md={12} className="paddingTop">
-              <Map />
-          </Grid>
-        </Grid>
+       <Media />
       );
     case 3:
       return (

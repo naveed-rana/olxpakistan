@@ -57,8 +57,8 @@ class LocationSearchInput extends React.Component {
         
         />   
 
-            <div style={{ position: 'absolute',zIndex: 1100,marginTop:10,border:'1px solid #dbdbdb'}}>
-              {loading && <div>Loading...</div>}
+            <div style={{ position: 'absolute',zIndex:1100,marginTop:10,border:'1px solid #dbdbdb'}}>
+              {loading && <div style={{ backgroundColor: '#ffffff', cursor: 'pointer',padding:15,paddingBottom:15,borderBottom:'1px solid #fafafa',paddingRight:20  }}>Loading...</div>}
               {suggestions.map(suggestion => {
                 const className = suggestion.active
                   ? 'suggestion-item--active'
