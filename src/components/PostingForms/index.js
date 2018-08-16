@@ -126,6 +126,9 @@ function getStepContent(step) {
       return (
         <Grid container spacing={8}> 
           <Grid item xs={12} md={12} className="paddingTop">
+          <Typography variant="caption" align="center"> 
+                      Please Add Your Personel Information Consciously!
+                    </Typography>
           <TextField
                   InputProps={{
                     startAdornment: (

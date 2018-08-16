@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-
+import addImg from '../resource/images/add_image.png';
 class Media extends Component {
     render() {
         return (
@@ -14,27 +12,54 @@ class Media extends Component {
                       Please Add Your Products Images That Best Describe Your Product!
                     </Typography>
                   </Grid>
-                  <Grid item xs={12} md={12}>
-                    
-                    <input type="file" id="file1" name="image" accept="image/*" capture style={{display:'none',fontSize: '20px',
-                    height:'80px'}}/>
-                    <img src={require('../resource/images/add.png')} id="upfile1" style={{cursor:'pointer'}} />
+                  <Grid item xs={12} md={4}>                  
+                  <div className="image-upload">
+                    <label for="file-input">
+                        <img src={addImg}/>
+                    </label>
+                   <input id="file-input" accept="image/*" capture type="file"/>
+                  </div>
                   </Grid>
-                  <TextField
-                  type="file"
-                   InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <i className="material-icons iconFixfield">
-                        phone
-                        </i>
-                      </InputAdornment>
-                    ),
-                  }}
-                fullWidth={true}
-                required={true}
-                placeholder="Phone Number"
-                />
+                  <Grid item xs={12} md={4}>                  
+                  <div className="image-upload">
+                    <label for="file-input">
+                        <img src={addImg}/>
+                    </label>
+                   <input id="file-input" accept="image/*" capture type="file"/>
+                  </div>
+                  </Grid>
+                  <Grid item xs={12} md={4}>                  
+                  <div className="image-upload">
+                    <label for="file-input">
+                        <img src={addImg}/>
+                    </label>
+                   <input id="file-input" accept="image/*" capture type="file"/>
+                  </div>
+                  </Grid>
+                  <Grid item xs={12} md={4}>                  
+                  <div className="image-upload">
+                    <label for="file-input">
+                        <img src={addImg}/>
+                    </label>
+                   <input id="file-input" accept="image/*" capture type="file"/>
+                  </div>
+                  </Grid>
+                  <Grid item xs={12} md={4}>                  
+                  <div className="image-upload">
+                    <label for="file-input">
+                        <img src={addImg}/>
+                    </label>
+                   <input id="file-input" accept="image/*" capture type="file"/>
+                  </div>
+                  </Grid>
+                  <Grid item xs={12} md={4}>                  
+                  <div className="image-upload">
+                    <label for="file-input">
+                        <img src={addImg}/>
+                    </label>
+                   <input id="file-input" accept="image/*" capture type="file"/>
+                  </div>
+                  </Grid>
                 </Grid>
             </div>
         )
