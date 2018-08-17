@@ -98,7 +98,8 @@ body{
 padding: 60px 30px 20px 30px;
 }
 .loginbtn{
-    padding: 10px 9vw 10px 9vw !important;
+    padding: 10px 0 !important;
+    width: 100% !important;
 }
 .largeIcon{
     font-size: 30px !important;
@@ -116,4 +117,8 @@ padding: 60px 30px 20px 30px;
 .mangaeWithSelect{
     position: relative;
     top: 6px !important;
+}
+.singUpBtn{
+    padding: 20px 0;
+    width: 100% !important;
 }

@@ -7,10 +7,10 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import Map from '../googleMapApi';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import data from './pk.json';
 import Divider from '@material-ui/core/Divider';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 class SignUp extends Component {
 
@@ -24,12 +24,20 @@ class SignUp extends Component {
             cellNo:'',
             address: '',
             city:'',
+            cities:[],
             country:'',
-            province:'choose your province'
+            province:''
         }
     }
 
-    
+    onSelectHandler=(e)=>{
+      let cities=[]
+     cities = data.filter((item)=> item.admin === e.target.value);
+      this.setState({
+        province:e.target.value,
+        cities
+      })
+    }
 
     onChangeHandler = (e) => {
         let name = e.target.name;
@@ -41,7 +49,7 @@ class SignUp extends Component {
    }
     render() {
       console.log(this.state);
-      
+      const {cities} = this.state;
         return (
             <div>
                 <Grid container spacing={8}> 
@@ -56,7 +64,7 @@ class SignUp extends Component {
                      <Typography variant="display1" align="center">
                      <i className="material-icons largeIcon">account_box
                     </i>
-                    SIGNUP
+                    SignUp
                     </Typography>  
                      <Grid container spacing={8} className="LoginContainer"> 
                        <Grid item xs={12} md={6} className="paddingTop">
@@ -150,7 +158,9 @@ class SignUp extends Component {
                     add_comment
 
                            </i>
-                      <select name="province" className="selectSignUp">
+                      <select name="province"
+                      onChange={this.onSelectHandler}
+                      className="selectSignUp">
                       <option selected disabled value="none">
                       Choose your province
                       </option>
@@ -181,10 +191,27 @@ class SignUp extends Component {
                       </select>
                       <Divider />
                     </Grid>
-                     
+                     {cities.length>0 ? 
                      <Grid item xs={12} md={12} className="paddingTop">
                        
+                    <i className="material-icons iconFixfield mangaeWithSelect">
+                    add_comment
+
+                           </i>
+                      <select name="province" className="selectSignUp">
+                      <option selected disabled value="none">
+                      Choose your City
+                      </option>
+                      {cities.map((item)=>{
+                        return(
+                      <option value={item.city}>
+                       {item.city}
+                      </option>)
+                      })}
+                      </select>
+                      <Divider />
                      </Grid>
+                     :<div></div>}
 
                      <Grid item xs={12} md={12} className="paddingTop">
                      <TextField
@@ -208,6 +235,25 @@ class SignUp extends Component {
                   />
                        </Grid>
 
+                       <Grid item xs={12} md={12} className="paddingTop">
+                         <Typography variant="caption" > 
+                         <FormControlLabel
+                         control={< Checkbox value = "checkedB" color = "primary" />}/>
+                         Copyright © 2018. OLX Pakistan - All Rights Reserved -
+Reproduction of material from olxpakistan pages without prior written permission from OLX is strictly prohibited and may result in legal action.
+Reproduction of material containing the OLX watermark constitutes unauthorized use of the OLX trade mark and may also result in legal action. 
+                         </Typography>
+                       </Grid>
+                       <Grid item xs={12} md={12} align="center" className="paddingTop">
+                                        <Button
+                                        type="submit"
+                                        variant="contained" size="small" color="primary" className="singUpBtn">
+                                            Submit
+                                            <i className="material-icons iconSize">
+                                                send
+                                            </i>
+                                        </Button>
+                                    </Grid>
                      </Grid>
                  
                    </Paper> 

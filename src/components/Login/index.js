@@ -41,10 +41,10 @@ class Login extends Component {
 
                             <Typography variant="display1" align="center">
                                <i className="material-icons largeIcon">account_box
-                                </i>LOGIN
+                                </i>Login
                             </Typography>
                             <Grid container spacing={8} className="LoginContainer">
-                                <form>
+                              
                                     <Grid item xs={12} md={12} className="paddingTop">
                                         <TextField
                                             type="email"
@@ -123,7 +123,7 @@ class Login extends Component {
                                         </Grid>
                                     </Hidden>
                                     </Grid>
-                                </form>
+                           
                             </Grid>
 
                         </Paper>
