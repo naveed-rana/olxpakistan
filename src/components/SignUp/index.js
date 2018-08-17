@@ -6,7 +6,10 @@ import Hidden from '@material-ui/core/Hidden';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
-import Map from ''
+import Map from '../googleMapApi';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import data from './pk.json';
 
 class SignUp extends Component {
 
@@ -20,18 +23,33 @@ class SignUp extends Component {
             cellNo:'',
             address: '',
             city:'',
-            province:'',
-            country:''
+            country:'',
+            province:'choose your province'
         }
     }
+
+    componentDidMount() {
+      var branches = [];
+      data.forEach(item => {
+     if(branches.indexOf(item.admin) === -1){
+       branches.push(item.admin);
+     }
+   });
+      console.log(branches);
+    }
+    
 
     onChangeHandler = (e) => {
         let name = e.target.name;
         let value = e.target.value;
         this.setState({[name]: value});
     }
-
+   getAddress=(address)=>{
+      this.setState({address})
+   }
     render() {
+      console.log(this.state);
+      
         return (
             <div>
                 <Grid container spacing={8}> 
@@ -131,9 +149,40 @@ class SignUp extends Component {
                     </Grid>
 
                     <Grid item xs={12} md={12} className="paddingTop">
-                      <Map underline={true} />
+                      <Map underline={false} sendAddress={this.getAddress}/>
                     </Grid>
-
+                    
+                    <Grid item xs={12} md={12} className="paddingTop">
+                      <select name="province">
+                      <option value="none">
+                      Choose your province
+                      </option>
+                      <option value="Sindh">
+                      Sindh
+                      </option>
+                      <option value="Punjab">
+                      Punjab
+                      </option>
+                      <option value="Khyber Pakhtunkhwa">
+                      Khyber Pakhtunkhwa
+                      </option>
+                      <option value="Islāmābād">
+                      Islāmābād
+                      </option>
+                      <option value="Balochistān">
+                      Balochistān
+                      </option>
+                      <option value="Gilgit-Baltistan">
+                      Gilgit-Baltistan
+                      </option>
+                      <option value="Federally Administered Tribal Areas">
+                      Federally Administered Tribal Areas
+                      </option>
+                      <option value="Federally Administered Tribal Areas">
+                      Azad Kashmir
+                      </option>
+                      </select>
+                    </Grid>
                      </Grid>
                  
                    </Paper> 

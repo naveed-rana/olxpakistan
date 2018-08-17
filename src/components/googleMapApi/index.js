@@ -6,6 +6,7 @@ import PlacesAutocomplete, {
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
+
 class LocationSearchInput extends React.Component {
   constructor(props) {
     super(props);
@@ -18,8 +19,11 @@ class LocationSearchInput extends React.Component {
 
   handleSelect = address => {
     this.setState({ address:address });
+    if(this.props.sendAddress){
+    this.props.sendAddress(address);
+  }
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
+      .then(results => {getLatLng(results[0])})
       .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error));
   };
@@ -39,7 +43,7 @@ class LocationSearchInput extends React.Component {
             <TextField
          
          InputProps={{
-          disableUnderline:true,
+          disableUnderline:this.props.underline,
             startAdornment: (
               <InputAdornment position="start">
                 <i className="material-icons iconFixfield">
