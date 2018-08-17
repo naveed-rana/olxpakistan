@@ -105,3 +105,15 @@ padding: 60px 30px 20px 30px;
     position: relative;
     top:3px;
 }
+.selectSignUp{
+    border:none !important;
+    width: 95%;
+    padding:10px;
+    font-weight: 400;
+    display: inline-block;
+    outline: none;
+}
+.mangaeWithSelect{
+    position: relative;
+    top: 6px !important;
+}

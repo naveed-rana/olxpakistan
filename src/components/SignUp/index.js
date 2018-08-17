@@ -10,6 +10,7 @@ import Map from '../googleMapApi';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import data from './pk.json';
+import Divider from '@material-ui/core/Divider';
 
 class SignUp extends Component {
 
@@ -28,15 +29,6 @@ class SignUp extends Component {
         }
     }
 
-    componentDidMount() {
-      var branches = [];
-      data.forEach(item => {
-     if(branches.indexOf(item.admin) === -1){
-       branches.push(item.admin);
-     }
-   });
-      console.log(branches);
-    }
     
 
     onChangeHandler = (e) => {
@@ -153,8 +145,13 @@ class SignUp extends Component {
                     </Grid>
                     
                     <Grid item xs={12} md={12} className="paddingTop">
-                      <select name="province">
-                      <option value="none">
+                  
+                    <i className="material-icons iconFixfield mangaeWithSelect">
+                    add_comment
+
+                           </i>
+                      <select name="province" className="selectSignUp">
+                      <option selected disabled value="none">
                       Choose your province
                       </option>
                       <option value="Sindh">
@@ -182,7 +179,35 @@ class SignUp extends Component {
                       Azad Kashmir
                       </option>
                       </select>
+                      <Divider />
                     </Grid>
+                     
+                     <Grid item xs={12} md={12} className="paddingTop">
+                       
+                     </Grid>
+
+                     <Grid item xs={12} md={12} className="paddingTop">
+                     <TextField
+                     readOnly
+                    InputProps={{
+                      
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                          star_half
+                           </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  
+                  type="text"
+                  fullWidth={true}
+                  required={true}
+                  value="Pakistan"
+      
+                  />
+                       </Grid>
+
                      </Grid>
                  
                    </Paper> 
