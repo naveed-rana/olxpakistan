@@ -25,8 +25,8 @@ class SignUp extends Component {
             address: '',
             city:'',
             cities:[],
-            country:'',
-            province:''
+            province:'',
+            checkbox:''
         }
     }
 
@@ -49,7 +49,8 @@ class SignUp extends Component {
    }
     render() {
       console.log(this.state);
-      const {cities} = this.state;
+      const {cities,name,email,password,confirmpassword,cellNo,address,city,province,checkbox} = this.state;
+      const isvalid = name ==='' || email ==='' || password ==='' || confirmpassword ==='' || cellNo ==='' || address ==='' ||  city ===''||province===''|| checkbox===''; 
         return (
             <div>
                 <Grid container spacing={8}> 
@@ -148,6 +149,26 @@ class SignUp extends Component {
                   />
                     </Grid>
 
+                      <Grid item xs={12} md={12} className="paddingTop">
+                    <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                              phone
+                           </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                
+                  fullWidth={true}
+                  required={true}
+                  placeholder="Mobile No."
+                  name="cellNo"
+                  onChange={this.onChangeHandler}
+                  />
+                    </Grid>
+
                     <Grid item xs={12} md={12} className="paddingTop">
                       <Map underline={false} sendAddress={this.getAddress}/>
                     </Grid>
@@ -198,13 +219,15 @@ class SignUp extends Component {
                     add_comment
 
                            </i>
-                      <select name="province" className="selectSignUp">
+                      <select name="city" 
+                      onChange={this.onChangeHandler}
+                      className="selectSignUp">
                       <option selected disabled value="none">
                       Choose your City
                       </option>
-                      {cities.map((item)=>{
+                      {cities.map((item,i)=>{
                         return(
-                      <option value={item.city}>
+                      <option key={i} value={item.city}>
                        {item.city}
                       </option>)
                       })}
@@ -238,7 +261,10 @@ class SignUp extends Component {
                        <Grid item xs={12} md={12} className="paddingTop">
                          <Typography variant="caption" > 
                          <FormControlLabel
-                         control={< Checkbox value = "checkedB" color = "primary" />}/>
+                         control={< Checkbox 
+                         name="checkbox"
+                         onChange={this.onChangeHandler}
+                         value = "checkedB" color = "primary" />}/>
                          Copyright © 2018. OLX Pakistan - All Rights Reserved -
 Reproduction of material from olxpakistan pages without prior written permission from OLX is strictly prohibited and may result in legal action.
 Reproduction of material containing the OLX watermark constitutes unauthorized use of the OLX trade mark and may also result in legal action. 
@@ -246,6 +272,7 @@ Reproduction of material containing the OLX watermark constitutes unauthorized u
                        </Grid>
                        <Grid item xs={12} md={12} align="center" className="paddingTop">
                                         <Button
+                                        disabled={isvalid}
                                         type="submit"
                                         variant="contained" size="small" color="primary" className="singUpBtn">
                                             Submit
