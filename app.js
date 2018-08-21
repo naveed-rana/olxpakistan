@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 const passport = require('passport')
 var session = require('express-session');
 var mongoose = require('mongoose');
+const cookieparser =require('cookie-parser');
 var setuppassport = require('./server/Passport');
 var dbURI = require('./server/config');
 var usersRouter = require('./server/routes/users');
@@ -20,20 +21,15 @@ app.use(bodyParser.urlencoded({
     extended: true
   }));
 app.use(bodyParser.json());
-
-
 app.use(session({
-  secret: "naveed screet",
-  resave: false,
-  saveUninitialized: false
-}))
+  secret: "!@#$#%@#$$%^$)#$()^$%"}));
+app.use(cookieparser());
+
 app.use(passport.initialize())
 app.use(passport.session())
 setuppassport();
- 
 
-// app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/feedback', feedBackRouter);
 
 app.use(express.static('public'));

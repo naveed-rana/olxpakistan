@@ -1,6 +1,7 @@
+import axios from 'axios';
+export const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 export const CREATEUSER = 'CREATEUSER';
-import {baseURL} from './config';
-import axois from 'axois';
+
 
 function createUser(message) {
 
@@ -10,9 +11,10 @@ function createUser(message) {
     }
 }
 export function startCreateUser(userData) {
-
+    
     return (dispatch) => {
-        axois.post(baseURL+'/user/singup',userData).then((response=>{
+      
+        axios.post(baseURL+'/user/signup',userData).then((response=>{
             alert();
             console.log(response);
             

@@ -11,6 +11,8 @@ import data from './pk.json';
 import Divider from '@material-ui/core/Divider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import {startCreateUser} from '../redux/actions/userAction';
+import { connect } from 'react-redux';
 
 class SignUp extends Component {
 
@@ -29,7 +31,28 @@ class SignUp extends Component {
             checkbox:''
         }
     }
-
+  
+    onSubmitHandler=(e)=>{
+      e.preventDefault();
+      const {name,email,password,confirmpassword,cellNo,address,city,province,checkbox} = this.state;
+      if(password !== confirmpassword){
+      
+      }
+      else{
+            let userData = {
+              name,
+              email,
+              password,
+              cellNo,
+              address,
+              city,
+              province,
+            }
+        this.props.startCreateUser(userData);
+      }
+       
+    }
+    
     onSelectHandler=(e)=>{
       let cities=[]
      cities = data.filter((item)=> item.admin === e.target.value);
@@ -87,6 +110,9 @@ class SignUp extends Component {
                   name="name"
                   onChange={this.onChangeHandler}
                   />
+                      
+                      
+
                        </Grid>
                        <Grid item xs={12} md={6} className="paddingTop">
                        <TextField
@@ -266,12 +292,13 @@ class SignUp extends Component {
                          onChange={this.onChangeHandler}
                          value = "checkedB" color = "primary" />}/>
                          Copyright © 2018. OLX Pakistan - All Rights Reserved -
-Reproduction of material from olxpakistan pages without prior written permission from OLX is strictly prohibited and may result in legal action.
-Reproduction of material containing the OLX watermark constitutes unauthorized use of the OLX trade mark and may also result in legal action. 
+                         Reproduction of material from olxpakistan pages without prior written permission from OLX is strictly prohibited and may result in legal action.
+                         Reproduction of material containing the OLX watermark constitutes unauthorized use of the OLX trade mark and may also result in legal action. 
                          </Typography>
                        </Grid>
                        <Grid item xs={12} md={12} align="center" className="paddingTop">
                                         <Button
+                                        onClick={this.onSubmitHandler}
                                         disabled={isvalid}
                                         type="submit"
                                         variant="contained" size="small" color="primary" className="singUpBtn">
@@ -295,4 +322,4 @@ Reproduction of material containing the OLX watermark constitutes unauthorized u
         )
     }
 }
-export default SignUp;
+export default connect(null,{startCreateUser})(SignUp);
