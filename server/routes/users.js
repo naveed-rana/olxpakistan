@@ -9,10 +9,10 @@ router.post('/signup',(req,res)=>{
           let newUser = new userSchemea(req.body);
           newUser.save((err,user)=>{
               if(err){
-                  res.status(400).json("error has been occored!")
+                  res.status(500).json("error has been occored!")
               }
               else{
-                  res.status(200).json(user)
+                  res.status(200).json("Account has been created!")
               }
           });
 });
@@ -46,9 +46,13 @@ router.get('/authenticate',(req,res)=>{
 })
 
 router.post('/emailVerification',(req,res)=>{
-    console.log(req.body);
     userSchemea.findOne({email:req.body.email},(err,user)=>{
-        res.status(200).json(user);
+        if(user){
+        res.status(200).json("email already in use");}
+        else{
+            res.json(200,"readytouse"
+            )
+        }
         
     });
 })

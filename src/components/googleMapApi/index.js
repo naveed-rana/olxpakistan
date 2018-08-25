@@ -54,7 +54,6 @@ class LocationSearchInput extends React.Component {
             ),
           }}
 
-          id="full-width"
           fullWidth
           {...getInputProps({
             placeholder: 'Location ...',

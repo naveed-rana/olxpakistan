@@ -1,17 +1,20 @@
-import {CHECKEMAIL } from '../../actions/userAction';
+import {CHECKEMAIL,CREATEUSER} from '../../actions/userAction';
 const INITIAL_STATE = {
-  user: {},
+  userAccount:'',
   emailVerification:'',
-  flag:false,
-  flagNetworkerror:false
   
 };
 
 function userReducer(state = INITIAL_STATE, action) {
   switch(action.type) {
 
+     case CREATEUSER:{
+      return{
+        ...state,
+        userAccount:action.data
+      }
+     }
      case CHECKEMAIL:{
-       debugger;
        return {
          ...state,
          emailVerification:action.message

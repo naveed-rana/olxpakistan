@@ -1,17 +1,15 @@
 import axios from 'axios';
+import {toast} from 'react-toastify';
 export const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 export const CREATEUSER = 'CREATEUSER';
 export const CHECKEMAIL = 'CHECKEMAIL';
 
-
-function createUser(message) {
-
-    return {
+function creatUser(data) {
+    return{
         type:CREATEUSER,
-        message
+        data
     }
 }
-
 
 export function startCreateUser(userData) {
     
@@ -19,11 +17,10 @@ export function startCreateUser(userData) {
       
         axios.post(baseURL+'/user/signup',userData).then((response=>{
             alert();
-            console.log(response);
-
+            toast.success(response.data);
+            dispatch(creatUser(response.data));
         })).catch(err=>{
-            console.log(err);
-            
+            toast.error(err);
         });
     }
 
@@ -31,7 +28,6 @@ export function startCreateUser(userData) {
 }
 
 function emailVerification(message) {
-
     return {
         type:CHECKEMAIL,
         message
@@ -41,11 +37,11 @@ function emailVerification(message) {
 
 export function startEmailVerification(email){
     return (dispatch) =>{
-        alert(email);
-        axios.post(baseURL+'/user/emailVerification',email).then((response=>{
+
+        axios.post(baseURL+'/user/emailVerification',{email}).then((response=>{
         dispatch(emailVerification(response.data));
         })).catch(err=>{
-            console.log(err); 
+            toast.error(err);
         });
     }
 }

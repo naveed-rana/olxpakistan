@@ -12,7 +12,11 @@ import Divider from '@material-ui/core/Divider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import {startCreateUser,startEmailVerification} from '../redux/actions/userAction';
+import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
+import {LOGIN} from '../constants';
+
+
 
 class SignUp extends Component {
 
@@ -34,7 +38,24 @@ class SignUp extends Component {
             emailVarified:'',
         }
     }
+
+    componentDidMount() {
+      document.title = "Signup";
+    }
   
+    componentWillReceiveProps(nextProps) {
+      if(nextProps.emailVerification ==='email already in use'){
+        this.setState({emailError:"Email already in use, please use another email"});
+      
+      }
+      else{
+        this.setState({emailError:''});
+      }
+
+      if(nextProps.userAccount ==='Account has been created!'){
+        this.props.history.push(LOGIN);
+      }
+    }
 
     onBlurEmailHandler = (e) =>{
       const {email} = this.state;
@@ -121,9 +142,8 @@ class SignUp extends Component {
       this.setState({address})
    }
     render() {
-      console.log(this.state);
       const {cities,name,email,password,confirmpassword,cellNo,address,city,province,checkbox,emailError,passwordError} = this.state;
-      const isvalid = name ==='' || email ==='' || password ==='' || confirmpassword ==='' || cellNo ==='' || address ==='' ||  city ===''||province===''|| checkbox===''; 
+      const isvalid = name ==='' || email ==='' || password ==='' || confirmpassword ==='' || cellNo ==='' || address ==='' ||  city ===''||province===''|| checkbox===''  || emailError !=='' || passwordError !== '' ; 
         return (
             <div>
                 <Grid container spacing={8}> 
@@ -383,4 +403,10 @@ class SignUp extends Component {
         )
     }
 }
-export default connect(null,{startCreateUser,startEmailVerification})(SignUp);
+
+const mapStateToProps = state => ({
+  emailVerification:state.user.emailVerification,
+  userAccount :state.user.userAccount
+})
+
+export default withRouter(connect(mapStateToProps,{startCreateUser,startEmailVerification})(SignUp));
