@@ -11,7 +11,7 @@ import data from './pk.json';
 import Divider from '@material-ui/core/Divider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import {startCreateUser} from '../redux/actions/userAction';
+import {startCreateUser,startEmailVerification} from '../redux/actions/userAction';
 import { connect } from 'react-redux';
 
 class SignUp extends Component {
@@ -28,17 +28,67 @@ class SignUp extends Component {
             city:'',
             cities:[],
             province:'',
-            checkbox:''
+            checkbox:'',
+            emailError:'',
+            passwordError:'',
+            emailVarified:'',
         }
     }
   
-    onSubmitHandler=(e)=>{
-      e.preventDefault();
-      const {name,email,password,confirmpassword,cellNo,address,city,province,checkbox} = this.state;
-      if(password !== confirmpassword){
+
+    onBlurEmailHandler = (e) =>{
+      const {email} = this.state;
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let result = re.test(String(email).toLowerCase());
+    
+    if(result){
+      this.setState({emailError:''})
+      this.props.startEmailVerification(email);
       
+    }
+    else{
+      this.setState({emailError:"Please use correct email address!"})
+    }
+    
+    }
+
+    onBlurPasswordHandler = (e) =>{
+      const {password,confirmpassword} = this.state; 
+       if(confirmpassword !== ''){
+        if(password !== confirmpassword){
+          this.setState({passwordError:'Password does not match to the  confirm password!'})
+        }
+        else{
+          this.setState({passwordError:''})
+        }
       }
       else{
+         this.setState({passwordError:''})
+      }
+    }
+
+    onBlurConfirmPasswordHanlder=()=>{
+
+      const {password,confirmpassword} = this.state; 
+      if(password !== ''){
+        if(password !== confirmpassword){
+          this.setState({passwordError:'Confirm password does not match to the password!'})
+        }
+        else{
+          this.setState({passwordError:''})
+        }
+      }
+      else{
+         this.setState({passwordError:''})
+      }
+      
+    }
+
+
+    onSubmitHandler=(e)=>{
+      e.preventDefault();
+      const {name,email,password,confirmpassword,cellNo,address,city,province} = this.state;
+      
             let userData = {
               name,
               email,
@@ -49,7 +99,7 @@ class SignUp extends Component {
               province,
             }
         this.props.startCreateUser(userData);
-      }
+      
        
     }
     
@@ -72,7 +122,7 @@ class SignUp extends Component {
    }
     render() {
       console.log(this.state);
-      const {cities,name,email,password,confirmpassword,cellNo,address,city,province,checkbox} = this.state;
+      const {cities,name,email,password,confirmpassword,cellNo,address,city,province,checkbox,emailError,passwordError} = this.state;
       const isvalid = name ==='' || email ==='' || password ==='' || confirmpassword ==='' || cellNo ==='' || address ==='' ||  city ===''||province===''|| checkbox===''; 
         return (
             <div>
@@ -105,7 +155,6 @@ class SignUp extends Component {
                     }}
                   fullWidth={true}
                   required={true}
-                  helperText=""
                   placeholder="Name"
                   name="name"
                   onChange={this.onChangeHandler}
@@ -128,8 +177,11 @@ class SignUp extends Component {
                     }}
                   fullWidth={true}
                   required={true}
+                  FormHelperTextProps={{error:true}}
+                  helperText={emailError}
                   placeholder="email"
                   name="email"
+                  onBlur={this.onBlurEmailHandler}
                   onChange={this.onChangeHandler}
                   />
                        </Grid>
@@ -150,7 +202,12 @@ class SignUp extends Component {
                   fullWidth={true}
                   required={true}
                   placeholder="Password"
+                  onBlur={this.onBlurPasswordHandler}
                   name="password"
+                  FormHelperTextProps={{
+                    error:true
+                  }}
+                  helperText={passwordError}
                   onChange={this.onChangeHandler}
                   />
                     </Grid>
@@ -168,7 +225,12 @@ class SignUp extends Component {
                     }}
                   type="password"
                   fullWidth={true}
+                  FormHelperTextProps={{
+                    error:true
+                  }}
+                  onBlur={this.onBlurConfirmPasswordHanlder}
                   required={true}
+                  helperText={passwordError}
                   placeholder="Confirm Password"
                   name="confirmpassword"
                   onChange={this.onChangeHandler}
@@ -202,7 +264,7 @@ class SignUp extends Component {
                     <Grid item xs={12} md={12} className="paddingTop">
                   
                     <i className="material-icons iconFixfield mangaeWithSelect">
-                    add_comment
+                    add
 
                            </i>
                       <select name="province"
@@ -242,9 +304,8 @@ class SignUp extends Component {
                      <Grid item xs={12} md={12} className="paddingTop">
                        
                     <i className="material-icons iconFixfield mangaeWithSelect">
-                    add_comment
-
-                           </i>
+                    location_city
+                     </i>
                       <select name="city" 
                       onChange={this.onChangeHandler}
                       className="selectSignUp">
@@ -322,4 +383,4 @@ class SignUp extends Component {
         )
     }
 }
-export default connect(null,{startCreateUser})(SignUp);
+export default connect(null,{startCreateUser,startEmailVerification})(SignUp);

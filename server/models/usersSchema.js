@@ -3,8 +3,8 @@ var userSchema = mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    mobileno: String,
-    location: String,
+    cellNo: String,
+    address: String,
     province: String,
     city: String
 });

@@ -6,37 +6,33 @@ var User = require("../models/usersSchema");
     
 module.exports = function() {
 
-
-    passport.use("login", new LocalStrategy({
-        passReqToCallback : true
-    },
-        function(username, password, done) {
-        User.findOne({ name: username }, function(err, user) {
+   
+passport.use(new LocalStrategy({usernameField:'email'},
+function (email, password, done) {
+  
+    UserModel.findOne({ email: email }, function (err, user) {
         if (err) { return done(err); }
         if (!user) {
-        return done(null, false,
-         { message: "No user has that username!" });
+            return done(null, false, { message: 'Incorrect username.' });
         }
-        user.checkPassword(password, function(err, isMatch) {
-        if (err) { return done(err); }
-        if (isMatch) {
+        if (user.password !=password){
+            return done(null, false, { message: 'Incorrect password.' });
+        }
         return done(null, user);
-        } else {
-        return done(null, false,
-         { message: "Invalid password." });
-        }
-        });
-        });
-        }));
+    });
+}
+));
 
-
-
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
 done(null, user._id);
 });
-passport.deserializeUser(function(id, done) {
-User.findById(id, function(err, user) {
-done(err, user);
+
+passport.deserializeUser(function (id, done) {
+
+UserModel.findById(id, function (err, user) {
+    done(err, user);
 });
 });
+
+
 };

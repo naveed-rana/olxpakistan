@@ -1,6 +1,7 @@
-
+import {CHECKEMAIL } from '../../actions/userAction';
 const INITIAL_STATE = {
   user: {},
+  emailVerification:'',
   flag:false,
   flagNetworkerror:false
   
@@ -8,9 +9,12 @@ const INITIAL_STATE = {
 
 function userReducer(state = INITIAL_STATE, action) {
   switch(action.type) {
-     case 'unset':{
+
+     case CHECKEMAIL:{
+       debugger;
        return {
-         user:{}
+         ...state,
+         emailVerification:action.message
        }
      }
     default : return state;
