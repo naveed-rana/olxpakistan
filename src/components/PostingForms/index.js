@@ -12,9 +12,11 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Map from '../googleMapApi';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Media from './media';
 import addImg from '../resource/images/add_image.png';
 import Divider from '@material-ui/core/Divider';
+import { connect } from 'react-redux';
+import {compose} from 'recompose';
+
 
 const styles = theme => ({
   root: {
@@ -48,7 +50,12 @@ class VerticalLinearStepper extends Component {
       image5:addImg,
       image6:addImg,
       title:'',
-      category:''
+      category:'none',
+      condition:'none',
+      price:'',
+      discriptions:'',
+      tag:'',
+      loading:false
     };
   }
 
@@ -63,7 +70,11 @@ class VerticalLinearStepper extends Component {
     switch (step) {
       case 0:
         return (
-          <Grid container spacing={8}> 
+          <div>
+            <Typography variant="caption" align="center"> 
+               Please add impressive Title and choose category!
+            </Typography>
+          <Grid container spacing={8} className=""> 
             <Grid item xs={12} md={12} className="paddingTop">
                 <TextField
                     InputProps={{
@@ -79,6 +90,7 @@ class VerticalLinearStepper extends Component {
                   onChange={this.onChangeHandler}
                   fullWidth={true}
                   placeholder="Title"
+                  value={this.state.title}
                   />
             </Grid>
             <Grid item xs={12} md={12} className="paddingTop">
@@ -87,9 +99,10 @@ class VerticalLinearStepper extends Component {
                     business
                    </i>
                       <select name="category"
+                      value={this.state.category}
                       onChange={this.onChangeHandler}
                       className="selectSignUp">
-                      <option selected disabled value="none">
+                      <option selected value="none">
                       Choose Category
                       </option>
                       <option value="mobiles">
@@ -113,47 +126,93 @@ class VerticalLinearStepper extends Component {
                       </select>
                       <Divider />
                     </Grid>
-    
           </Grid>
+          </div>
         );
             
       case 1:
         return  (
           <Grid container spacing={8}> 
             <Grid item xs={12} md={12} className="paddingTop">
+            <Typography variant="caption" align="center"> 
+               Please add correct price and specfications of products for better experience and sell.
+            </Typography>
             <TextField
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
                           <i className="material-icons iconFixfield">
-                              account_box
+                          local_atm
                            </i>
                         </InputAdornment>
                       ),
                     }}
                   fullWidth={true}
+                  name="price"
+                  value={this.state.price}
+                  onChange={this.onChangeHandler}
                   required={true}
-                  placeholder="Your Name"
+                  placeholder="price"
                   />
             </Grid>
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12} md={12} className="paddingTop">
+                  
+                    <i className="material-icons iconFixfield mangaeWithSelect">
+                    cast_connected
+                   </i>
+                      <select name="condition"
+                      value={this.state.condition}
+                      onChange={this.onChangeHandler}
+                      className="selectSignUp">
+                      <option selected value="none">
+                      Choose condition
+                      </option>
+                      <option value="new">
+                      New
+                      </option>
+                      <option value="used">
+                      Used
+                      </option>
+                      
+                      </select>
+                      <Divider />
+                    </Grid>
+            <Grid item xs={12} md={12} className="paddingTop">
             <TextField
-                     InputProps={{
+                    InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
                           <i className="material-icons iconFixfield">
-                          phone
-                          </i>
+                          details
+                           </i>
                         </InputAdornment>
                       ),
                     }}
                   fullWidth={true}
-                  required={true}
-                  placeholder="Phone Number"
+                  name="discriptions"
+                  value={this.state.discriptions}
+                  onChange={this.onChangeHandler}
+                  multiline={true}
+                  placeholder="Discriptions"
                   />
             </Grid>
             <Grid item xs={12} md={12} className="paddingTop">
-                <Map />
+            <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                          attachment
+                           </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  name="tag"
+                  value={this.state.tag}
+                  onChange={this.onChangeHandler}
+                  placeholder="Tag , separated"
+                  />
             </Grid>
           </Grid>
         );
@@ -163,7 +222,7 @@ class VerticalLinearStepper extends Component {
                   <Grid container spacing={8}> 
                     <Grid item xs={12} md={12}>
                       <Typography variant="caption" align="center"> 
-                        Please Add Your Products Images That Best Describe Your Product!
+                        Please Add Your Products Images That Best Describe Your Product, Select at leaset one image!
                       </Typography>
                     </Grid>
                     <Grid item xs={12} md={4}>                  
@@ -241,8 +300,8 @@ class VerticalLinearStepper extends Component {
           <Grid container spacing={8}> 
             <Grid item xs={12} md={12} className="paddingTop">
             <Typography variant="caption" align="center"> 
-                        Please Add Your Personel Information Consciously!
-                      </Typography>
+                        Please Check Your Personel Information Consciously!
+            </Typography>
             <TextField
                     InputProps={{
                       startAdornment: (
@@ -255,6 +314,7 @@ class VerticalLinearStepper extends Component {
                     }}
                   fullWidth={true}
                   required={true}
+                  value={this.props.userdata.name}
                   placeholder="Your Name"
                   />
             </Grid>
@@ -270,12 +330,26 @@ class VerticalLinearStepper extends Component {
                       ),
                     }}
                   fullWidth={true}
+                  value={this.props.userdata.cellNo}
                   required={true}
                   placeholder="Phone Number"
                   />
             </Grid>
             <Grid item xs={12} md={12} className="paddingTop">
-                <Map />
+            <TextField
+                     InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                          location_on
+                          </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  value={this.props.userdata.address}
+                  placeholder="address"
+                  />
             </Grid>
           </Grid>
         );
@@ -283,6 +357,12 @@ class VerticalLinearStepper extends Component {
       default:
         return 'Unknown step';
     }
+  }
+
+
+  onSubmitHandle = () =>{
+    this.setState({loading:true})
+    
   }
   
   
@@ -315,9 +395,21 @@ class VerticalLinearStepper extends Component {
   };
 
   render() {
+    var isValid;
     const { classes } = this.props;
     const steps = getSteps();
-    const { activeStep } = this.state;
+    const { activeStep, title,category,price,condition,discriptions,tag,image1,image2,image3,image4,image5,image6 } = this.state;
+    if(activeStep === 0){
+       isValid = title === '' || category === 'none';
+    }
+    else if(activeStep === 1)
+    {
+      isValid = price === '' || condition === 'none' || discriptions === '' || tag === '';
+    }
+    else {
+       isValid = image1 == addImg && image2 == addImg && image3 == addImg && image4 == addImg && image5 == addImg && image6 == addImg;
+    }
+    
 
     return (
       <div className={classes.root}>
@@ -338,6 +430,7 @@ class VerticalLinearStepper extends Component {
                         Back
                       </Button>
                       <Button
+                        disabled={isValid}
                         variant="outlined"
                         color="primary"
                         size="small"
@@ -355,9 +448,26 @@ class VerticalLinearStepper extends Component {
         </Stepper>
         {activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>All steps completed - you&quot;re finished</Typography>
-            <Button onClick={this.handleReset} className={classes.button}>
+            <Typography>All steps completed - you&quot;re finished! 
+              if you are done submit the form otherwise you can reset the forms.
+            </Typography>
+            <Button 
+            variant="outlined"
+            color="primary"
+            size="small"
+            onClick={this.handleReset} 
+            className={classes.button}>
               Reset
+            </Button>
+
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={this.onSubmitHandle}
+              className={classes.button}
+             >
+                 Submit
             </Button>
           </Paper>
         )}
@@ -370,4 +480,8 @@ VerticalLinearStepper.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(VerticalLinearStepper);
+const mapStateToProps = state => ({
+  userdata :state.user.user
+})
+
+export default compose(connect(mapStateToProps,null),withStyles(styles))(VerticalLinearStepper);
