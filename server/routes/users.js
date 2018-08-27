@@ -19,12 +19,8 @@ router.post('/signup',(req,res)=>{
 
 router.post('/login',passport.authenticate('local'),(req,res)=>{
     
-    if (req.isAuthenticated()) {
-        res.status(200).json("user succefully login");        
+     res.json(200,req.user);
     }
-    else{
-        res.status(400).json("user not found, error occoured!");    
-    }}
 )
 
 
@@ -41,7 +37,7 @@ router.get('/authenticate',(req,res)=>{
         res.json(200,req.user)
      }
      else{
-        res.json(500,'user is not logged in!')
+        res.json(401,'user is not logged in!')
      }
 })
 
@@ -56,5 +52,20 @@ router.post('/emailVerification',(req,res)=>{
         
     });
 })
+
+
+router.post('/try',(req,res)=>{
+    let newUser = new userSchemea(req.body);
+    newUser.save((err,user)=>{
+        if(err){
+            res.status(500).json("error has been occored!")
+        }
+        else{
+            res.status(200).json("Account has been created!")
+        }
+    });
+     
+})
+
 
 module.exports = router;

@@ -1,7 +1,7 @@
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
-var User = require("../models/usersSchema");
+var UserModel = require("../models/usersSchema");
 
     
 module.exports = function() {
@@ -24,7 +24,7 @@ function (email, password, done) {
 ));
 
 passport.serializeUser(function (user, done) {
-done(null, user._id);
+   done(null, user._id);
 });
 
 passport.deserializeUser(function (id, done) {

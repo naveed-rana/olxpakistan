@@ -12,9 +12,9 @@ var feedBackRouter = require('./server/routes/feedback');
 var app = express();
 
 //db connection
-mongoose.connect(dbURI, function (err) {
-   if (err) throw err;
-   console.log('Successfully connected');
+mongoose.connect(dbURI,{ useNewUrlParser: true }, function (err) {
+  if (err) throw err;
+  console.log('Successfully connected');
 });
 
 app.use(bodyParser.urlencoded({
@@ -22,17 +22,21 @@ app.use(bodyParser.urlencoded({
   }));
 app.use(bodyParser.json());
 app.use(session({
-  secret: "!@#$#%@#$$%^$)#$()^$%"}));
+  secret: "@#^&$!#_)(@!#)**(@^%*&^*#${}|{@#$@#$(#@",
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(cookieparser());
 
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 setuppassport();
+
 
 app.use('/user', usersRouter);
 app.use('/feedback', feedBackRouter);
 
 app.use(express.static('public'));
 
-app.listen(8080)
+app.listen(8080);
 

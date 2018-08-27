@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
 import * as routes from '../constants';
+import { connect } from 'react-redux';
+
 
 class HeaderBar extends Component {
     render() {

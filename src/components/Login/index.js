@@ -9,18 +9,37 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+import {SIGNUP} from '../constants';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import {startLoginUser} from '../redux/actions/userAction';
+import { connect } from 'react-redux';
+import {POSTING} from '../constants';
+import {withRouter} from 'react-router-dom';
+
 
 class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            loading:false
         }
     }
+   
+    componentDidMount() {
+        document.title = "Signup";
+      }
 
-
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            loading:false
+        })
+      if(nextProps.user.email){
+        this.props.history.push(POSTING);
+      }
+      
+      }
 
     onChangeHandler = (e) => {
         let name = e.target.name;
@@ -28,9 +47,21 @@ class Login extends Component {
         this.setState({[name]: value});
     }
 
+    onClickHandler = (e) => {
+      e.preventDefault();
+      this.setState({loading:true});
+      const {email,password} = this.state;
+      let data = {
+          email,
+          password
+      }
+      this.props.startLoginUser(data);
+
+    }
+
     render() {
-        const {email,password} = this.state;
-        const isnotValid = email ==='' || password ==='';  
+        const {email,password,loading} = this.state;
+        const isnotValid = email ==='' || password ==='' || loading;  
         console.log(this.state);
         return (
             <div>
@@ -96,19 +127,24 @@ class Login extends Component {
 
                                     <Grid item xs={12} md={12} align="center">
                                         <Button
-                                        type="submit"
+                                        onClick={this.onClickHandler}
                                         disabled={isnotValid}
                                         variant="contained" size="small" color="primary" className="loginbtn">
+                                        {loading ?
+                                        <CircularProgress size={20} />:
+                                           <span>
                                             Submit
-                                            <i className="material-icons iconSize">
+                                            <i className="material-icons iconSize submitIcon">
                                                 send
                                             </i>
+                                            </span>
+                                            }
                                         </Button>
                                     </Grid>
                                     <Grid container spacing={8} className="paddingTop"> 
                                     <Grid item xs={12} md={6} className="paddingTop">
                                         <Typography variant="body2">
-                                            <Link to="">Register</Link>
+                                            <Link to={SIGNUP}>Register</Link>
                                         </Typography>
                                     </Grid>
                                     <Hidden smDown>
@@ -140,4 +176,10 @@ class Login extends Component {
         )
     }
 }
-export default Login;
+
+const mapStateToProps = state => ({
+    user:state.user.user,
+    error:state.user.error
+  })
+
+export default withRouter(connect(mapStateToProps,{startLoginUser})(Login));

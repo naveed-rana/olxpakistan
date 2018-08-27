@@ -5,8 +5,13 @@ import Footer from './Footer';
 import './resource/css/index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import OlxPakistan from './Navigation';
+import {startGetUser} from './redux/actions/userAction';
+import { connect } from 'react-redux';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.startGetUser();
+  }
   render() {
     return (
       <div>
@@ -30,4 +35,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null,{startGetUser})(App);

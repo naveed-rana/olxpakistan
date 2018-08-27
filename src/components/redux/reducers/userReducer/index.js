@@ -1,8 +1,9 @@
-import {CHECKEMAIL,CREATEUSER} from '../../actions/userAction';
+import {CHECKEMAIL,CREATEUSER,LOGIN,LOGINERR} from '../../actions/userAction';
 const INITIAL_STATE = {
+  user:{},
   userAccount:'',
   emailVerification:'',
-  
+  error:''
 };
 
 function userReducer(state = INITIAL_STATE, action) {
@@ -18,6 +19,18 @@ function userReducer(state = INITIAL_STATE, action) {
        return {
          ...state,
          emailVerification:action.message
+       }
+     }
+     case LOGIN:{
+       return{
+         ...state,
+         user:action.user
+       }
+     }
+     case LOGINERR:{
+       return{
+         ...state,
+         error:action.err
        }
      }
     default : return state;

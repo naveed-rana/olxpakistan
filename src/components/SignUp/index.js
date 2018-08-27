@@ -10,6 +10,7 @@ import Map from '../googleMapApi';
 import data from './pk.json';
 import Divider from '@material-ui/core/Divider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Checkbox from '@material-ui/core/Checkbox';
 import {startCreateUser,startEmailVerification} from '../redux/actions/userAction';
 import {withRouter} from 'react-router-dom';
@@ -36,6 +37,7 @@ class SignUp extends Component {
             emailError:'',
             passwordError:'',
             emailVarified:'',
+            loading:false
         }
     }
 
@@ -54,6 +56,9 @@ class SignUp extends Component {
 
       if(nextProps.userAccount ==='Account has been created!'){
         this.props.history.push(LOGIN);
+      }
+      else{
+        this.setState({loading:false});
       }
     }
 
@@ -108,6 +113,7 @@ class SignUp extends Component {
 
     onSubmitHandler=(e)=>{
       e.preventDefault();
+      this.setState({loading:true});
       const {name,email,password,confirmpassword,cellNo,address,city,province} = this.state;
       
             let userData = {
@@ -142,8 +148,8 @@ class SignUp extends Component {
       this.setState({address})
    }
     render() {
-      const {cities,name,email,password,confirmpassword,cellNo,address,city,province,checkbox,emailError,passwordError} = this.state;
-      const isvalid = name ==='' || email ==='' || password ==='' || confirmpassword ==='' || cellNo ==='' || address ==='' ||  city ===''||province===''|| checkbox===''  || emailError !=='' || passwordError !== '' ; 
+      const {cities,name,email,password,confirmpassword,cellNo,address,city,province,checkbox,emailError,passwordError,loading} = this.state;
+      const isvalid = name ==='' || email ==='' || password ==='' || confirmpassword ==='' || cellNo ==='' || address ==='' ||  city ===''||province===''|| checkbox===''  || emailError !=='' || passwordError !== '' || loading; 
         return (
             <div>
                 <Grid container spacing={8}> 
@@ -383,10 +389,17 @@ class SignUp extends Component {
                                         disabled={isvalid}
                                         type="submit"
                                         variant="contained" size="small" color="primary" className="singUpBtn">
+                                            {
+                                            loading ?
+                                            <CircularProgress size={20} />
+                                            :
+                                            <span>
                                             Submit
-                                            <i className="material-icons iconSize">
+                                            <i className="material-icons iconSize submitIcon">
                                                 send
                                             </i>
+                                            </span>
+                                          }
                                         </Button>
                                     </Grid>
                      </Grid>

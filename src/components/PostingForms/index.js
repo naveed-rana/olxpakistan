@@ -14,6 +14,7 @@ import Map from '../googleMapApi';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Media from './media';
 import addImg from '../resource/images/add_image.png';
+import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
   root: {
@@ -45,9 +46,18 @@ class VerticalLinearStepper extends Component {
       image3:addImg,
       image4:addImg,
       image5:addImg,
-      image6:addImg
+      image6:addImg,
+      title:'',
+      category:''
     };
   }
+
+
+  onChangeHandler = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    this.setState({[name]: value});
+}
 
   getStepContent=(step)=> {
     switch (step) {
@@ -60,35 +70,50 @@ class VerticalLinearStepper extends Component {
                       startAdornment: (
                         <InputAdornment position="start">
                           <i className="material-icons iconFixfield">
-                              account_box
+                          subtitles
                            </i>
                         </InputAdornment>
                       ),
                     }}
+                  name="title"
+                  onChange={this.onChangeHandler}
                   fullWidth={true}
-                  required={true}
-                  placeholder="Your Name"
-                  />
-            </Grid>
-            <Grid item xs={12} md={12}>
-            <TextField
-                     InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          phone
-                          </i>
-                        </InputAdornment>
-                      ),
-                    }}
-                  fullWidth={true}
-                  required={true}
-                  placeholder="Phone Number"
+                  placeholder="Title"
                   />
             </Grid>
             <Grid item xs={12} md={12} className="paddingTop">
-                <Map />
-            </Grid>
+                  
+                    <i className="material-icons iconFixfield mangaeWithSelect">
+                    business
+                   </i>
+                      <select name="category"
+                      onChange={this.onChangeHandler}
+                      className="selectSignUp">
+                      <option selected disabled value="none">
+                      Choose Category
+                      </option>
+                      <option value="mobiles">
+                      Mobiles
+                      </option>
+                      <option value="vehicals">
+                      Vehicals
+                      </option>
+                      <option value="bikes">
+                      Bikes
+                      </option>
+                      <option value="animals">
+                      Animals
+                      </option>
+                      <option value="laptops">
+                      Laptops
+                      </option>
+                      <option value="furniture">
+                      Furniture
+                      </option>
+                      </select>
+                      <Divider />
+                    </Grid>
+    
           </Grid>
         );
             
