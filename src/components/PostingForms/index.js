@@ -378,6 +378,7 @@ class VerticalLinearStepper extends Component {
     formData.append('discriptions',discriptions);
     formData.append('tag',tag);
     formData.append('user',this.props.userdata._id);
+    debugger;
 
     this.props.startAdsPosting(formData);
   }

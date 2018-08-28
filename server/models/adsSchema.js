@@ -1,14 +1,16 @@
 var mongoose = require('mongoose');
-var userSchema = mongoose.Schema({
+var adsSchema = mongoose.Schema({
     title: String,
     category: String,
     condition: String,
     price: String,
     discriptions: String,
     tag: String,
-    user: String
+    user: String,
+    media:Array,
+    timestamp : { type : Date, default: Date.now }
 });
 
-var usersModels = mongoose.model('users', userSchema);
+var adsModels = mongoose.model('ads', adsSchema);
 
-module.exports =usersModels;
+module.exports =adsModels;
