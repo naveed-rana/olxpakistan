@@ -8,7 +8,7 @@ const cookieparser =require('cookie-parser');
 var setuppassport = require('./server/Passport');
 var dbURI = require('./server/config');
 var usersRouter = require('./server/routes/users');
-var feedBackRouter = require('./server/routes/feedback');
+var ads = require('./server/routes/ads');
 var app = express();
 
 //db connection
@@ -34,7 +34,7 @@ setuppassport();
 
 
 app.use('/user', usersRouter);
-app.use('/feedback', feedBackRouter);
+app.use('/ads', ads);
 
 app.use(express.static('public'));
 

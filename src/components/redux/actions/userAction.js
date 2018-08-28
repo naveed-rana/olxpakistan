@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {toast} from 'react-toastify';
-export const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
+const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 export const CREATEUSER = 'CREATEUSER';
 export const CHECKEMAIL = 'CHECKEMAIL';
 export const LOGIN = 'LOGIN';

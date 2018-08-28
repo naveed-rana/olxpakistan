@@ -10,12 +10,12 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Map from '../googleMapApi';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import addImg from '../resource/images/add_image.png';
 import Divider from '@material-ui/core/Divider';
 import { connect } from 'react-redux';
 import {compose} from 'recompose';
+import {startAdsPosting} from '../redux/actions/adsActions';
 
 
 const styles = theme => ({
@@ -55,7 +55,8 @@ class VerticalLinearStepper extends Component {
       price:'',
       discriptions:'',
       tag:'',
-      loading:false
+      loading:false,
+      images:[]
     };
   }
 
@@ -64,7 +65,7 @@ class VerticalLinearStepper extends Component {
     let name = e.target.name;
     let value = e.target.value;
     this.setState({[name]: value});
-}
+   }
 
   getStepContent=(step)=> {
     switch (step) {
@@ -362,7 +363,23 @@ class VerticalLinearStepper extends Component {
 
   onSubmitHandle = () =>{
     this.setState({loading:true})
+    const {images, title,category,condition,price,discriptions,tag} = this.state;
     
+    let formData = new FormData();
+    let i = 0;
+    images.forEach((file)=>{
+      i++;
+    formData.append(`file${i}`, file);
+    })
+    formData.append('title',title);
+    formData.append('category',category);
+    formData.append('condition',condition);
+    formData.append('price',price);
+    formData.append('discriptions',discriptions);
+    formData.append('tag',tag);
+    formData.append('user',this.props.userdata._id);
+
+    this.props.startAdsPosting(formData);
   }
   
   
@@ -381,9 +398,12 @@ class VerticalLinearStepper extends Component {
 
   fileChangeHandler=(event)=>{
     const name = event.target.name;
+    let  imagedata = this.state.images;
     if(event.target.files[0]){
+     imagedata.push(event.target.files[0])
     this.setState({
-         [name]: URL.createObjectURL(event.target.files[0])
+         [name]: URL.createObjectURL(event.target.files[0]),
+         images:imagedata
     })
   }
    }
@@ -484,4 +504,4 @@ const mapStateToProps = state => ({
   userdata :state.user.user
 })
 
-export default compose(connect(mapStateToProps,null),withStyles(styles))(VerticalLinearStepper);
+export default compose(connect(mapStateToProps,{startAdsPosting}),withStyles(styles))(VerticalLinearStepper);
