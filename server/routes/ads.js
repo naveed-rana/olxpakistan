@@ -29,6 +29,10 @@ router.post('/posting',upload.any(),(req,res)=>{
      newAds.discriptions = req.body.discriptions;
      newAds.tag = req.body.tag;
      newAds.user = req.body.user;
+     newAds.username = req.body.username;
+     newAds.userphone = req.body.userphone;
+     newAds.useremail = req.body.useremail;
+     newAds.userlocations = req.body.userlocations;
      newAds.media = media;
      
      newAds.save((err,add)=>{

@@ -64,7 +64,7 @@ function MediaControlCard(props) {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptates, voluptate cumque pariatur aliquid quidem 
           </Typography>
           <Grid container spacing={8}> 
-            <Grid item  md={4}>
+            <Grid item  md={3}>
                      <Typography variant="caption" > 
                     <i class="material-icons iconFix">
                     account_circle
@@ -73,7 +73,7 @@ function MediaControlCard(props) {
                      </Typography>
                     
             </Grid>
-            <Grid item  md={4}>
+            <Grid item  md={3}>
             <Typography variant="caption" > 
                     <i class="material-icons iconFix">
                         phone
@@ -81,12 +81,20 @@ function MediaControlCard(props) {
                      03034766669
                      </Typography>
             </Grid>
-            <Grid item  md={4}>
+            <Grid item  md={3}>
             <Typography variant="caption" > 
                     <i class="material-icons iconFix">
                         email
                      </i>
                      rana@gmail.com
+                     </Typography>
+            </Grid>
+            <Grid item  md={3}>
+            <Typography variant="caption" > 
+                    <i class="material-icons iconFix">
+                    location_on
+                     </i>
+                     Faisalabad
                      </Typography>
             </Grid>
           </Grid>

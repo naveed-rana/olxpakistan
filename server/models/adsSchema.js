@@ -7,6 +7,10 @@ var adsSchema = mongoose.Schema({
     discriptions: String,
     tag: String,
     user: String,
+    username: String,
+    userphone: String,
+    useremail: String,
+    userlocations: String,
     media:Array,
     timestamp : { type : Date, default: Date.now }
 });

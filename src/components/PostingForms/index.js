@@ -16,6 +16,7 @@ import Divider from '@material-ui/core/Divider';
 import { connect } from 'react-redux';
 import {compose} from 'recompose';
 import {startAdsPosting} from '../redux/actions/adsActions';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const styles = theme => ({
@@ -88,6 +89,7 @@ class VerticalLinearStepper extends Component {
                       ),
                     }}
                   name="title"
+                  autoFocus={true}
                   onChange={this.onChangeHandler}
                   fullWidth={true}
                   placeholder="Title"
@@ -150,6 +152,7 @@ class VerticalLinearStepper extends Component {
                     }}
                   fullWidth={true}
                   name="price"
+                  autoFocus={true}
                   value={this.state.price}
                   onChange={this.onChangeHandler}
                   required={true}
@@ -352,6 +355,22 @@ class VerticalLinearStepper extends Component {
                   placeholder="address"
                   />
             </Grid>
+            <Grid item xs={12} md={12} className="paddingTop">
+            <TextField
+                     InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <i className="material-icons iconFixfield">
+                          email
+                          </i>
+                        </InputAdornment>
+                      ),
+                    }}
+                  fullWidth={true}
+                  value={this.props.userdata.email}
+                  placeholder="email"
+                  />
+            </Grid>
           </Grid>
         );
       
@@ -362,14 +381,14 @@ class VerticalLinearStepper extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({loading:false});
-    
-
+    this.setState({activeStep:0})
   }
 
   onSubmitHandle = () =>{
     this.setState({loading:true})
-    const {images, title,category,condition,price,discriptions,tag} = this.state;
-    
+    const {images,category,condition,price,discriptions,tag} = this.state;
+    var title = this.state.title;
+    title = title.toLowerCase();
     let formData = new FormData();
     let i = 0;
     images.forEach((file)=>{
@@ -383,7 +402,11 @@ class VerticalLinearStepper extends Component {
     formData.append('discriptions',discriptions);
     formData.append('tag',tag);
     formData.append('user',this.props.userdata._id);
-
+    formData.append('username',this.props.userdata.name);
+    formData.append('userphone',this.props.userdata.cellNo);
+    formData.append('useremail',this.props.userdata.email);
+    formData.append('userlocations',this.props.userdata.address);
+    
     this.props.startAdsPosting(formData);
   }
   
@@ -423,7 +446,7 @@ class VerticalLinearStepper extends Component {
     var isValid;
     const { classes } = this.props;
     const steps = getSteps();
-    const { activeStep, title,category,price,condition,discriptions,tag,image1,image2,image3,image4,image5,image6 } = this.state;
+    const { activeStep, title,category,price,condition,discriptions,tag,image1,image2,image3,image4,image5,image6,loading } = this.state;
     if(activeStep === 0){
        isValid = title === '' || category === 'none';
     }
@@ -486,13 +509,14 @@ class VerticalLinearStepper extends Component {
             </Button>
 
             <Button
+              disabled={loading}
               variant="outlined"
               color="primary"
               size="small"
               onClick={this.onSubmitHandle}
               className={classes.button}
              >
-                 Submit
+                 {loading ?<CircularProgress size={20} />:"Submit"}
             </Button>
           </Paper>
         )}
