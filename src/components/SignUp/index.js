@@ -46,6 +46,10 @@ class SignUp extends Component {
     }
   
     componentWillReceiveProps(nextProps) {
+        this.setState({loading:false});
+        console.log('===================nextr=================');
+        console.log(nextProps);
+        console.log('====================================');
       if(nextProps.emailVerification ==='email already in use'){
         this.setState({emailError:"Email already in use, please use another email"});
       
@@ -57,9 +61,7 @@ class SignUp extends Component {
       if(nextProps.userAccount ==='Account has been created!'){
         this.props.history.push(LOGIN);
       }
-      else{
-        this.setState({loading:false});
-      }
+      
     }
 
     onBlurEmailHandler = (e) =>{
@@ -419,7 +421,8 @@ class SignUp extends Component {
 
 const mapStateToProps = state => ({
   emailVerification:state.user.emailVerification,
-  userAccount :state.user.userAccount
+  userAccount :state.user.userAccount,
+  err:state.user.signupErr
 })
 
 export default withRouter(connect(mapStateToProps,{startCreateUser,startEmailVerification})(SignUp));

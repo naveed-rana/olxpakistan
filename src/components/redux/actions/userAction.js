@@ -5,6 +5,8 @@ export const CREATEUSER = 'CREATEUSER';
 export const CHECKEMAIL = 'CHECKEMAIL';
 export const LOGIN = 'LOGIN';
 export const LOGINERR = 'LOGINERR';
+export const SIGNUPERR = 'SIGNUPERR';
+
 
 
 function loginUser(user) {
@@ -57,6 +59,13 @@ function creatUser(data) {
     }
 }
 
+function creatUserErr(err) {
+    return {
+        type:SIGNUPERR,
+        err
+    }
+}
+
 
 export function startCreateUser(userData) {
     
@@ -67,6 +76,7 @@ export function startCreateUser(userData) {
             dispatch(creatUser(response.data));
         })).catch(err=>{
             toast.error("Error occoured! while processing");
+            dispatch(creatUserErr(err));
         });
     }
 

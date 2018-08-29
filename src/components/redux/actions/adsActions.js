@@ -7,6 +7,7 @@ const config = {
     }
 }
 export const ADSPOSTING = 'ADSPOSTING';
+export const ADSPOSTINGERR = 'ADSPOSTINGERR';
 
 
 function adsPosting(response) {
@@ -16,15 +17,21 @@ function adsPosting(response) {
     }
 }
 
+function adsPostingErr(err) {
+    return {
+        type:ADSPOSTINGERR,
+        err
+    }
+}
+
 export function startAdsPosting(data) {
     return (dispatch)=>{
-        alert("call fun")
         axios.post(baseURL+'/ads/posting',data,config).then((response=>{
             toast.success(response.data);
-            alert("resp");
-           // dispatch(creatUser(response.data));
+            dispatch(adsPosting(response.data));
         })).catch(err=>{
             toast.error("Error occoured! while processing");
+            dispatch(adsPostingErr(err));
         });
     }
 }

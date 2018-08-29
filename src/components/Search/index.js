@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Card from '../smallScreenResults';
+
 
 class Search extends Component {
     render() {
@@ -95,7 +97,15 @@ class Search extends Component {
 
                 <Paper className="marginTop" elevation={5}>
                   
-                  <img width="100%" src={require('../resource/images/adsloading.gif')} alt=""/>
+                  {/* <img width="100%" src={require('../resource/images/adsloading.gif')} alt=""/> */}
+
+                  <Hidden only={['md', 'xl','lg']}>
+                    <Card/>
+                  </Hidden>
+                  <Hidden only={['xs', 'sm']}>
+                  largescreen
+                  </Hidden>
+                    
                 </Paper>
                 
               </Grid>

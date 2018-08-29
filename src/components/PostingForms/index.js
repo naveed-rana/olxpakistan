@@ -360,6 +360,11 @@ class VerticalLinearStepper extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({loading:false});
+    
+
+  }
 
   onSubmitHandle = () =>{
     this.setState({loading:true})
@@ -378,7 +383,6 @@ class VerticalLinearStepper extends Component {
     formData.append('discriptions',discriptions);
     formData.append('tag',tag);
     formData.append('user',this.props.userdata._id);
-    debugger;
 
     this.props.startAdsPosting(formData);
   }
@@ -502,7 +506,9 @@ VerticalLinearStepper.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userdata :state.user.user
+  userdata : state.user.user,
+  success : state.ads.adsSuccess,
+  error:state.ads.adsErr 
 })
 
 export default compose(connect(mapStateToProps,{startAdsPosting}),withStyles(styles))(VerticalLinearStepper);
