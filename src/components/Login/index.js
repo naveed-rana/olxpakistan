@@ -9,10 +9,13 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import {Link} from 'react-router-dom';
+import LockIcon from '@material-ui/icons/LockOutlined';
+import Avatar from '@material-ui/core/Avatar';
 import {SIGNUP} from '../constants';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {startLoginUser} from '../redux/actions/userAction';
 import { connect } from 'react-redux';
+import pink from '@material-ui/core/colors/pink';
 import {POSTING} from '../constants';
 import {withRouter} from 'react-router-dom';
 
@@ -71,12 +74,12 @@ class Login extends Component {
                     </Hidden>
 
                     <Grid item xs={12} md={4}>
-                        <Paper className="loginPaper" elevation={10}>
-
-                            <Typography variant="display1" align="center">
-                               <i className="material-icons largeIcon">account_box
-                                </i>Login
-                            </Typography>
+                        <Paper className="loginPaper" elevation={10} align="center">
+                 
+                          <Avatar style={{color: '#fff',backgroundColor: pink[500],}} >
+                          <LockIcon />
+                          </Avatar>
+                         <Typography variant="headline">Sign in</Typography>
                             <Grid container spacing={8} className="LoginContainer">
                               
                                     <Grid item xs={12} md={12} className="paddingTop">
@@ -92,6 +95,7 @@ class Login extends Component {
                                                 </InputAdornment>
                                             )
                                         }}
+                                            autoFocus={true}
                                             fullWidth={true}
                                             required={true}
                                             helperText=""

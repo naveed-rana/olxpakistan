@@ -7,10 +7,37 @@ import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Card from '../smallScreenResults';
+import TablePaginationActionsWrapped from '../paginations';
+import TablePagination from '@material-ui/core/TablePagination';
+import Table from '@material-ui/core/Table';
+import TableFooter from '@material-ui/core/TableFooter';
+import TableRow from '@material-ui/core/TableRow';
+import LargeScreenResults from '../LargeScreenResults';
+
 
 
 class Search extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+      copyData:[],
+      branches:[],      
+      page: 0,
+      rowsPerPage: 5,
+
+    };
+  }
+  handleChangePage = (event, page) => {
+    this.setState({page});
+  };
+
+  handleChangeRowsPerPage = event => {
+    this.setState({rowsPerPage: event.target.value});
+  };
     render() {
+      const {data, rowsPerPage, page} = this.state;
         return (
             <div>
             <Grid container spacing={8}> 
@@ -101,9 +128,42 @@ class Search extends Component {
 
                   <Hidden only={['md', 'xl','lg']}>
                     <Card/>
+                    <Table >
+                    <TableFooter>
+                      <TableRow>
+                        <TablePagination
+                          colSpan={2}
+                          count={data.length}
+                          rowsPerPage={rowsPerPage}
+                          page={page}
+                          labelDisplayedRows={() => ""}
+                          labelRowsPerPage=""
+                          onChangePage={this.handleChangePage}
+                          onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                          ActionsComponent={TablePaginationActionsWrapped}/>
+                      </TableRow>
+                    </TableFooter>
+                 </Table>
                   </Hidden>
                   <Hidden only={['xs', 'sm']}>
-                  largescreen
+                 <LargeScreenResults />
+                 <Divider />
+                 <LargeScreenResults />
+                 <Table >
+                    <TableFooter>
+                      <TableRow>
+                        <TablePagination
+                          colSpan={2}
+                          count={data.length}
+                          rowsPerPage={rowsPerPage}
+                          page={page}
+                          labelRowsPerPage="Ads per page"
+                          onChangePage={this.handleChangePage}
+                          onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                          ActionsComponent={TablePaginationActionsWrapped}/>
+                      </TableRow>
+                    </TableFooter>
+                 </Table>
                   </Hidden>
                     
                 </Paper>

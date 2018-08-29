@@ -16,7 +16,8 @@ import {startCreateUser,startEmailVerification} from '../redux/actions/userActio
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {LOGIN} from '../constants';
-
+import pink from '@material-ui/core/colors/pink';
+import Avatar from '@material-ui/core/Avatar';
 
 
 class SignUp extends Component {
@@ -47,9 +48,6 @@ class SignUp extends Component {
   
     componentWillReceiveProps(nextProps) {
         this.setState({loading:false});
-        console.log('===================nextr=================');
-        console.log(nextProps);
-        console.log('====================================');
       if(nextProps.emailVerification ==='email already in use'){
         this.setState({emailError:"Email already in use, please use another email"});
       
@@ -161,13 +159,14 @@ class SignUp extends Component {
                 </Hidden>
                 
                  <Grid item xs={12} md={6}>
-                   <Paper className="loginPaper" elevation={10}>
+                   <Paper className="loginPaper" elevation={10} align="center">
                      
-                     <Typography variant="display1" align="center">
-                     <i className="material-icons largeIcon">account_box
+                   
+                    <Avatar style={{color: '#fff',backgroundColor: pink[500],}} >
+                    <i className="material-icons largeIcon">account_circle
                     </i>
-                    SignUp
-                    </Typography>  
+                          </Avatar>
+                         <Typography variant="headline">Sign in</Typography>
                      <Grid container spacing={8} className="LoginContainer"> 
                        <Grid item xs={12} md={6} className="paddingTop">
                        <TextField
@@ -183,6 +182,7 @@ class SignUp extends Component {
                     }}
                   fullWidth={true}
                   required={true}
+                  autoFocus={true}
                   placeholder="Name"
                   name="name"
                   onChange={this.onChangeHandler}

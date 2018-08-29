@@ -60,7 +60,9 @@ class SmallScreenResults extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Card className={classes.card}>
+        <div>
+
+            <Card className={classes.card}>
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
@@ -108,6 +110,8 @@ class SmallScreenResults extends React.Component {
           </CardContent>
         </Collapse>
       </Card>
+      
+        </div>
     );
   }
 }
