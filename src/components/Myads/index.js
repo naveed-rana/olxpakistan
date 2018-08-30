@@ -45,7 +45,6 @@ class MyAds extends Component {
     render() {
       const {data, rowsPerPage, page,} = this.state;
       
- 
         return (
             <div>
             <Grid container spacing={8}> 

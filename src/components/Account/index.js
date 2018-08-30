@@ -90,7 +90,7 @@ class HomePage extends Component {
                 exact
                 path={routes.SAVEDADS}
                 component={() =><SavedAds />}/>
-            <Route exact path={routes.POSTING} component={() =>< Home />}/>
+            <Route exact path={routes.ACCOUNT_HOME} component={() =>< Home />}/>
         </Paper>
           
         </Grid>

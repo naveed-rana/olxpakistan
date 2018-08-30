@@ -69,8 +69,7 @@ export function startGetUserAds(id) {
     
     return (dispatch) =>{
         axios.get(baseURL+'/search/getuserads',{params:{id}}).then((response=>{
-            console.log(response.data)
-            dispatch(getAds(response.data));
+            dispatch(getUserAds(response.data));
         }))
     }
 }

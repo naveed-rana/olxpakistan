@@ -138,3 +138,11 @@ padding: 60px 30px 20px 30px;
 .marginTop{
     margin-top: 20px !important;
 }
+.shaddowNone{
+    border-radius: 0px !important;
+}
+.avatar{
+    font-size: 50px !important;
+   height: 250px !important;
+   width: 250px !important;
+}
