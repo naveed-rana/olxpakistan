@@ -9,6 +9,7 @@ import {startGetUser} from './redux/actions/userAction';
 import {startGetSuggestions,startGetAds} from './redux/actions/searchActions';
 import { connect } from 'react-redux';
 
+
 class App extends Component {
   componentDidMount() {
     this.props.startGetUser();

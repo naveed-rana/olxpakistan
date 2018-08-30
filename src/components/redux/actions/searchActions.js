@@ -6,6 +6,7 @@ export const MAPLOCATIONS = 'MAPLOCATIONS';
 export const SEARCHTITLE = 'SEARCHTITLE';
 export const GETSUGGESTIONS = 'GETSUGGESTIONS';
 export const GETADS = 'GETADS';
+export const GETADSUSERAds = 'GETADSUSERAds';
 
 
 export function getMapState(data) {
@@ -51,6 +52,23 @@ export function startGetAds(req) {
     
     return (dispatch) =>{
         axios.get(baseURL+'/search/getads',{params:req}).then((response=>{
+            console.log(response.data)
+            dispatch(getAds(response.data));
+        }))
+    }
+}
+
+function getUserAds(data) {
+    return{
+        type:GETADSUSERAds,
+        data
+    }
+}
+//getting user ads
+export function startGetUserAds(id) {
+    
+    return (dispatch) =>{
+        axios.get(baseURL+'/search/getuserads',{params:{id}}).then((response=>{
             console.log(response.data)
             dispatch(getAds(response.data));
         }))

@@ -40,7 +40,25 @@ const styles = theme => ({
   },
 });
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+function dateFormate(time){
+  var currentdate = new Date(time); 
+  var datetime = monthNames[currentdate.getMonth()] + " "
+          + currentdate.getDate() + ", "
+          + currentdate.getFullYear() + "  "  
+          + currentdate.getHours() + ":"  
+          + currentdate.getMinutes() + ":" 
+          + currentdate.getSeconds();
+      return datetime;
+ }
+
 function MediaControlCard(props) {
+  
+  
+
   const { classes, theme } = props;
 
   return (
@@ -51,25 +69,27 @@ function MediaControlCard(props) {
 <Card className={classes.card} elevation={0}>
      <CardMedia
         className={classes.cover}
-        image={img}
+        image={require(`../../uploads/${props.ad.media[0]}`)}
         title="Live from space album cover"
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography variant="body2">Live From Space</Typography>
+          <Typography variant="body2">{props.ad.title}</Typography>
           <Typography variant="caption" color="textSecondary">
-            Mac Miller
+       
+              Category:{props.ad.category} , {dateFormate(props.ad.timestamp)}
+           
           </Typography>
           <Typography variant="body1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptates, voluptate cumque pariatur aliquid quidem 
+           {props.ad.discriptions}
           </Typography>
           <Grid container spacing={8}> 
-            <Grid item  md={3}>
+            <Grid item  md={2}>
                      <Typography variant="caption" > 
                     <i class="material-icons iconFix">
                     account_circle
                      </i>
-                     Naveed Rana
+                     {props.ad.username}
                      </Typography>
                     
             </Grid>
@@ -78,23 +98,23 @@ function MediaControlCard(props) {
                     <i class="material-icons iconFix">
                         phone
                      </i>
-                     03034766669
+                     {props.ad.userphone}
                      </Typography>
             </Grid>
-            <Grid item  md={3}>
+            <Grid item  md={5} noWrap>
             <Typography variant="caption" > 
                     <i class="material-icons iconFix">
                         email
                      </i>
-                     rana@gmail.com
+                     {props.ad.useremail}
                      </Typography>
             </Grid>
-            <Grid item  md={3}>
-            <Typography variant="caption" > 
+            <Grid item  md={2}>
+            <Typography variant="caption" noWrap > 
                     <i class="material-icons iconFix">
                     location_on
                      </i>
-                     Faisalabad
+                     {props.ad.userlocations}
                      </Typography>
             </Grid>
           </Grid>
@@ -104,7 +124,7 @@ function MediaControlCard(props) {
     </Card>
 </ExpansionPanelSummary>
 <ExpansionPanelDetails>
-<MediaSlider />
+<MediaSlider media={props.ad.media} />
 </ExpansionPanelDetails>
 </ExpansionPanel>
 

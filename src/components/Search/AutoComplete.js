@@ -174,7 +174,7 @@ class AutoComplete extends React.Component {
           {...autosuggestProps}
           inputProps={{
             classes,
-            placeholder: 'Search an Ad',
+            placeholder: 'Search by Title or Tag',
             value: this.state.single,
             onChange: this.handleChange('single'),
           }}

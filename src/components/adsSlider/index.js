@@ -10,28 +10,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import image from '../resource/images/adsloading.gif';
 
-const tutorialSteps = [
-  {
-    label: 'How to be happy :)',
-    imgPath: image
-  },
-  {
-    label: '1. Work with something that you like, like…',
-    imgPath:image
-  },
-  {
-    label: '2. Keep your friends close to you and hangout with them',
-    imgPath: '../resource/images/add.png',
-  },
-  {
-    label: '3. Travel everytime that you have a chance',
-    imgPath: '../resource/images/ads1.JPG',
-  },
-  {
-    label: '4. And contribute to Material-UI :D',
-    imgPath: '../resource/images/adsheight.JPG',
-  },
-];
+
 
 const styles = theme => ({
   root: {
@@ -47,7 +26,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    maxheight: 500,
+    maxHeight: 500,
     minWidth: 10,
     overflow: 'hidden',
     width: '100%',
@@ -57,7 +36,16 @@ const styles = theme => ({
 class SwipeableTextMobileStepper extends React.Component {
   state = {
     activeStep: 0,
+    tutorialSteps:[]
   };
+
+  componentWillMount() {
+   let tutorialStep = [];
+    this.props.media.forEach(item => {
+      tutorialStep.push({label:"List of images",imgPath:item});
+    });
+    this.setState({tutorialSteps:tutorialStep});
+  }
 
   handleNext = () => {
     this.setState(prevState => ({
@@ -77,7 +65,12 @@ class SwipeableTextMobileStepper extends React.Component {
 
   render() {
     const { classes, theme } = this.props;
-    const { activeStep } = this.state;
+    const { activeStep ,tutorialSteps} = this.state;
+    console.log('====================================');
+    console.log(tutorialSteps);
+    console.log('====================================');
+    console.log('public url: ', process.env.PUBLIC_URL)
+
 
     const maxSteps = tutorialSteps.length;
 
@@ -92,8 +85,8 @@ class SwipeableTextMobileStepper extends React.Component {
           onChangeIndex={this.handleStepChange}
           enableMouseEvents
         >
-          {tutorialSteps.map(step => (
-            <img  key={step.label} className={classes.img} src={step.imgPath} alt={step.label} />
+          {tutorialSteps.map((step,i) => (
+            <img  key={i} className={classes.img} src={require(`../../uploads/${step.imgPath}`)} alt={step.label} />
           ))}
         </SwipeableViews>
         <MobileStepper

@@ -16,7 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import {startLoginUser} from '../redux/actions/userAction';
 import { connect } from 'react-redux';
 import pink from '@material-ui/core/colors/pink';
-import {POSTING} from '../constants';
+import {ACCOUNT} from '../constants';
 import {withRouter} from 'react-router-dom';
 
 
@@ -39,7 +39,7 @@ class Login extends Component {
             loading:false
         })
       if(nextProps.user.email){
-        this.props.history.push(POSTING);
+        this.props.history.push(ACCOUNT);
       }
       
       }
@@ -146,25 +146,12 @@ class Login extends Component {
                                         </Button>
                                     </Grid>
                                     <Grid container spacing={8} className="paddingTop"> 
-                                    <Grid item xs={12} md={6} className="paddingTop">
+                                    <Grid item xs={12} md={12} className="paddingTop" align="right">
                                         <Typography variant="body2">
                                             <Link to={SIGNUP}>Register</Link>
                                         </Typography>
                                     </Grid>
-                                    <Hidden smDown>
-                                        <Grid item xs={12} md={6} align="right" className="paddingTop">
-                                            <Typography variant="body2">
-                                                <Link to="/">Forget Password</Link>
-                                            </Typography>
-                                        </Grid>
-                                    </Hidden>
-                                    <Hidden mdUp>
-                                        <Grid item xs={12} md={6}>
-                                            <Typography variant="body2" className="paddingTop">
-                                                <Link to="">Forget Password</Link>
-                                            </Typography>
-                                        </Grid>
-                                    </Hidden>
+                            
                                     </Grid>
                            
                             </Grid>

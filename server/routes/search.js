@@ -44,5 +44,18 @@ router.get('/getads',(req,res)=>{
      
 })
 
+router.get('/getuserads',(req,res)=>{
+    
+    adsmodels.find({"user":req.query.id},(err,data)=>{
+        if(err){
+            res.status(500).json("error has been occored!")
+        }
+        else{
+            res.status(200).json(data);
+        }
+    });
+     
+});
+
 
 module.exports = router;

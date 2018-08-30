@@ -23,6 +23,7 @@ import MediaSlider from '../adsSlider';
 const styles = theme => ({
   card: {
     minWidth: 10,
+    marginTop:2
   },
   media: {
     height: 0,
@@ -49,6 +50,21 @@ const styles = theme => ({
   },
 });
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+function dateFormate(time){
+  var currentdate = new Date(time); 
+  var datetime = monthNames[currentdate.getMonth()] + " "
+          + currentdate.getDate() + ", "
+          + currentdate.getFullYear() + "  "  
+          + currentdate.getHours() + ":"  
+          + currentdate.getMinutes() + ":" 
+          + currentdate.getSeconds();
+      return datetime;
+ }
+
 class SmallScreenResults extends React.Component {
   state = { expanded: false };
 
@@ -66,7 +82,7 @@ class SmallScreenResults extends React.Component {
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
+              {this.props.ad.username.charAt(0)}
             </Avatar>
           }
           action={
@@ -74,18 +90,17 @@ class SmallScreenResults extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={this.props.ad.title}
+          subheader={dateFormate(this.props.ad.timestamp)}
         />
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/paella.jpg"
-          title="Contemplative Reptile"
+          image={require(`../../uploads/${this.props.ad.media[0]}`)}
+          title={this.props.ad.tag}
         />
         <CardContent>
           <Typography component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+            {this.props.ad.discriptions}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -106,7 +121,7 @@ class SmallScreenResults extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-          <MediaSlider />
+          <MediaSlider media = {this.props.ad.media}/>
           </CardContent>
         </Collapse>
       </Card>

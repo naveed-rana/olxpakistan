@@ -166,7 +166,7 @@ class SignUp extends Component {
                     <i className="material-icons largeIcon">account_circle
                     </i>
                           </Avatar>
-                         <Typography variant="headline">Sign in</Typography>
+                         <Typography variant="headline">Sign Up</Typography>
                      <Grid container spacing={8} className="LoginContainer"> 
                        <Grid item xs={12} md={6} className="paddingTop">
                        <TextField

@@ -36,12 +36,33 @@ class Search extends Component {
 
   
   componentDidMount() {
-    this.setState({
-      title:this.props.titleSearch,
-      locations:this.props.mapSearch,
-      data:this.props.ads,
-      copyData:this.props.ads
-    })
+    let title = this.props.titleSearch.toLowerCase();
+    let locations = this.props.mapSearch;
+    let data = this.props.ads;
+    let copyData;
+      if(data.length > 0){
+    
+      if(title !== '' && locations !==''){
+        copyData = data.filter(item => (item.title.includes(title) ||item.tag.includes(title)) && item.userlocations === locations );
+         this.setState({data,copyData});
+      }
+      else if (title !== ''){
+        copyData = data.filter(item => item.title.includes(title) ||item.tag.includes(title));
+        this.setState({data,copyData});    
+      }
+      else if(locations !==''){
+        copyData = data.filter(item =>item.userlocations === locations );
+        this.setState({data,copyData});
+      }
+      else{
+        this.setState({copyData:data});
+      }
+    
+    }
+      else{
+        this.props.startGetAds({category:"all"});
+      }
+      
     
   }
   
@@ -54,16 +75,26 @@ class Search extends Component {
     this.props.startGetAds({category:e.target.value});
   }
   getTitleSearch=(title)=>{
+    title = title.toLowerCase();
     this.setState({title});
-    const {locations,category} = this.state;
+    var {data,copyData,locations} = this.state;
+    if(locations === ''){
+      copyData = data.filter(item => item.title.includes(title) ||item.tag.includes(title));
+      this.setState({copyData});
+    }else{
+      copyData = data.filter(item => (item.title.includes(title) ||item.tag.includes(title)) && item.userlocations === locations );
+      this.setState({copyData});
+    }
   }
   getMapState=(locations)=>{
     this.setState({locations});
-    const {title,category} = this.state;
-    let data = {
-      category,
-      title,
-      locations
+    let {title,data,copyData} = this.state;
+    if(title === ''){
+      copyData = data.filter(item =>item.userlocations === locations );
+      this.setState({copyData});
+    }else{
+      copyData = data.filter(item => item.title.includes(title) ||item.tag.includes(title));
+      this.setState({copyData});
     }
   }
   handleChangePage = (event, page) => {
@@ -74,7 +105,7 @@ class Search extends Component {
     this.setState({rowsPerPage: event.target.value});
   };
     render() {
-      const {data, rowsPerPage, page,title,locations} = this.state;
+      const {copyData, rowsPerPage, page,title,locations} = this.state;
       
  
         return (
@@ -98,7 +129,7 @@ class Search extends Component {
                       value={this.state.category}
                       onChange={this.onChangeHandler}
                       className="selectSignUp">
-                      <option selected value="none">
+                      <option selected value="all">
                       All Categories
                       </option>
                       <option value="mobiles">
@@ -141,21 +172,27 @@ class Search extends Component {
                 </Paper>
 
                 <Paper className="marginTop" elevation={5}>
-                  
-                  {/* <img width="100%" src={require('../resource/images/adsloading.gif')} alt=""/> */}
-
+             
                   <Hidden only={['md', 'xl','lg']}>
-                    <Card/>
+                  {copyData.length>0 ?
+              copyData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((ad,i) => {
+                return (
+               <Card key={i} ad={ad} />
+                );
+              })
+              :<img width="100%" src={require('../resource/images/adsloading23.gif')} alt=""/> }
                     <Table >
                     <TableFooter>
                       <TableRow>
                         <TablePagination
                           colSpan={2}
-                          count={data.length}
+                          count={copyData.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
                           labelDisplayedRows={() => ""}
                           labelRowsPerPage=""
+                          rowsPerPageOptions={[2,5, 10,25]}
                           onChangePage={this.handleChangePage}
                           onChangeRowsPerPage={this.handleChangeRowsPerPage}
                           ActionsComponent={TablePaginationActionsWrapped}/>
@@ -164,18 +201,27 @@ class Search extends Component {
                  </Table>
                   </Hidden>
                   <Hidden only={['xs', 'sm']}>
-                 <LargeScreenResults />
-                 <Divider />
-                 <LargeScreenResults />
+                  {copyData.length>0 ?
+              copyData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((ad,i) => {
+                return (
+                  <div key={i}>
+               <LargeScreenResults  ad={ad}  />
+               <Divider />
+                  </div>
+                );
+              })
+              : <img width="100%" src={require('../resource/images/adsloading.gif')} alt=""/> }
                  <Table >
                     <TableFooter>
                       <TableRow>
                         <TablePagination
                           colSpan={2}
-                          count={data.length}
+                          count={copyData.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
                           labelRowsPerPage="Ads per page"
+                          rowsPerPageOptions={[5, 10,25,100,500]}
                           onChangePage={this.handleChangePage}
                           onChangeRowsPerPage={this.handleChangeRowsPerPage}
                           ActionsComponent={TablePaginationActionsWrapped}/>

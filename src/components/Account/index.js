@@ -14,11 +14,12 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Icon from '@material-ui/core/Icon';
 import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
+import PostAnAdd from '../Posting';
 
 
 class HomePage extends Component {
   state = {
-    value: 4,
+    value: 0
   };
   componentDidMount() {
   
@@ -41,6 +42,8 @@ class HomePage extends Component {
         </Hidden>
         <Grid item xs={12} md={8}>
         <Hidden only={['xs','sm']}>
+        <Paper className="" elevation={10}>
+        
           <BottomNavigation
                 value={value}
                 onChange={this.handleChange}
@@ -48,37 +51,34 @@ class HomePage extends Component {
                 >
                 <BottomNavigationAction 
                 className="buttomNavigation"
-                label="New Complaints"
-                icon={<Icon>library_add</Icon>}
-                component={Link} to={routes.SAVEDADS}
+                label="HOME"
+                icon={<Icon>home</Icon>}
+                component={Link} to={routes.ACCOUNT_HOME}
                 />
 
                 <BottomNavigationAction 
                 className="buttomNavigation" 
-                label="My Complaints" 
+                label="My Ads" 
                 icon={<Icon>visibility</Icon>} 
-                component={Link} to={routes.ACCOUNT_HOME}
+                component={Link} to={routes.MYADS}
                 />
 
 
                 <BottomNavigationAction
                 className="buttomNavigation"
-                label="History" 
+                label="Update" 
                 component={Link} to={routes.SETTINGS}
-                icon={<Icon>history</Icon>} />
+                icon={<Icon>update</Icon>} />
 
                 <BottomNavigationAction
                 className="buttomNavigation"
                 label="Account" 
-                component={Link} to={routes.SETTINGS}
+                component={Link} to={routes.ACCOUNT_HOME}
                 icon={<Icon>account_circle</Icon>} />
 
-                <BottomNavigationAction className="buttomNavigation" 
-                component={Link} to={routes.ACCOUNT_HOME}
-                label="Instructions"
-                icon={<Icon>help_outline</Icon>} />
-
 </BottomNavigation>
+
+        </Paper>
 
         </Hidden>
           
@@ -90,7 +90,7 @@ class HomePage extends Component {
                 exact
                 path={routes.SAVEDADS}
                 component={() =><SavedAds />}/>
-            <Route exact path={routes.ACCOUNT_HOME} component={() =>< Home />}/>
+            <Route exact path={routes.POSTING} component={() =>< Home />}/>
         </Paper>
           
         </Grid>
