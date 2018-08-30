@@ -6,13 +6,14 @@ import './resource/css/index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import OlxPakistan from './Navigation';
 import {startGetUser} from './redux/actions/userAction';
-import {startGetSuggestions} from './redux/actions/searchActions';
+import {startGetSuggestions,startGetAds} from './redux/actions/searchActions';
 import { connect } from 'react-redux';
 
 class App extends Component {
   componentDidMount() {
     this.props.startGetUser();
     this.props.startGetSuggestions();
+    this.props.startGetAds({category:"all"});
   }
   render() {
     return (
@@ -37,4 +38,4 @@ class App extends Component {
   }
 }
 
-export default connect(null,{startGetUser,startGetSuggestions})(App);
+export default connect(null,{startGetUser,startGetSuggestions,startGetAds})(App);

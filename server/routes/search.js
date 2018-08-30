@@ -22,4 +22,27 @@ router.get('/getsuggestions',(req,res)=>{
 })
 
 
+router.get('/getads',(req,res)=>{
+    if(req.query.category === 'all'){
+        adsmodels.find({},(err,data)=>{
+            if(err){
+                res.status(500).json("error has been occored!")
+            }
+            else{
+                res.status(200).json(data);
+            }
+    });}
+    else{
+    adsmodels.find({"category":req.query.category},(err,data)=>{
+        if(err){
+            res.status(500).json("error has been occored!")
+        }
+        else{
+            res.status(200).json(data);
+        }
+    });}
+     
+})
+
+
 module.exports = router;

@@ -4,8 +4,6 @@ import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Card from '../smallScreenResults';
 import TablePaginationActionsWrapped from '../paginations';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -16,8 +14,7 @@ import LargeScreenResults from '../LargeScreenResults';
 import SearchTitle from './AutoComplete';
 import Map from './MapApi';
 import { connect } from 'react-redux';
-
-
+import {startGetAds} from '../redux/actions/searchActions';
 
 
 class Search extends Component {
@@ -26,13 +23,12 @@ class Search extends Component {
 
     this.state = {
       data: [],
-      copyData:[],
-      branches:[],      
+      copyData:[],     
       page: 0,
       rowsPerPage: 5,
       title:'',
       locations:'',
-      category:'none'
+      category:'',
       
 
     };
@@ -40,21 +36,35 @@ class Search extends Component {
 
   
   componentDidMount() {
-    
     this.setState({
       title:this.props.titleSearch,
       locations:this.props.mapSearch,
+      data:this.props.ads,
+      copyData:this.props.ads
     })
+    
   }
   
+  componentWillReceiveProps(nextProps) {
+    this.setState({data:nextProps.ads,copyData:nextProps.ads})
+  }
+
   onChangeHandler = (e) =>{
     this.setState({category:e.target.value})
+    this.props.startGetAds({category:e.target.value});
   }
   getTitleSearch=(title)=>{
     this.setState({title});
+    const {locations,category} = this.state;
   }
   getMapState=(locations)=>{
     this.setState({locations});
+    const {title,category} = this.state;
+    let data = {
+      category,
+      title,
+      locations
+    }
   }
   handleChangePage = (event, page) => {
     this.setState({page});
@@ -65,6 +75,7 @@ class Search extends Component {
   };
     render() {
       const {data, rowsPerPage, page,title,locations} = this.state;
+      
  
         return (
             <div>
@@ -88,7 +99,7 @@ class Search extends Component {
                       onChange={this.onChangeHandler}
                       className="selectSignUp">
                       <option selected value="none">
-                      Search by Category
+                      All Categories
                       </option>
                       <option value="mobiles">
                       Mobiles
@@ -188,6 +199,7 @@ class Search extends Component {
 const mapStateToProps = state => ({
   mapSearch:state.search.mapSearch,
   titleSearch:state.search.titleSearch,
+  ads:state.search.ads,
 })
 
-export default connect(mapStateToProps,null)(Search);
+export default connect(mapStateToProps,{startGetAds})(Search);

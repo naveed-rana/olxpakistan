@@ -1,8 +1,9 @@
-import {MAPLOCATIONS, SEARCHTITLE,GETSUGGESTIONS} from '../../actions/searchActions';
+import {MAPLOCATIONS, SEARCHTITLE,GETSUGGESTIONS,GETADS} from '../../actions/searchActions';
 const INITIAL_STATE = {
     mapSearch: '',
     titleSearch: '',
-    suggestions:[]
+    suggestions:[],
+    ads:[]
 
 };
 
@@ -24,6 +25,12 @@ function searchReducer(state = INITIAL_STATE, action) {
             return{
                 ...state,
                 suggestions:action.data
+            }
+        }
+        case GETADS:{
+            return{
+                ...state,
+                ads:action.data
             }
         }
         default:

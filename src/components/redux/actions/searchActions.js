@@ -5,6 +5,7 @@ const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:808
 export const MAPLOCATIONS = 'MAPLOCATIONS';
 export const SEARCHTITLE = 'SEARCHTITLE';
 export const GETSUGGESTIONS = 'GETSUGGESTIONS';
+export const GETADS = 'GETADS';
 
 
 export function getMapState(data) {
@@ -34,6 +35,24 @@ export function startGetSuggestions() {
         axios.get(baseURL+'/search/getsuggestions').then((response=>{
             console.log(response.data)
             dispatch(getSuggestions(response.data));
+        }))
+    }
+}
+
+function getAds(data) {
+    return{
+        type:GETADS,
+        data
+    }
+}
+
+//gettings ads
+export function startGetAds(req) {
+    
+    return (dispatch) =>{
+        axios.get(baseURL+'/search/getads',{params:req}).then((response=>{
+            console.log(response.data)
+            dispatch(getAds(response.data));
         }))
     }
 }
