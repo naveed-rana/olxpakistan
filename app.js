@@ -9,6 +9,7 @@ var setuppassport = require('./server/Passport');
 var dbURI = require('./server/config');
 var usersRouter = require('./server/routes/users');
 var ads = require('./server/routes/ads');
+var seachRoutes = require('./server/routes/search');
 var app = express();
 
 //db connection
@@ -35,6 +36,7 @@ setuppassport();
 
 app.use('/user', usersRouter);
 app.use('/ads', ads);
+app.use('/search', seachRoutes);
 
 app.use(express.static('public'));
 

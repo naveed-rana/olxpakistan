@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {getMapState} from '../redux/actions/searchActions';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -14,6 +12,11 @@ class LocationSearchInput extends React.Component {
     super(props);
     this.state = { address: '' };
   }
+
+  componentDidMount() {
+    this.setState({ address:this.props.locations });
+  }
+  
 
   handleChange = address => {
     this.setState({ address:address });
@@ -48,11 +51,10 @@ class LocationSearchInput extends React.Component {
             <TextField
          
          InputProps={{
-          disableUnderline:this.props.underline,
             startAdornment: (
               <InputAdornment position="start">
                 <i className="material-icons iconFixfield">
-                location_on
+                edit_location
                 </i>
               </InputAdornment>
             ),
@@ -97,4 +99,4 @@ class LocationSearchInput extends React.Component {
     );
   }
 }
-export default connect(null,{getMapState})(LocationSearchInput);
+export default LocationSearchInput;

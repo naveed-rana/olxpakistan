@@ -75,6 +75,12 @@ body{
 .postingPaper{
     padding: 10px;
 }
+
+.largepostingPaper{
+    padding: 10px;
+    min-height: 40vh !important;
+}
+
 .image-upload > input
 {
     display: none;

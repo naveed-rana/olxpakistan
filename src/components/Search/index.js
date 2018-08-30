@@ -13,6 +13,10 @@ import Table from '@material-ui/core/Table';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import LargeScreenResults from '../LargeScreenResults';
+import SearchTitle from './AutoComplete';
+import Map from './MapApi';
+import { connect } from 'react-redux';
+
 
 
 
@@ -26,8 +30,31 @@ class Search extends Component {
       branches:[],      
       page: 0,
       rowsPerPage: 5,
+      title:'',
+      locations:'',
+      category:'none'
+      
 
     };
+  }
+
+  
+  componentDidMount() {
+    
+    this.setState({
+      title:this.props.titleSearch,
+      locations:this.props.mapSearch,
+    })
+  }
+  
+  onChangeHandler = (e) =>{
+    this.setState({category:e.target.value})
+  }
+  getTitleSearch=(title)=>{
+    this.setState({title});
+  }
+  getMapState=(locations)=>{
+    this.setState({locations});
   }
   handleChangePage = (event, page) => {
     this.setState({page});
@@ -37,7 +64,8 @@ class Search extends Component {
     this.setState({rowsPerPage: event.target.value});
   };
     render() {
-      const {data, rowsPerPage, page} = this.state;
+      const {data, rowsPerPage, page,title,locations} = this.state;
+ 
         return (
             <div>
             <Grid container spacing={8}> 
@@ -55,7 +83,8 @@ class Search extends Component {
                  <Grid item xs={12} md={4} className="paddingTop">
                   
                       <select name="category"
-                      value=""
+                      style={{fontWeight:'bold'}}
+                      value={this.state.category}
                       onChange={this.onChangeHandler}
                       className="selectSignUp">
                       <option selected value="none">
@@ -82,42 +111,20 @@ class Search extends Component {
                       </select>
                    
                     </Grid>
+                <Grid item xs={12} md={4} className="paddingTop">
+                 <SearchTitle getTitleSearch={this.getTitleSearch} titles={title}/>
+                </Grid>
+                 <Hidden only={['sm','xs']}>
                  <Grid item xs={12} md={4} className="paddingTop">
-                <TextField
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          edit_location
-                           </i>
-                        </InputAdornment>
-                      ),
-                    }}
-                  name="title"
-                  onChange={this.onChangeHandler}
-                  fullWidth={true}
-                  placeholder="Search by Locations"
-                  value=""
-                  />
-                </Grid> 
-                 <Grid item xs={12} md={4} className="paddingTop">
-                <TextField
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          find_in_page
-                           </i>
-                        </InputAdornment>
-                      ),
-                    }}
-                  name="title"
-                  onChange={this.onChangeHandler}
-                  fullWidth={true}
-                  placeholder="Search by Title"
-                  value=""
-                  />
-            </Grid>
+                 <Map getMapState = {this.getMapState} locations={locations} />
+                 </Grid> 
+                 </Hidden>
+                 <Hidden only={['md','lg','xl']}>
+                 <Grid item xs={12} md={4} className="paddingTop marginTop">
+                 <Map getMapState = {this.getMapState} locations={locations} />
+                 </Grid> 
+                 </Hidden>
+                 
                 
                 </Grid>
                 </Paper>
@@ -178,5 +185,9 @@ class Search extends Component {
         )
     }
 }
+const mapStateToProps = state => ({
+  mapSearch:state.search.mapSearch,
+  titleSearch:state.search.titleSearch,
+})
 
-export default Search;
+export default connect(mapStateToProps,null)(Search);

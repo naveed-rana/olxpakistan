@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {compose} from 'recompose';
 import { connect } from 'react-redux';
-import {getTitleSearch} from '../redux/actions/searchActions';
+
 
 
 var suggestions = [];
@@ -22,11 +22,10 @@ function renderInputComponent(inputProps) {
     <TextField
       fullWidth
       InputProps={{
-        disableUnderline:true,
         startAdornment: (
           <InputAdornment position="start">
             <i className="material-icons iconFixfield">
-            search
+            find_in_page
             </i>
           </InputAdornment>
         ),
@@ -117,7 +116,7 @@ const styles = theme => ({
   },
 });
 
-class IntegrationAutosuggest extends React.Component {
+class AutoComplete extends React.Component {
   popperNode = null;
 
   state = {
@@ -125,7 +124,14 @@ class IntegrationAutosuggest extends React.Component {
     popper: '',
     suggestions: [],
   };
-
+  
+  componentDidMount() {
+    this.setState({single:this.props.titles });
+    console.log('==================log==================');
+    console.log(this.state.single);
+    console.log('====================================');
+  }
+  
   componentWillReceiveProps(nextProps) {
     suggestions = nextProps.suggestions;
   }
@@ -190,11 +196,11 @@ class IntegrationAutosuggest extends React.Component {
   }
 }
 
-IntegrationAutosuggest.propTypes = {
+AutoComplete.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   suggestions:state.search.suggestions,
 })
-export default compose(withStyles(styles),connect(mapStateToProps,{getTitleSearch}))(IntegrationAutosuggest);
+export default compose(withStyles(styles),connect(mapStateToProps))(AutoComplete);
