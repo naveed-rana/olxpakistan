@@ -146,3 +146,6 @@ padding: 60px 30px 20px 30px;
    height: 250px !important;
    width: 250px !important;
 }
+.pointer{
+    cursor: pointer !important;
+}

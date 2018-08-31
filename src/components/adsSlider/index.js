@@ -9,6 +9,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import image from '../resource/images/adsloading.gif';
+const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 
 
@@ -66,10 +67,7 @@ class SwipeableTextMobileStepper extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { activeStep ,tutorialSteps} = this.state;
-    console.log('====================================');
-    console.log(tutorialSteps);
-    console.log('====================================');
-    console.log('public url: ', process.env.PUBLIC_URL)
+ 
 
 
     const maxSteps = tutorialSteps.length;
@@ -86,7 +84,7 @@ class SwipeableTextMobileStepper extends React.Component {
           enableMouseEvents
         >
           {tutorialSteps.map((step,i) => (
-            <img  key={i} className={classes.img} src={require(`../../uploads/${step.imgPath}`)} alt={step.label} />
+            <img  key={i} className={classes.img} src={`${baseURL}/static/media/${step.imgPath}`} alt={step.label} />
           ))}
         </SwipeableViews>
         <MobileStepper

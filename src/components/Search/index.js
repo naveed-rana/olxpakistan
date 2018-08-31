@@ -150,6 +150,12 @@ class Search extends Component {
                       <option value="furniture">
                       Furniture
                       </option>
+                      <option value="property">
+                      Property
+                      </option>
+                      <option value="books">
+                      Books
+                      </option>
                       </select>
                    
                     </Grid>

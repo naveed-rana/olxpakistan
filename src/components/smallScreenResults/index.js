@@ -17,7 +17,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MediaSlider from '../adsSlider';
-
+const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 
 const styles = theme => ({
@@ -85,17 +85,13 @@ class SmallScreenResults extends React.Component {
               {this.props.ad.username.charAt(0)}
             </Avatar>
           }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
+         
           title={this.props.ad.title}
           subheader={dateFormate(this.props.ad.timestamp)}
         />
         <CardMedia
           className={classes.media}
-          image={require(`../../uploads/${this.props.ad.media[0]}`)}
+          image={`${baseURL}/static/media/${this.props.ad.media[0]}`}
           title={this.props.ad.tag}
         />
         <CardContent>

@@ -1,60 +1,164 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const styles = {
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+function dateFormate(time){
+  var currentdate = new Date(time); 
+  var datetime = monthNames[currentdate.getMonth()] + " "
+          + currentdate.getDate() + ", "
+          + currentdate.getFullYear() + "  "  
+          + currentdate.getHours() + ":"  
+          + currentdate.getMinutes() + ":" 
+          + currentdate.getSeconds();
+      return datetime;
+ }
+
+
+const styles = theme => ({
+  root: {
+    maxWidth: 400,
+    flexGrow: 1,
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    height: 50,
+    paddingLeft: theme.spacing.unit * 4,
+    marginBottom: 20,
+    backgroundColor: theme.palette.background.default,
+  },
+  img: {
+    height: 255,
+    maxWidth: 400,
+    overflow: 'hidden',
+    width: '100%',
+  },
   card: {
-    maxWidth: 345,
+    minWidth: 10,
+    marginTop:2
   },
   media: {
-    // ⚠️ object-fit is not supported by IE11.
-    objectFit: 'cover',
+    height: 0,
+    paddingTop: '56.25%', // 16:9
   },
-};
+});
 
-function ImgMediaCard(props) {
-  const { classes } = props;
-  return (
-    <Card className={classes.card}>
-      <CardActionArea>
+class SwipeableTextMobileStepper extends React.Component {
+  state = {
+    activeStep: 0,
+    data:[]
+  };
+
+  componentDidMount() {
+    alert(this.props.data[0].title);
+    this.setState({data:this.props.data})
+    setInterval(this.handleNext, 3000);
+  }
+
+  handleNext = () => {
+        const {activeStep} = this.state;
+      if( activeStep === 4){
+       this.setState({activeStep:0});
+      }
+      else{
+    this.setState(prevState => ({
+      activeStep: prevState.activeStep + 1,
+    }));}
+  };
+
+  handleBack = () => {
+    this.setState(prevState => ({
+      activeStep: prevState.activeStep - 1,
+    }));
+  };
+
+  handleStepChange = activeStep => {
+    this.setState({ activeStep });
+  };
+
+  render() {
+    const { classes, theme } = this.props;
+    const { activeStep ,data} = this.state;
+
+    const maxSteps = data.length;
+
+    return (
+        data.length>0 ?
+      <div className={classes.root}>
+      
+        <Paper square elevation={0} className={classes.header}>
+          <Typography>{data[activeStep].title}</Typography>
+        </Paper>
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={this.state.activeStep}
+          onChangeIndex={this.handleStepChange}
+          enableMouseEvents
+        >
+          {data.map((step,i) => (
+            <div key={i}>
+
+         <Card className={classes.card}>   
         <CardMedia
-          component="img"
           className={classes.media}
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
+          image={require(`../../uploads/${step.media[0]}`)}
+          title={step.tag}
         />
         <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
-            Lizard
-          </Typography>
           <Typography component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            {step.discriptions}
           </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
-  );
+        </Card>
+            </div>
+          ))}
+        </SwipeableViews>
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          activeStep={activeStep}
+          className={classes.mobileStepper}
+          nextButton={
+            <Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
+              Next
+              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            </Button>
+          }
+          backButton={
+            <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>
+              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+              Back
+            </Button>
+          }
+        />
+      </div>
+      :"loading...."
+    );
+  }
 }
 
-ImgMediaCard.propTypes = {
+SwipeableTextMobileStepper.propTypes = {
   classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ImgMediaCard);
+export default withStyles(styles, { withTheme: true })(SwipeableTextMobileStepper);

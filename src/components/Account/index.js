@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as routes from '../constants';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import SavedAds from '../SavedAds';
 import Home from '../AccountsHome';
@@ -14,17 +14,17 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Icon from '@material-ui/core/Icon';
 import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
-import PostAnAdd from '../Posting';
-
 
 class HomePage extends Component {
   state = {
     value: 0
   };
   componentDidMount() {
-  
-  
-  }
+     document.title = "Account";
+     if(!this.props.user){
+       this.props.history.push(routes.LOGIN);
+     }
+  }  
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -105,4 +105,8 @@ class HomePage extends Component {
 }
 
 
-export default HomePage;
+const mapStateToProps = state => ({
+  user : state.user.user._id,
+})
+
+export default withRouter(connect(mapStateToProps,null)(HomePage));

@@ -6,6 +6,10 @@ export const CHECKEMAIL = 'CHECKEMAIL';
 export const LOGIN = 'LOGIN';
 export const LOGINERR = 'LOGINERR';
 export const SIGNUPERR = 'SIGNUPERR';
+export const LOGOUT = 'logout';
+
+
+
 
 
 
@@ -41,7 +45,6 @@ export function startLoginUser(userData) {
 export function startGetUser() {
     
     return (dispatch) => {
-    
         axios.get(baseURL+'/user/authenticate').then((response=>{
             dispatch(loginUser(response.data));
         })).catch(err=>{
@@ -102,3 +105,22 @@ export function startEmailVerification(email){
     }
 }
 
+
+
+
+function logoutUser() {
+    return{
+        type:LOGOUT
+    }
+}
+
+export function startLogoutUser() {
+    return (dispatch) => {
+    
+        axios.post(baseURL+'/user/logout').then((response=>{
+            toast.success("Successfully Logout!");
+            dispatch(logoutUser());
+        })).catch(err=>{
+            toast.error("Error ccoured! while logout");
+        });
+    }}

@@ -38,7 +38,7 @@ app.use('/user', usersRouter);
 app.use('/ads', ads);
 app.use('/search', seachRoutes);
 
-app.use(express.static('public'));
+app.use(express.static('./build'));
 
 app.listen(8080);
 

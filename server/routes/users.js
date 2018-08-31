@@ -18,18 +18,19 @@ router.post('/signup',(req,res)=>{
 });
 
 router.post('/login',passport.authenticate('local'),(req,res)=>{
-    
+ 
      res.json(200,req.user);
     }
 )
 
 
-router.get('/logout',(req,res)=>{
-    if(req.logout()){
-    res.json(200,"succefully logout!");}
-    else{
-     res.json(500,"error occoured!");
-    }
+router.post('/logout',(req,res)=>{
+   console.log(req.user);
+    req.logout();
+    console.log(req.user);
+    res.json(200,"succefully logout!");
+    
+   
 })
 
 router.get('/authenticate',(req,res)=>{

@@ -12,6 +12,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
 import MediaSlider from '../adsSlider';
+const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 const styles = theme => ({
   card: {
@@ -69,7 +70,7 @@ function MediaControlCard(props) {
 <Card className={classes.card} elevation={0}>
      <CardMedia
         className={classes.cover}
-        image={require(`../../uploads/${props.ad.media[0]}`)}
+        image={`${baseURL}/static/media/${props.ad.media[0]}`}
         title="Live from space album cover"
       />
       <div className={classes.details}>

@@ -1,4 +1,4 @@
-import {CHECKEMAIL,CREATEUSER,LOGIN,LOGINERR,SIGNUPERR} from '../../actions/userAction';
+import {CHECKEMAIL,CREATEUSER,LOGIN,LOGINERR,SIGNUPERR,LOGOUT} from '../../actions/userAction';
 const INITIAL_STATE = {
   user:{},
   userAccount:'',
@@ -32,6 +32,12 @@ function userReducer(state = INITIAL_STATE, action) {
        return{
          ...state,
          user:action.user
+       }
+     }
+     case LOGOUT:{
+       return{
+         ...state,
+         user:{}
        }
      }
      case LOGINERR:{

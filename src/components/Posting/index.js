@@ -6,8 +6,20 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Forms from '../PostingForms';
+import { connect } from 'react-redux'
+import {withRouter} from 'react-router-dom';
+import {LOGIN} from '../constants';
+
 
 class Posting extends Component {
+
+  componentDidMount() {
+    document.title = "Posting";
+    if(!this.props.user){
+      this.props.history.push(LOGIN);
+    }
+ }  
+
     render() {
         return (
             <div>
@@ -35,5 +47,8 @@ class Posting extends Component {
         )
     }
 }
+const mapStateToProps = state => ({
+  user : state.user.user._id,
+})
 
-export default Posting;
+export default withRouter(connect(mapStateToProps,null)(Posting));
