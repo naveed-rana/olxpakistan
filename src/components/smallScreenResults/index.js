@@ -17,6 +17,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MediaSlider from '../adsSlider';
+import Chip from '@material-ui/core/Chip';
+import {toast} from 'react-toastify';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 
@@ -62,7 +64,7 @@ function dateFormate(time){
           + currentdate.getHours() + ":"  
           + currentdate.getMinutes() + ":" 
           + currentdate.getSeconds();
-      return datetime;
+      return datetime; 
  }
 
 class SmallScreenResults extends React.Component {
@@ -71,6 +73,25 @@ class SmallScreenResults extends React.Component {
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
+
+  onClickHandler=()=>{
+    let obj ={
+      title:this.props.ad.title,
+      category:this.props.ad.category,
+      condition:this.props.ad.price,
+      price:this.props.ad.price,
+      discriptions:this.props.ad.discriptions,
+      tag:this.props.ad.tag,
+      user:this.props.ad.user,
+      username:this.props.ad.username,
+      userphone:this.props.ad.cellNo,
+      useremail:this.props.ad.useremail,
+      userlocations:this.props.ad.userlocations,
+      media:this.props.ad.media,
+      timestamp:this.props.ad.timestamp
+    }
+    toast.success("Saved successfully for later view!");
+  }
 
   render() {
     const { classes } = this.props;
@@ -85,6 +106,16 @@ class SmallScreenResults extends React.Component {
               {this.props.ad.username.charAt(0)}
             </Avatar>
           }
+
+          action={
+            <Typography component="p" className="price">
+            <i class="material-icons iconFixpric">
+              monetization_on
+              </i>
+          {this.props.ad.price} only &nbsp; &nbsp; &nbsp;  &nbsp;
+            </Typography>
+          }
+
          
           title={this.props.ad.title}
           subheader={dateFormate(this.props.ad.timestamp)}
@@ -98,12 +129,14 @@ class SmallScreenResults extends React.Component {
           <Typography component="p">
             {this.props.ad.discriptions}
           </Typography>
+         
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
+          <IconButton aria-label="Add to favorites" onClick={this.onClickHandler}>
             <FavoriteIcon />
           </IconButton>
           
+
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,

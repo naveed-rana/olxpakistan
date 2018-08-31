@@ -75,12 +75,26 @@ function MediaControlCard(props) {
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography variant="body2">{props.ad.title}</Typography>
+        <Grid container spacing={8}> 
+            <Grid item xs={6} md={6}>
+            <Typography variant="body2">{props.ad.title}</Typography>
+            </Grid>
+            <Grid item xs={6} md={6} align="right">
+            <Typography component="p" className="price">
+            <i class="material-icons iconFixpric">
+              monetization_on
+              </i>
+          {props.ad.price} only &nbsp; &nbsp; &nbsp;  &nbsp;
+            </Typography>
+            </Grid>
+          </Grid>
+          
           <Typography variant="caption" color="textSecondary">
        
               Category:{props.ad.category} , {dateFormate(props.ad.timestamp)}
            
           </Typography>
+          
           <Typography variant="body1">
            {props.ad.discriptions}
           </Typography>
