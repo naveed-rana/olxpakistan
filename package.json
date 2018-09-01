@@ -57,7 +57,12 @@
     "start": "node app.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "npm install && npm run build"
+  },
+  "engines": {
+    "node": "8.9.1",
+    "npm": "5.6.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
