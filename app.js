@@ -6,11 +6,11 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 const cookieparser =require('cookie-parser');
 var setuppassport = require('./server/Passport');
-var dbURI = require('./server/config');
 var usersRouter = require('./server/routes/users');
 var ads = require('./server/routes/ads');
 var seachRoutes = require('./server/routes/search');
 var app = express();
+var dbURI = require('./server/config/key');
 
 //db connection
 mongoose.connect(dbURI,{ useNewUrlParser: true }, function (err) {
@@ -39,6 +39,6 @@ app.use('/ads', ads);
 app.use('/search', seachRoutes);
 
 app.use(express.static('./build'));
-
-app.listen(8080);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT);
 
