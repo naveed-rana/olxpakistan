@@ -39,7 +39,7 @@ app.use('/user', usersRouter);
 app.use('/ads', ads);
 app.use('/search', seachRoutes);
 
-app.use(express.static('./build'));
+app.use(express.static('build'));
 const PORT = process.env.PORT || 8080;
 app.listen(PORT);
 
