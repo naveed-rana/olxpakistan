@@ -11,6 +11,7 @@ var ads = require('./server/routes/ads');
 var seachRoutes = require('./server/routes/search');
 var app = express();
 var dbURI = require('./server/config/key');
+console.log(dbURI);
 
 //db connection
 mongoose.connect(dbURI,{ useNewUrlParser: true }, function (err) {
