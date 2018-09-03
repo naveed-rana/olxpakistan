@@ -9,9 +9,9 @@ var setuppassport = require('./server/Passport');
 var usersRouter = require('./server/routes/users');
 var ads = require('./server/routes/ads');
 var seachRoutes = require('./server/routes/search');
+var messageRoutes = require('./server/routes/messages');
 var app = express();
 var dbURI = require('./server/config/key');
-console.log(dbURI);
 
 //db connection
 mongoose.connect(dbURI,{ useNewUrlParser: true }, function (err) {
@@ -38,8 +38,8 @@ setuppassport();
 app.use('/user', usersRouter);
 app.use('/ads', ads);
 app.use('/search', seachRoutes);
+app.use('/message', messageRoutes);
 
 app.use(express.static(path.join(__dirname, './build')));
 const PORT = process.env.PORT || 8080;
 app.listen(PORT);
-

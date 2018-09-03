@@ -22,12 +22,30 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <style type="text/css">
+    
+      .App1 {
+        text-align: center;
+        height: 100vh;
+      }
+     .App1 img {
+       margin-top:15%;
+     }
+     .responsive {
+     max-width: 100%;
+     height: auto;
+       }
+    </style>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
+    <div id="root">
+      <div class="App1">
+        <img class="responsive" src="loader.gif" alt="loading...">
+       </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

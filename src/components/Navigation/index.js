@@ -18,7 +18,7 @@ import {BrowserRouter as Router,Link} from 'react-router-dom';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 import Routes from '../Routes';
 import Header from '../Header';
-import {POSTING,SEARCH} from '../constants';
+import {POSTING,SEARCH, HOME} from '../constants';
 
 const drawerWidth = 240;
 
@@ -61,6 +61,10 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
+  underlineRemove:{
+    textDecoration:'none',
+    color:'black'
+  }
 });
 
 class Navigation extends React.Component {
@@ -95,10 +99,12 @@ class Navigation extends React.Component {
             
             <Grid container spacing={8}> 
           <Grid item xs={6} md={3}>
+           <Link to={HOME} className={classes.underlineRemove}>
             <Typography variant="body2" color="inherit">
               <img src={require('../resource/images/smallogo.png')} alt="logo"/>
               PAKISTAN
             </Typography>
+            </Link>
             </Grid>
 
             <Hidden mdUp>

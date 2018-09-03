@@ -124,7 +124,7 @@ handleChangeRowsPerPage = event => {
               copyData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((ad,i) => {
                 return (
-               <Card key={i} ad={ad} />
+               <Card key={i} ad={ad} large={window.innerWidth<700?"small":"large"} />
                 );
               })
               :<img width="100%" src={require('../resource/images/postloader.gif')} alt=""/> }

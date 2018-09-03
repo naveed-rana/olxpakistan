@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
-import image from '../resource/images/adsloading.gif';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 
@@ -37,15 +38,20 @@ const styles = theme => ({
 class SwipeableTextMobileStepper extends React.Component {
   state = {
     activeStep: 0,
-    tutorialSteps:[]
+    tutorialSteps:[],
+    photoIndex: 0,
+    isOpen: false,
+    images:[]
   };
 
   componentWillMount() {
    let tutorialStep = [];
+   let image = [];
     this.props.media.forEach(item => {
       tutorialStep.push({label:"List of images",imgPath:item});
+      image.push(`${baseURL}/static/media/${item}`);
     });
-    this.setState({tutorialSteps:tutorialStep});
+    this.setState({tutorialSteps:tutorialStep,images:image});
   }
 
   handleNext = () => {
@@ -63,10 +69,13 @@ class SwipeableTextMobileStepper extends React.Component {
   handleStepChange = activeStep => {
     this.setState({ activeStep });
   };
+  onClickHandler = () => {
+    this.setState({isOpen:true});
+  }
 
   render() {
     const { classes, theme } = this.props;
-    const { activeStep ,tutorialSteps} = this.state;
+    const { activeStep ,tutorialSteps,photoIndex, isOpen,images} = this.state;
  
 
 
@@ -84,7 +93,7 @@ class SwipeableTextMobileStepper extends React.Component {
           enableMouseEvents
         >
           {tutorialSteps.map((step,i) => (
-            <img  key={i} className={classes.img} src={`${baseURL}/static/media/${step.imgPath}`} alt={step.label} />
+            <img  key={i} className={classes.img} onClick={this.onClickHandler} src={`${baseURL}/static/media/${step.imgPath}`} alt={step.label} />
           ))}
         </SwipeableViews>
         <MobileStepper
@@ -105,6 +114,26 @@ class SwipeableTextMobileStepper extends React.Component {
             </Button>
           }
         />
+        <div>
+        {isOpen && (
+          <Lightbox
+            mainSrc={images[photoIndex]}
+            nextSrc={images[(photoIndex + 1) % images.length]}
+            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+            onMovePrevRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + images.length - 1) % images.length,
+              })
+            }
+            onMoveNextRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + 1) % images.length,
+              })
+            }
+          />
+        )}
+          </div>
       </div>
     );
   }
@@ -114,5 +143,7 @@ SwipeableTextMobileStepper.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
+
+
 
 export default withStyles(styles, { withTheme: true })(SwipeableTextMobileStepper);

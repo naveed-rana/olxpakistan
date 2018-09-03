@@ -13,14 +13,22 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MediaSlider from '../adsSlider';
-import Chip from '@material-ui/core/Chip';
+import Icon from '@material-ui/core/Icon';
 import {toast} from 'react-toastify';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
+import {compose} from 'recompose';
+import {startSendMessage} from '../redux/actions/messageActions';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
-
 
 const styles = theme => ({
   card: {
@@ -68,14 +76,40 @@ function dateFormate(time){
  }
 
 class SmallScreenResults extends React.Component {
-  state = { expanded: false };
+  state = {
+     expanded: false,
+     open: false,
+     message:'',
+  };
 
+  handleClickOpen = () => {
+    
+    this.setState({ open: true });
+  };
+  
+  handleClose = () => {
+    let data = {
+      message:this.state.message,
+      username: this.props.ad.username,
+      userphone: this.props.ad.userphone,
+      title:this.props.ad.title,
+      adsid: this.props.ad._id,
+      userid: this.props.userid,
+    }
+    this.props.startSendMessage(data);
+    this.setState({ open: false, message:''});
+  };
+  
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
+  onChangeHandler=(e)=>{
+    
+    this.setState({message:e.target.value});
+  }
 
   onClickHandler=()=>{
-    let obj ={
+    let obj = {
       title:this.props.ad.title,
       category:this.props.ad.category,
       condition:this.props.ad.price,
@@ -94,10 +128,64 @@ class SmallScreenResults extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes,large } = this.props;
+    const {message} = this.state;
 
     return (
         <div>
+         <Dialog
+          fullScreen={large==='large'?false:true}
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+            >
+          <DialogTitle id="form-dialog-title">Message</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+             Please send concise message to the saller and deal with.
+            </DialogContentText>
+            <Grid container spacing={8}> 
+              <Grid item xs={12} md={12}>
+              <TextField
+              margin="dense"
+              id="name"
+              label="Name"
+              value={this.props.ad.username}
+              fullWidth
+            />
+              </Grid>
+              <Grid item xs={12} md={12}>
+              <TextField
+              margin="dense"
+              value={this.props.ad.userphone}
+              label="Phone No"
+              fullWidth
+            />
+              </Grid>
+              <Grid item xs={12} md={12}>
+              <TextField
+              onChange={this.onChangeHandler}
+              autoFocus
+              multiline={true}
+              margin="dense"
+              label="Message"
+              value={message}
+              fullWidth
+            />
+              </Grid>
+            </Grid>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleClose} color="primary">
+              Send
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+
 
             <Card className={classes.card}>
         <CardHeader
@@ -135,7 +223,9 @@ class SmallScreenResults extends React.Component {
           <IconButton aria-label="Add to favorites" onClick={this.onClickHandler}>
             <FavoriteIcon />
           </IconButton>
-          
+          <IconButton aria-label="Add to favorites" onClick={this.handleClickOpen}>
+            <Icon >message</Icon>
+          </IconButton>
 
           <IconButton
             className={classnames(classes.expand, {
@@ -154,14 +244,17 @@ class SmallScreenResults extends React.Component {
           </CardContent>
         </Collapse>
       </Card>
-      
         </div>
     );
   }
 }
 
 SmallScreenResults.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SmallScreenResults);
+const mapStateToProps = state => ({
+  userid:state.user.user._id,
+})
+
+export default compose(connect(mapStateToProps,{startSendMessage}),withStyles(styles))(SmallScreenResults);
