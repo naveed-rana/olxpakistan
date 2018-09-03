@@ -99,6 +99,10 @@ class SmallScreenResults extends React.Component {
     this.props.startSendMessage(data);
     this.setState({ open: false, message:''});
   };
+
+close=()=>{
+  this.setState({ open: false});
+}
   
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -176,7 +180,7 @@ class SmallScreenResults extends React.Component {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.close} color="primary">
               Cancel
             </Button>
             <Button onClick={this.handleClose} color="primary">

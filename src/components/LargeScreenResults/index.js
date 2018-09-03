@@ -103,6 +103,10 @@ handleClose = () => {
   this.setState({ open: false,message:''});
 };
 
+close=()=>{
+  this.setState({ open: false});
+}
+
 onChangeHandler = (e) =>{
   this.setState({message:e.target.value});
 }
@@ -169,7 +173,7 @@ onChangeHandler = (e) =>{
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.close} color="primary">
               Cancel
             </Button>
             <Button onClick={this.handleClose} color="primary">
