@@ -19,7 +19,7 @@ router.post('/signup',(req,res)=>{
 
 router.post('/login',passport.authenticate('local'),(req,res)=>{
  
-     res.json(200,req.user);
+     res.status(200).json(req.user);
     }
 )
 
@@ -28,17 +28,17 @@ router.post('/logout',(req,res)=>{
    console.log(req.user);
     req.logout();
     console.log(req.user);
-    res.json(200,"succefully logout!");
+    res.status(200).json("succefully logout!");
     
    
 })
 
 router.get('/authenticate',(req,res)=>{
     if(req.isAuthenticated()){
-        res.json(200,req.user)
+        res.status(200).json(req.user)
      }
      else{
-        res.json(401,'user is not logged in!')
+        res.status(401).json('user is not logged in!')
      }
 })
 
@@ -47,7 +47,7 @@ router.post('/emailVerification',(req,res)=>{
         if(user){
         res.status(200).json("email already in use");}
         else{
-            res.json(200,"readytouse"
+            res.status(200).json("readytouse"
             )
         }
         

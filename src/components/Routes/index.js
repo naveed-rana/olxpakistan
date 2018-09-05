@@ -7,6 +7,7 @@ import Login from '../Login';
 import SignUp from '../SignUp';
 import Home from '../Home';
 import Account from '../Account';
+import SavedAds from '../SavedAds';
 
 
 function Routes() {
@@ -20,7 +21,7 @@ function Routes() {
         <Route exact path={routes.HOME} component={() => <Home />}/>
         <Route exact path={routes.ACCOUNT} component={() => <Account />}/>
         <Route exact path={routes.SETTINGS} component={() => <Account />}/>
-        <Route exact path={routes.SAVEDADS} component={() => <Account />}/>
+        <Route exact path={routes.SAVEDADS} component={() => <SavedAds />}/>
         <Route exact path={routes.MYADS} component={() => <Account />}/>
         </Switch>
         </div>

@@ -21,7 +21,7 @@ import TextField from '@material-ui/core/TextField';
 import {compose} from 'recompose';
 import {startSendMessage} from '../redux/actions/messageActions';
 import {connect} from 'react-redux';
- 
+import {toast} from 'react-toastify';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 const styles = theme => ({
@@ -79,12 +79,26 @@ class MediaControlCard extends Component {
       expanded: null,
       open: false,
       message:'',
+      getItems:[],
+      viewlater:false
     };
   }
 
-onClickHandler = () =>{
-  alert()
-}
+   
+  componentDidMount() {
+    let data =JSON.parse(localStorage.getItem('savedads'));
+    let view =false;
+    if(data){
+      data.forEach(element => {
+      
+       if(element._id === this.props.ad._id)
+         {
+           view = true;
+         }
+      });
+    
+    this.setState({getItems:data,viewlater:view});}
+  }
 
 handleClickOpen = () => {
   this.setState({ open: true });
@@ -125,10 +139,43 @@ onChangeHandler = (e) =>{
   }
   }
 
+  onClickHandler=()=>{
+
+    var {getItems} = this.state;
+    let obj = {
+      _id:this.props.ad._id,
+      title:this.props.ad.title,
+      category:this.props.ad.category,
+      condition:this.props.ad.price,
+      price:this.props.ad.price,
+      discriptions:this.props.ad.discriptions,
+      tag:this.props.ad.tag,
+      user:this.props.ad.user,
+      username:this.props.ad.username,
+      userphone:this.props.ad.cellNo,
+      useremail:this.props.ad.useremail,
+      userlocations:this.props.ad.userlocations,
+      media:this.props.ad.media,
+      timestamp:this.props.ad.timestamp
+    }
+
+    getItems.push(obj);
+    localStorage.setItem('savedads',JSON.stringify(getItems));
+    this.setState({getItems,viewlater:true});
+    toast.success("Saved successfully for later view!");
+  }
+
+  onRemoveHandler = () => {
+    let {getItems} = this.state;
+    let newlist = getItems.filter((item) => item._id !== this.props.ad._id);
+    localStorage.setItem('savedads', JSON.stringify(newlist));
+    this.setState({getItems:newlist,viewlater: false});
+    toast.success("Successfully remove from later view list!");
+}
 
   render() {
     const { classes} = this.props;
-    const {expanded,message} = this.state;
+    const {expanded,message,viewlater} = this.state;
     return (
       <div>
       <Dialog
@@ -203,9 +250,15 @@ onChangeHandler = (e) =>{
             <Grid item xs={6} md={6} >
             <Grid container spacing={8}> 
               <Grid item xs={6} md={6} align="right" className="otherevent">
-              <i className="material-icons iconFix otherevent" onClick=      {this.onClickHandler}>
+              {viewlater ?
+               <i className="material-icons iconFix otherevent colorSet" onClick={this.onRemoveHandler}>
+               favorite
+                 </i>
+              :
+              <i className="material-icons iconFix otherevent" onClick={this.onClickHandler}>
               favorite
                 </i>
+              }
                 <i className="material-icons iconFix otherevent" onClick={this.handleClickOpen}>
                 message
                 </i>

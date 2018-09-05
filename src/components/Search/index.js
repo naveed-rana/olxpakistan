@@ -22,6 +22,7 @@ class Search extends Component {
     super(props);
 
     this.state = {
+      
       data: [],
       copyData:[],     
       page: 0,
@@ -30,7 +31,6 @@ class Search extends Component {
       locations:'',
       category:'',
       
-
     };
   }
 

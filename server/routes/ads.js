@@ -37,11 +37,11 @@ router.post('/posting',upload.any(),(req,res)=>{
      
      newAds.save((err,add)=>{
        if(err){
-         res.json(500,"Error occoured while saving ads");
+         res.status(500).json("Error occoured while saving ads");
        }
        else{
 
-        res.json(200,'Add');
+        res.status(200).json('Add');
        }
      });
 

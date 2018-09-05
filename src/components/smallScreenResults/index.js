@@ -76,12 +76,34 @@ function dateFormate(time){
  }
 
 class SmallScreenResults extends React.Component {
-  state = {
-     expanded: false,
-     open: false,
-     message:'',
-  };
+   
+constructor(props) {
+  super(props)
+  this.state = {
+    expanded: false,
+    open: false,
+    message:'',
+    getItems:[],
+    viewlater:false
+ };
+}
 
+  
+  componentDidMount() {
+    let data =JSON.parse(localStorage.getItem('savedads'));
+    let view =false;
+    if(data){
+      data.forEach(element => {
+      
+       if(element._id === this.props.ad._id)
+         {
+           view = true;
+         }
+      });
+    
+    this.setState({getItems:data,viewlater:view});}
+  }
+  
   handleClickOpen = () => {
     
     this.setState({ open: true });
@@ -103,6 +125,8 @@ class SmallScreenResults extends React.Component {
 close=()=>{
   this.setState({ open: false});
 }
+
+
   
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -113,7 +137,10 @@ close=()=>{
   }
 
   onClickHandler=()=>{
+
+    var {getItems} = this.state;
     let obj = {
+      _id:this.props.ad._id,
       title:this.props.ad.title,
       category:this.props.ad.category,
       condition:this.props.ad.price,
@@ -128,12 +155,24 @@ close=()=>{
       media:this.props.ad.media,
       timestamp:this.props.ad.timestamp
     }
+
+    getItems.push(obj);
+    localStorage.setItem('savedads',JSON.stringify(getItems));
+    this.setState({getItems,viewlater:true});
     toast.success("Saved successfully for later view!");
   }
 
+  onRemoveHandler = () => {
+    let {getItems} = this.state;
+    let newlist = getItems.filter((item) => item._id !== this.props.ad._id);
+    localStorage.setItem('savedads', JSON.stringify(newlist));
+    this.setState({getItems:newlist,viewlater: false});
+    toast.success("Successfully remove from later view list!");
+}
+
   render() {
     const { classes,large } = this.props;
-    const {message} = this.state;
+    const {message,viewlater} = this.state;
 
     return (
         <div>
@@ -224,9 +263,14 @@ close=()=>{
          
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
+          {viewlater ? 
+           <IconButton aria-label="Add to favorites" onClick={this.onRemoveHandler}>
+           <FavoriteIcon className="colorSet"/>
+         </IconButton>
+          :
           <IconButton aria-label="Add to favorites" onClick={this.onClickHandler}>
             <FavoriteIcon />
-          </IconButton>
+          </IconButton>}
           <IconButton aria-label="Add to favorites" onClick={this.handleClickOpen}>
             <Icon >message</Icon>
           </IconButton>
