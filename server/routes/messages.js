@@ -17,7 +17,7 @@ router.post('/sendmessage',(req,res)=>{
 
 router.get('/getmessage',(req,res)=>{
 
-    messageModels.find({"userid":req.query[0]},(err,data)=>{
+    messageModels.find({"userid":req.query[0]}).sort('-timestamp').exec((err,data)=>{
         if(err){
             res.status(500).json("error has been occored!")
         }

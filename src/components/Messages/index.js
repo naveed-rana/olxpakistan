@@ -16,6 +16,7 @@ class Messages extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading:true,
             messages:[],
             page: 0,
             rowsPerPage: 5,
@@ -23,7 +24,7 @@ class Messages extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({messages:nextProps.messages});
+        this.setState({messages:nextProps.messages,loading:false});
     }
     
     componentDidMount() {
@@ -39,7 +40,7 @@ class Messages extends Component {
       };
 
     render() {
-        const {messages, rowsPerPage, page} = this.state;
+        const {messages, rowsPerPage, page,loading} = this.state;
         return (
             <div>
                <Grid container spacing={8} className="allPadding"> 
@@ -49,10 +50,14 @@ class Messages extends Component {
                </Typography>
             
                </Grid>
+               {loading? 
+               <img  src={require('../resource/images/adsloading23.gif')} alt=""/>
+               :
+               <div>
                {messages.length>0 ? messages.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((message,i)=>{return (
-                    <Grid item xs={12} md={12} key={i}>
+                    <Grid item xs={12} md={12} key={i} className="paddingTop">
                     <Divider />
-                    <Typography variant="body2" > 
+                    <Typography variant="body2" className="paddingTop"> 
                      {message.title}
                     </Typography>
                     <Typography variant="caption" > 
@@ -64,7 +69,7 @@ class Messages extends Component {
                     <Grid container spacing={8}> 
                       <Grid item xs={6} md={3}>
                        <Typography variant="caption" > 
-                       <i class="material-icons iconFix">
+                       <i className="material-icons iconFix">
                          account_circle
                          </i> 
                          {message.username}
@@ -72,7 +77,7 @@ class Messages extends Component {
                       </Grid>
                       <Grid item xs={6} md={9}>
                       <Typography variant="caption" > 
-                       <i class="material-icons iconFix">
+                       <i className="material-icons iconFix">
                          phone
                          </i>
                          {message.userphone}
@@ -81,6 +86,8 @@ class Messages extends Component {
                     </Grid>
                   </Grid>
                );}):"no message yet!"}
+               </div>
+               }
                 <Grid item xs={12} md={12}>
                 <Divider />
                 <Hidden only={['md', 'xl','lg']}>

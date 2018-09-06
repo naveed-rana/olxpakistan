@@ -36,7 +36,6 @@ class LocationSearchInput extends React.Component {
   };
 
   render() {
-      console.log(this.state.address);
       
     return (
       

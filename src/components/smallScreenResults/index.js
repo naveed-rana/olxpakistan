@@ -228,7 +228,7 @@ close=()=>{
 
           action={
             <Typography component="p" className="price">
-            <i class="material-icons iconFixpric">
+            <i className="material-icons iconFixpric">
               monetization_on
               </i>
           {this.props.ad.price} only &nbsp; &nbsp; &nbsp;  &nbsp;

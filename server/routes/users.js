@@ -25,12 +25,8 @@ router.post('/login',passport.authenticate('local'),(req,res)=>{
 
 
 router.post('/logout',(req,res)=>{
-   console.log(req.user);
     req.logout();
-    console.log(req.user);
-    res.status(200).json("succefully logout!");
-    
-   
+    res.status(200).json("succefully logout!");  
 })
 
 router.get('/authenticate',(req,res)=>{

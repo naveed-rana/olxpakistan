@@ -4,7 +4,6 @@ import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
 import Forms from '../PostingForms';
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom';
@@ -12,20 +11,35 @@ import {LOGIN} from '../constants';
 
 
 class Posting extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      adsViewOf:true
+    }
+  }
+  
+  adsViewOff = ( ) => {
+    this.setState({adsViewOf:false});
+  }
 
   componentDidMount() {
+
     document.title = "Posting";
     if(!this.props.user){
       this.props.history.push(LOGIN);
     }
  }  
 
-    render() {
+    render() { 
+       const {adsViewOf} = this.state;
         return (
             <div>
             <Grid container spacing={8}> 
               <Hidden smDown>
               <Grid item xs={1} md={2}>
+              {adsViewOf ? 
+              <img width="100%" onClick={this.adsViewOff} src={require('../resource/images/ads1.JPG')} alt=""/>
+              :""}
               </Grid>
               </Hidden>
               <Grid item xs={12} md={8}>
@@ -40,6 +54,9 @@ class Posting extends Component {
               </Grid>
               <Hidden smDown>
               <Grid item xs={1} md={2}>
+              {adsViewOf ? 
+              <img width="100%" onClick={this.adsViewOff} src={require('../resource/images/ads1.JPG')} alt=""/>
+              :""}
               </Grid>
               </Hidden>
             </Grid>

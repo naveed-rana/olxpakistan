@@ -29,19 +29,21 @@ function searchReducer(state = INITIAL_STATE, action) {
             }
         }
         case GETADS:{
+            let adsrev = action.data.reverse();
             return{
                 ...state,
-                ads:action.data
+                ads:adsrev
             }
         }
         case GETADSUSERAds:{
+            let adsrev = action.data.reverse();
             return{
                 ...state,
-                myAds:action.data
+                myAds:adsrev
             }
         }
         case USERADDELETE:{
-            let deleteAd = state.myAds.filter((ad)=> ad._id !== action.data);
+            let deleteAd = state.myAds.filter((ad)=> ad._id !== action.data.id);
             return{
                 ...state,
                 myAds:deleteAd

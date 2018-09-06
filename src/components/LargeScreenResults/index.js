@@ -265,7 +265,7 @@ onChangeHandler = (e) =>{
               </Grid>
               <Grid item xs={6} md={6}>
               <Typography component="p" className="price">
-            <i class="material-icons iconFixpric">
+            <i className="material-icons iconFixpric">
               monetization_on
               </i>
           {this.props.ad.price} only
@@ -287,7 +287,7 @@ onChangeHandler = (e) =>{
           <Grid container spacing={8}> 
             <Grid item  md={2}>
                      <Typography variant="caption" > 
-                    <i class="material-icons iconFix">
+                    <i className="material-icons iconFix">
                     account_circle
                      </i>
                      {this.props.ad.username}
@@ -296,7 +296,7 @@ onChangeHandler = (e) =>{
             </Grid>
             <Grid item  md={3}>
             <Typography variant="caption" > 
-                    <i class="material-icons iconFix">
+                    <i className="material-icons iconFix">
                         phone
                      </i>
                      {this.props.ad.userphone}
@@ -304,7 +304,7 @@ onChangeHandler = (e) =>{
             </Grid>
             <Grid item  md={5} >
             <Typography variant="caption" > 
-                    <i class="material-icons iconFix">
+                    <i className="material-icons iconFix">
                         email
                      </i>
                      {this.props.ad.useremail}
@@ -312,7 +312,7 @@ onChangeHandler = (e) =>{
             </Grid>
             <Grid item  md={2}>
             <Typography variant="caption" > 
-                    <i class="material-icons iconFix">
+                    <i className="material-icons iconFix">
                     location_on
                      </i>
                      {this.props.ad.userlocations}

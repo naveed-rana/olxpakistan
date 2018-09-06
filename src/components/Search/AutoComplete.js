@@ -127,9 +127,6 @@ class AutoComplete extends React.Component {
   
   componentDidMount() {
     this.setState({single:this.props.titles });
-    console.log('==================log==================');
-    console.log(this.state.single);
-    console.log('====================================');
   }
   
   componentWillReceiveProps(nextProps) {
@@ -149,7 +146,6 @@ class AutoComplete extends React.Component {
   };
 
   handleChange = name => (event, { newValue }) => {
-    console.log(newValue);
     this.props.getTitleSearch(newValue);
     this.setState({
       [name]: newValue,

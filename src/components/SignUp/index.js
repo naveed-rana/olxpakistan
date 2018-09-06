@@ -114,7 +114,7 @@ class SignUp extends Component {
     onSubmitHandler=(e)=>{
       e.preventDefault();
       this.setState({loading:true});
-      const {name,email,password,confirmpassword,cellNo,address,city,province} = this.state;
+      const {name,email,password,cellNo,address,city,province} = this.state;
       
             let userData = {
               name,

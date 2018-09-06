@@ -28,6 +28,7 @@ class LaterView extends Component {
 
   
   componentDidMount() {
+    document.title = "View Later Ads";
     let data =JSON.parse(localStorage.getItem('savedads'));
     if(data){
     this.setState({copyData:data,loading:false});}

@@ -4,8 +4,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
 import {Link} from 'react-router-dom';
 import * as routes from '../../constants';
 
@@ -25,6 +23,12 @@ export const mailFolderListItems = (
       </ListItemIcon>
       <ListItemText primary="My ads" />
     </ListItem>
+    <ListItem button component={Link} to={routes.MESSAGE}>
+      <ListItemIcon>
+      <Icon>message</Icon>
+      </ListItemIcon>
+      <ListItemText primary="Inbox" />
+    </ListItem>
     <ListItem button component={Link} to={routes.POSTING}>
       <ListItemIcon>
         <Icon>note_add</Icon>
@@ -42,6 +46,12 @@ export const otherMailFolderListItems = (
       <Icon>home</Icon>
       </ListItemIcon>
       <ListItemText primary="Home" />
+    </ListItem>
+    <ListItem button component={Link} to={routes.SAVEDADS}>
+      <ListItemIcon>
+      <Icon>visibility</Icon>
+      </ListItemIcon>
+      <ListItemText primary="View Later" />
     </ListItem>
     <ListItem button component={Link} to={routes.SEARCH}>
       <ListItemIcon>

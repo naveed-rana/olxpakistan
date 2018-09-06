@@ -26,16 +26,19 @@ class Search extends Component {
       data: [],
       copyData:[],     
       page: 0,
-      rowsPerPage: 5,
+      rowsPerPage: 3,
       title:'',
       locations:'',
       category:'',
-      
+      adsViewOf:true,
     };
   }
 
   
   componentDidMount() {
+    this.props.startGetAds({category:"all"});
+
+    document.title = "Search";
     let title = this.props.titleSearch.toLowerCase();
     let locations = this.props.mapSearch;
     let data = this.props.ads;
@@ -64,6 +67,10 @@ class Search extends Component {
       }
       
     
+  }
+
+  adsViewOff = () => {
+    this.setState({adsViewOf:false})
   }
   
   componentWillReceiveProps(nextProps) {
@@ -105,14 +112,15 @@ class Search extends Component {
     this.setState({rowsPerPage: event.target.value});
   };
     render() {
-      const {copyData, rowsPerPage, page,title,locations} = this.state;
-      
- 
+      const {copyData, rowsPerPage, page,title,locations,adsViewOf} = this.state;
         return (
             <div>
             <Grid container spacing={8}> 
               <Hidden smDown>
               <Grid item xs={1} md={2}>
+              {adsViewOf ? 
+              <img width="100%" onClick={this.adsViewOff} src={require('../resource/images/adsheight.JPG')} alt=""/>
+              :""}
               </Grid>
               </Hidden>
               <Grid item xs={12} md={8}>
@@ -198,7 +206,7 @@ class Search extends Component {
                           page={page}
                           labelDisplayedRows={() => ""}
                           labelRowsPerPage=""
-                          rowsPerPageOptions={[2,5, 10,25]}
+                          rowsPerPageOptions={[3,5, 10,25]}
                           onChangePage={this.handleChangePage}
                           onChangeRowsPerPage={this.handleChangeRowsPerPage}
                           ActionsComponent={TablePaginationActionsWrapped}/>
@@ -227,7 +235,7 @@ class Search extends Component {
                           rowsPerPage={rowsPerPage}
                           page={page}
                           labelRowsPerPage="Ads per page"
-                          rowsPerPageOptions={[5, 10,25,100,500]}
+                          rowsPerPageOptions={[3, 10,25,100,500]}
                           onChangePage={this.handleChangePage}
                           onChangeRowsPerPage={this.handleChangeRowsPerPage}
                           ActionsComponent={TablePaginationActionsWrapped}/>
@@ -241,6 +249,9 @@ class Search extends Component {
               </Grid>
               <Hidden smDown>
               <Grid item xs={1} md={2}>
+              {adsViewOf ? 
+              <img width="100%" onClick={this.adsViewOff} src={require('../resource/images/adsheight.JPG')} alt=""/>
+              :""}
               </Grid>
               </Hidden>
             </Grid>

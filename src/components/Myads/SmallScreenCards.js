@@ -12,18 +12,14 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MediaSlider from '../adsSlider';
 import Icon from '@material-ui/core/Icon';
-import {toast} from 'react-toastify';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import {compose} from 'recompose';
@@ -82,7 +78,7 @@ constructor(props) {
   };
   
   handleClose = () => {
-      this.props.startUserAdDelete(this.props.ad._id);
+      this.props.startUserAdDelete({id:this.props.ad._id});
       this.setState({ open: false});
   };
 
@@ -103,6 +99,7 @@ close=()=>{
     return (
         <div>
          <Dialog
+          fullScreen={true}
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
@@ -136,7 +133,7 @@ close=()=>{
 
           action={
             <Typography component="p" className="price">
-            <i class="material-icons iconFixpric">
+            <i className="material-icons iconFixpric">
               monetization_on
               </i>
           {this.props.ad.price} only &nbsp; &nbsp; &nbsp;  &nbsp;

@@ -17,11 +17,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import MediaSlider from '../adsSlider';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import {compose} from 'recompose';
 import {startUserAdDelete} from '../redux/actions/searchActions';
 import {connect} from 'react-redux';
-import {toast} from 'react-toastify';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 const styles = theme => ({
@@ -88,7 +86,7 @@ handleClickOpen = () => {
 };
 
 handleClose = () => {
-  this.props.startUserAdDelete(this.props.ad._id);
+  this.props.startUserAdDelete({id:this.props.ad._id});
   this.setState({ open: false});
 };
 
@@ -114,7 +112,7 @@ close=()=>{
 
   render() {
     const { classes} = this.props;
-    const {expanded,message,viewlater} = this.state;
+    const {expanded} = this.state;
     return (
       <div>
       <Dialog
@@ -165,21 +163,18 @@ close=()=>{
            {this.props.ad.discriptions}
           </Typography>
           <Grid container spacing={8}> 
-          <Grid item xs={6} md={6}>
+          <Grid item xs={6} md={3}>
               <Typography component="p" className="price">
-            <i class="material-icons iconFixpric">
+            <i className="material-icons iconFixpric">
               monetization_on
               </i>
           {this.props.ad.price} only
             </Typography>
               </Grid>
 
-              <Grid item xs={6} md={6} align="right" className="otherevent">
+              <Grid item xs={6} md={9} className="otherevent">
                 <i className="material-icons iconFix otherevent" onClick={this.handleClickOpen}>
                 delete
-                </i>
-                <i className="material-icons iconFix otherevent" onClick={this.handleClickOpen}>
-                pause_circle_filled
                 </i>
               </Grid>
            

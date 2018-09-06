@@ -65,7 +65,6 @@ class Login extends Component {
     render() {
         const {email,password,loading} = this.state;
         const isnotValid = email ==='' || password ==='' || loading;  
-        console.log(this.state);
         return (
             <div>
                 <Grid container spacing={8}>

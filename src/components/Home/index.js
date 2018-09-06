@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import DailyAds from '../dailyAds';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Hidden from '@material-ui/core/Hidden';
-import HomeCard from '../HomeCards';
 import { connect } from 'react-redux'
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -23,17 +21,22 @@ constructor(props) {
    copyData:[],     
    page: 0,
    rowsPerPage: 1,
+   adsViewOf:true
   }
 }
 
 
 componentDidMount() {
+  document.title = "Home";
   this.setState({
     ads:this.props.ads,
     copyData:this.props.ads
   });
 }
 
+adsViewOff = () => {
+  this.setState({adsViewOf:false});
+}
 
 onClickHandler = (data) =>{
   
@@ -53,12 +56,15 @@ handleChangeRowsPerPage = event => {
   this.setState({rowsPerPage: event.target.value});
 };
   render() {
-    const {ads,copyData, rowsPerPage, page} = this.state;
+    const {copyData, rowsPerPage, page,adsViewOf} = this.state;
     return (
       <div>
        <Grid container spacing={8}> 
         <Hidden smDown>
         <Grid item xs={1} md={2}>
+        {adsViewOf ? 
+              <img width="100%" onClick={this.adsViewOff} src={require('../resource/images/ads3.JPG')} alt=""/>
+              :""}
         </Grid>
         </Hidden>
         <Grid item xs={12} md={8}>
@@ -152,6 +158,9 @@ handleChangeRowsPerPage = event => {
         </Grid>
         <Hidden smDown>
         <Grid item xs={1} md={2}>
+        {adsViewOf ? 
+              <img width="100%" onClick={this.adsViewOff} src={require('../resource/images/ads3.JPG')} alt=""/>
+              :""}
         </Grid>
         </Hidden>
       </Grid>
