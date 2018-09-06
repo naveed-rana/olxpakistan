@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var messageSchema = mongoose.Schema({
     message:String,
+    title:String,
     username: String,
     userphone: String,
     adsid: String,

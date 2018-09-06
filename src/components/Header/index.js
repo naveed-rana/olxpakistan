@@ -25,7 +25,8 @@ class HeaderBar extends Component {
                    <Hidden smDown>
                    <Grid item xs={12} md={9} >
                      <Typography variant="caption" className="paddingLeft" > 
-                     <Link to="">Home</Link> | <Link to={routes.POSTING}>Posting</Link> |  <Link to={routes.SAVEDADS}>View later list</Link>
+                     <Link to="">Home</Link> | <Link to={routes.POSTING}>Posting</Link> |  <Link to={routes.SAVEDADS}>View later list</Link> |
+                     <Link to={routes.ACCOUNT}>Account</Link>
                      </Typography>
                    </Grid>
                    </Hidden> 

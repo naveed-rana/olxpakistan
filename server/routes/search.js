@@ -57,5 +57,20 @@ router.get('/getuserads',(req,res)=>{
      
 });
 
+router.post('/useraddelete',(req,res)=>{
+
+    adsmodels.findOneAndRemove({"_id":req.body.id},(err,data)=>{
+        if(err){
+            res.status(500).json("error has been occored!")
+        }
+        else{
+            res.status(200).json(data);
+        }
+    });
+     
+});
+
+
+
 
 module.exports = router;

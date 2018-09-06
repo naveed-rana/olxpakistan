@@ -35,7 +35,7 @@ function getMessage(data) {
 export function startGetMessage(id) {
     
     return (dispatch) => {
-        axios.post(baseURL+'/message/sendmessage',{params:id}).then((response=>{
+        axios.get(baseURL+'/message/getmessage',{params:id}).then((response=>{
             dispatch(getMessage(response.data));
         })).catch(err=>{
             toast.error("Network Error!");

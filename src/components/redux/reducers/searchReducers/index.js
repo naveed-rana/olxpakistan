@@ -1,4 +1,4 @@
-import {MAPLOCATIONS, SEARCHTITLE,GETSUGGESTIONS,GETADS,GETADSUSERAds} from '../../actions/searchActions';
+import {MAPLOCATIONS, SEARCHTITLE,GETSUGGESTIONS,GETADS,GETADSUSERAds,USERADDELETE} from '../../actions/searchActions';
 const INITIAL_STATE = {
     mapSearch: '',
     titleSearch: '',
@@ -38,6 +38,13 @@ function searchReducer(state = INITIAL_STATE, action) {
             return{
                 ...state,
                 myAds:action.data
+            }
+        }
+        case USERADDELETE:{
+            let deleteAd = state.myAds.filter((ad)=> ad._id !== action.data);
+            return{
+                ...state,
+                myAds:deleteAd
             }
         }
         default:

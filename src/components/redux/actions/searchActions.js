@@ -7,6 +7,7 @@ export const SEARCHTITLE = 'SEARCHTITLE';
 export const GETSUGGESTIONS = 'GETSUGGESTIONS';
 export const GETADS = 'GETADS';
 export const GETADSUSERAds = 'GETADSUSERAds';
+export const USERADDELETE = 'USERADDELETE';
 
 
 export function getMapState(data) {
@@ -71,5 +72,23 @@ export function startGetUserAds(id) {
         axios.get(baseURL+'/search/getuserads',{params:{id}}).then((response=>{
             dispatch(getUserAds(response.data));
         }))
+    }
+}
+function userAdDelete(data) {
+    return{
+        type:USERADDELETE,
+        data
+    }
+}
+//getting user ads
+export function startUserAdDelete(id) {
+    
+    return (dispatch) =>{
+        axios.post(baseURL+'/search/useraddelete',id).then((response=>{
+            toast.success('Successfully Deleted!');
+            dispatch(userAdDelete(id));
+        })).catch(err=>{
+            toast.error("Network Error!");
+        });
     }
 }

@@ -31,7 +31,7 @@ class Login extends Component {
     }
    
     componentDidMount() {
-        document.title = "Signup";
+        document.title = "SignIn";
       }
 
     componentWillReceiveProps(nextProps) {

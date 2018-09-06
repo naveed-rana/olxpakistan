@@ -28,7 +28,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import {compose} from 'recompose';
 import moment from 'moment';
-import {startSendMessage} from '../redux/actions/messageActions';
+import {startUserAdDelete} from '../redux/actions/searchActions';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 const styles = theme => ({
@@ -70,27 +70,11 @@ constructor(props) {
   this.state = {
     expanded: false,
     open: false,
-    message:'',
-    getItems:[],
-    viewlater:false
  };
 }
 
   
-  componentDidMount() {
-    let data =JSON.parse(localStorage.getItem('savedads'));
-    let view =false;
-    if(data){
-      data.forEach(element => {
-      
-       if(element._id === this.props.ad._id)
-         {
-           view = true;
-         }
-      });
-    
-    this.setState({getItems:data,viewlater:view});}
-  }
+ 
   
   handleClickOpen = () => {
     
@@ -98,16 +82,8 @@ constructor(props) {
   };
   
   handleClose = () => {
-    let data = {
-      message:this.state.message,
-      username: this.props.ad.username,
-      userphone: this.props.ad.userphone,
-      title:this.props.ad.title,
-      adsid: this.props.ad._id,
-      userid: this.props.ad.user,
-    }
-    this.props.startSendMessage(data);
-    this.setState({ open: false, message:''});
+      this.props.startUserAdDelete(this.props.ad._id);
+      this.setState({ open: false});
   };
 
 close=()=>{
@@ -119,99 +95,31 @@ close=()=>{
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
-  onChangeHandler=(e)=>{
-    
-    this.setState({message:e.target.value});
-  }
-
-  onClickHandler=()=>{
-
-    var {getItems} = this.state;
-    let obj = {
-      _id:this.props.ad._id,
-      title:this.props.ad.title,
-      category:this.props.ad.category,
-      condition:this.props.ad.price,
-      price:this.props.ad.price,
-      discriptions:this.props.ad.discriptions,
-      tag:this.props.ad.tag,
-      user:this.props.ad.user,
-      username:this.props.ad.username,
-      userphone:this.props.ad.userphone,
-      useremail:this.props.ad.useremail,
-      userlocations:this.props.ad.userlocations,
-      media:this.props.ad.media,
-      timestamp:this.props.ad.timestamp
-    }
-
-    getItems.push(obj);
-    localStorage.setItem('savedads',JSON.stringify(getItems));
-    this.setState({getItems,viewlater:true});
-    toast.success("Saved successfully for later view!");
-  }
-
-  onRemoveHandler = () => {
-    let {getItems} = this.state;
-    let newlist = getItems.filter((item) => item._id !== this.props.ad._id);
-    localStorage.setItem('savedads', JSON.stringify(newlist));
-    this.setState({getItems:newlist,viewlater: false});
-    toast.success("Successfully remove from later view list!");
-}
+ 
 
   render() {
-    const { classes,large } = this.props;
-    const {message,viewlater} = this.state;
+    const { classes } = this.props;
 
     return (
         <div>
          <Dialog
-          fullScreen={large==='large'?false:true}
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
             >
-          <DialogTitle id="form-dialog-title">Message</DialogTitle>
+          <DialogTitle id="form-dialog-title">Confirmations</DialogTitle>
           <DialogContent>
             <DialogContentText>
-             Please send concise message to the saller and deal with.
+            Confirmations! after delete your ads permanently delete from your accounts,Are you sure you want to delete?
             </DialogContentText>
-            <Grid container spacing={8}> 
-              <Grid item xs={12} md={12}>
-              <TextField
-              margin="dense"
-              id="name"
-              label="Name"
-              value={this.props.ad.username}
-              fullWidth
-            />
-              </Grid>
-              <Grid item xs={12} md={12}>
-              <TextField
-              margin="dense"
-              value={this.props.ad.userphone}
-              label="Phone No"
-              fullWidth
-            />
-              </Grid>
-              <Grid item xs={12} md={12}>
-              <TextField
-              onChange={this.onChangeHandler}
-              autoFocus
-              multiline={true}
-              margin="dense"
-              label="Message"
-              value={message}
-              fullWidth
-            />
-              </Grid>
-            </Grid>
+              
           </DialogContent>
           <DialogActions>
             <Button onClick={this.close} color="primary">
               Cancel
             </Button>
             <Button onClick={this.handleClose} color="primary">
-              Send
+              Delete
             </Button>
           </DialogActions>
         </Dialog>
@@ -252,16 +160,12 @@ close=()=>{
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           
-          {viewlater ? 
-           <IconButton aria-label="Add to favorites" onClick={this.onRemoveHandler}>
-           <FavoriteIcon className="colorSet"/>
-         </IconButton>
-          :
-          <IconButton aria-label="Add to favorites" onClick={this.onClickHandler}>
-            <FavoriteIcon />
-          </IconButton>}
           <IconButton aria-label="Add to favorites" onClick={this.handleClickOpen}>
-            <Icon >message</Icon>
+            <Icon >delete</Icon>
+          </IconButton>
+
+          <IconButton aria-label="Add to favorites" onClick={this.handleClickOpen}>
+            <Icon >status</Icon>
           </IconButton>
 
           <IconButton
@@ -294,4 +198,4 @@ const mapStateToProps = state => ({
   userid:state.user.user._id,
 })
 
-export default compose(connect(mapStateToProps,{startSendMessage}),withStyles(styles))(SmallScreenResults);
+export default compose(connect(mapStateToProps,{startUserAdDelete}),withStyles(styles))(SmallScreenResults);

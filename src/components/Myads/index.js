@@ -4,13 +4,13 @@ import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Card from '../smallScreenResults';
+import Card from './SmallScreenCards';
 import TablePaginationActionsWrapped from '../paginations';
 import TablePagination from '@material-ui/core/TablePagination';
 import Table from '@material-ui/core/Table';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
-import LargeScreenResults from '../LargeScreenResults';
+import LargeScreenResults from './LargeScreenCard';
 import { connect } from 'react-redux';
 import {startGetUserAds} from '../redux/actions/searchActions';
 
@@ -50,21 +50,17 @@ class MyAds extends Component {
             <Grid container spacing={8}> 
 
               <Grid item xs={12} md={12}>
-              <Paper className="postingPaper" elevation={5}>
                  <Typography variant="body2" align="center"> 
                    My Ads List
                  </Typography>
                    <Divider />
-                </Paper>
-
-                <Paper className="marginTop" elevation={5}>
              
                   <Hidden only={['md', 'xl','lg']}>
                   {data.length>0 ?
               data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((ad,i) => {
                 return (
-               <Card key={i} ad={ad} />
+               <Card key={i} ad={ad} my="myad" />
                 );
               })
               :<img width="100%" src={require('../resource/images/adsloading23.gif')} alt=""/> }
@@ -92,7 +88,7 @@ class MyAds extends Component {
               .map((ad,i) => {
                 return (
                   <div key={i}>
-               <LargeScreenResults  ad={ad}  />
+               <LargeScreenResults  ad={ad} my="myad" />
                <Divider />
                   </div>
                 );
@@ -115,9 +111,7 @@ class MyAds extends Component {
                     </TableFooter>
                  </Table>
                   </Hidden>
-                    
-                </Paper>
-                
+
               </Grid>
              
             </Grid>

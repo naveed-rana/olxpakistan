@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import SavedAds from '../SavedAds';
 import Home from '../AccountsHome';
 import MyAds from '../Myads';
-import Setting  from '../settings';
+import Messages  from '../Messages';
 import {connect} from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
@@ -66,15 +66,15 @@ class HomePage extends Component {
 
                 <BottomNavigationAction
                 className="buttomNavigation"
-                label="Update" 
-                component={Link} to={routes.SETTINGS}
-                icon={<Icon>update</Icon>} />
+                label="Messages" 
+                component={Link} to={routes.MESSAGE}
+                icon={<Icon>message</Icon>} />
 
                 <BottomNavigationAction
                 className="buttomNavigation"
-                label="Account" 
-                component={Link} to={routes.ACCOUNT_HOME}
-                icon={<Icon>account_circle</Icon>} />
+                label="Saved Ads" 
+                component={Link} to={routes.SAVEDADS}
+                icon={<Icon>streetview</Icon>} />
 
 </BottomNavigation>
 
@@ -85,11 +85,7 @@ class HomePage extends Component {
         <Paper className="marginTop" style={{borderRadius:'0'}} elevation={5}>
                         
             <Route exact path={routes.MYADS} component={() => <MyAds />}/>
-            <Route exact path={routes.SETTINGS} component={() =><Setting />}/>
-            <Route
-                exact
-                path={routes.SAVEDADS}
-                component={() =><SavedAds />}/>
+            <Route exact path={routes.MESSAGE} component={() =><Messages />}/>
             <Route exact path={routes.ACCOUNT_HOME} component={() =>< Home />}/>
         </Paper>
           

@@ -111,7 +111,7 @@ handleClose = () => {
     userphone: this.props.ad.userphone,
     title:this.props.ad.title,
     adsid: this.props.ad._id,
-    userid: this.props.userid,
+    userid: this.props.ad.user,
   }
   this.props.startSendMessage(data);
   this.setState({ open: false,message:''});
@@ -152,7 +152,7 @@ onChangeHandler = (e) =>{
       tag:this.props.ad.tag,
       user:this.props.ad.user,
       username:this.props.ad.username,
-      userphone:this.props.ad.cellNo,
+      userphone:this.props.ad.userphone,
       useremail:this.props.ad.useremail,
       userlocations:this.props.ad.userlocations,
       media:this.props.ad.media,

@@ -6,5 +6,5 @@ export const HOME = '/';
 export const ACCOUNT = '/account';
 export const ACCOUNT_HOME = '/account/';
 export const SAVEDADS = '/savedads';
-export const SETTINGS = '/account/setting';
+export const MESSAGE = '/account/inbox';
 export const MYADS = '/account/myads';

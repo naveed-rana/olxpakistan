@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
             <div>
                 <Paper className="paddingBottom" elevation={5}>
          <Grid container spacing={8}> 
-           <Grid item  md={2}>  </Grid>
+           <Grid item  md={2}> </Grid>
            <Grid item md={8} align="center">
              <Grid item>
              <img src={require('../resource/images/4.png')} alt="account"/>
