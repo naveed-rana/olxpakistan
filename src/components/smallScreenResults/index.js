@@ -241,14 +241,18 @@ close=()=>{
         />
         <CardMedia
           className={classes.media}
-          image={`${baseURL}/static/media/${this.props.ad.media[0]}`}
+          image={`${baseURL}/static/${this.props.ad.media[0]}`}
           title={this.props.ad.tag}
         />
         <CardContent>
           <Typography component="p">
             {this.props.ad.discriptions}
           </Typography>
-         
+          <Typography variant="caption" className={classes.marginTops} > 
+         Category: <b> {this.props.ad.category} </b> &nbsp;&nbsp;&nbsp;&nbsp;
+         Conditions:<b> {this.props.ad.condition} </b>&nbsp;&nbsp;&nbsp;&nbsp;
+         Tags:<b> {this.props.ad.tag} </b>
+         </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           
@@ -277,7 +281,7 @@ close=()=>{
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-          <MediaSlider media = {this.props.ad.media}/>
+          <MediaSlider media={this.props.ad.media} username={this.props.ad.username} userphone = {this.props.ad.userphone} useremail={this.props.ad.useremail} userlocations = {this.props.ad.userlocations}/>
           </CardContent>
         </Collapse>
       </Card>

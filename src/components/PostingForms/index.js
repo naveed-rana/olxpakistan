@@ -13,9 +13,11 @@ import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import addImg from '../resource/images/add_image.png';
 import Divider from '@material-ui/core/Divider';
+import {ACCOUNT} from '../constants';
 import { connect } from 'react-redux';
 import {compose} from 'recompose';
-import {startAdsPosting} from '../redux/actions/adsActions';
+import {withRouter} from 'react-router-dom';
+import {startAdsPosting,clearAdsPosting} from '../redux/actions/adsActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
@@ -386,8 +388,10 @@ class VerticalLinearStepper extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.props.clearAdsPosting();
     this.setState({loading:false});
-    this.setState({activeStep:0})
+    if(nextProps.success){
+    this.props.history.push(ACCOUNT);}
   }
 
   onSubmitHandle = () =>{
@@ -541,4 +545,4 @@ const mapStateToProps = state => ({
   error:state.ads.adsErr 
 })
 
-export default compose(connect(mapStateToProps,{startAdsPosting}),withStyles(styles))(VerticalLinearStepper);
+export default withRouter(compose(connect(mapStateToProps,{startAdsPosting,clearAdsPosting}),withStyles(styles))(VerticalLinearStepper));

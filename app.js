@@ -41,5 +41,6 @@ app.use('/search', seachRoutes);
 app.use('/message', messageRoutes);
 
 app.use(express.static(path.join(__dirname, './build')));
+app.use('/static',express.static(path.join(__dirname, './uploads')));
 const PORT = process.env.PORT || 8080;
 app.listen(PORT);

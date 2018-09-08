@@ -10,6 +10,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import Grid from '@material-ui/core/Grid';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 
@@ -22,7 +23,8 @@ const styles = theme => ({
   header: {
     display: 'flex',
     alignItems: 'center',
-    height: 50,
+    minHeight: 50,
+    paddingBottom:10,
     paddingLeft: theme.spacing.unit * 4,
     marginBottom: 20,
     backgroundColor: theme.palette.background.default,
@@ -48,8 +50,8 @@ class SwipeableTextMobileStepper extends React.Component {
    let tutorialStep = [];
    let image = [];
     this.props.media.forEach(item => {
-      tutorialStep.push({label:"List of images",imgPath:item});
-      image.push(`${baseURL}/static/media/${item}`);
+      tutorialStep.push({imgPath:item});
+      image.push(`${baseURL}/static/${item}`);
     });
     this.setState({tutorialSteps:tutorialStep,images:image});
   }
@@ -84,7 +86,43 @@ class SwipeableTextMobileStepper extends React.Component {
     return (
       <div className={classes.root}>
         <Paper square elevation={0} className={classes.header}>
-          <Typography>{tutorialSteps[activeStep].label}</Typography>
+   
+          <Grid container spacing={8}> 
+            <Grid item  >
+                     <Typography variant="caption" > 
+                    <i className="material-icons iconFix">
+                    account_circle
+                     </i>
+                     {this.props.username}
+                     </Typography>
+                    
+            </Grid>
+            <Grid item  >
+            <Typography variant="caption" > 
+                    <i className="material-icons iconFix">
+                        phone
+                     </i>
+                     {this.props.userphone}
+                     </Typography>
+            </Grid>
+            <Grid item  >
+            <Typography variant="caption" > 
+                    <i className="material-icons iconFix">
+                        email
+                     </i>
+                     {this.props.useremail}
+                     </Typography>
+            </Grid>
+            <Grid item >
+            <Typography variant="caption" > 
+                    <i className="material-icons iconFix">
+                    location_on
+                     </i>
+                     {this.props.userlocations}
+                     </Typography>
+            </Grid>
+          </Grid>
+        
         </Paper>
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -93,7 +131,7 @@ class SwipeableTextMobileStepper extends React.Component {
           enableMouseEvents
         >
           {tutorialSteps.map((step,i) => (
-            <img  key={i} className={classes.img} onClick={this.onClickHandler} src={`${baseURL}/static/media/${step.imgPath}`} alt={step.label} />
+            <img  key={i} className={classes.img} onClick={this.onClickHandler} src={`${baseURL}/static/${step.imgPath}`} alt={step.label} />
           ))}
         </SwipeableViews>
         <MobileStepper

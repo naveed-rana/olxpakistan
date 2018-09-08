@@ -51,6 +51,9 @@ const styles = theme => ({
   },
   discriptions:{
     width:'580px'
+  },
+  marginTops:{
+    marginTop:10
   }
 });
 
@@ -238,7 +241,7 @@ onChangeHandler = (e) =>{
 <Card className={classes.card} elevation={0}>
      <CardMedia
         className={classes.cover}
-        image={`${baseURL}/static/media/${this.props.ad.media[0]}`}
+        image={`${baseURL}/static/${this.props.ad.media[0]}`}
         title="Live from space album cover"
       />
       <div className={classes.details}>
@@ -277,55 +280,25 @@ onChangeHandler = (e) =>{
           
           <Typography variant="caption" color="textSecondary">
        
-              Category:{this.props.ad.category} , {dateFormate(this.props.ad.timestamp)}
+              {dateFormate(this.props.ad.timestamp)}
            
           </Typography>
           
           <Typography variant="body1" className={classes.discriptions}>
            {this.props.ad.discriptions}
           </Typography>
-          <Grid container spacing={8}> 
-            <Grid item  md={2}>
-                     <Typography variant="caption" > 
-                    <i className="material-icons iconFix">
-                    account_circle
-                     </i>
-                     {this.props.ad.username}
-                     </Typography>
-                    
-            </Grid>
-            <Grid item  md={3}>
-            <Typography variant="caption" > 
-                    <i className="material-icons iconFix">
-                        phone
-                     </i>
-                     {this.props.ad.userphone}
-                     </Typography>
-            </Grid>
-            <Grid item  md={5} >
-            <Typography variant="caption" > 
-                    <i className="material-icons iconFix">
-                        email
-                     </i>
-                     {this.props.ad.useremail}
-                     </Typography>
-            </Grid>
-            <Grid item  md={2}>
-            <Typography variant="caption" > 
-                    <i className="material-icons iconFix">
-                    location_on
-                     </i>
-                     {this.props.ad.userlocations}
-                     </Typography>
-            </Grid>
-          </Grid>
+         <Typography variant="caption" className={classes.marginTops} > 
+         Category: <b> {this.props.ad.category} </b> &nbsp;&nbsp;&nbsp;&nbsp;
+         Conditions:<b> {this.props.ad.condition} </b>&nbsp;&nbsp;&nbsp;&nbsp;
+         Tags:<b> {this.props.ad.tag} </b>
+         </Typography>
         </CardContent>
       </div>
      
     </Card>
 </ExpansionPanelSummary>
 <ExpansionPanelDetails>
-<MediaSlider media={this.props.ad.media} />
+<MediaSlider media={this.props.ad.media} username={this.props.ad.username} userphone = {this.props.ad.userphone} useremail={this.props.ad.useremail} userlocations = {this.props.ad.userlocations}/>
 </ExpansionPanelDetails>
 </ExpansionPanel>
       </div>

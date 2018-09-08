@@ -146,7 +146,7 @@ close=()=>{
         />
         <CardMedia
           className={classes.media}
-          image={`${baseURL}/static/media/${this.props.ad.media[0]}`}
+          image={`${baseURL}/static/${this.props.ad.media[0]}`}
           title={this.props.ad.tag}
         />
         <CardContent>

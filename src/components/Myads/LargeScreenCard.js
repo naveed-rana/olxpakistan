@@ -146,7 +146,7 @@ close=()=>{
 <Card className={classes.card} elevation={0}>
      <CardMedia
         className={classes.cover}
-        image={`${baseURL}/static/media/${this.props.ad.media[0]}`}
+        image={`${baseURL}/static/${this.props.ad.media[0]}`}
         title="Live from space album cover"
       />
       <div className={classes.details}>

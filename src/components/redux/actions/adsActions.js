@@ -8,6 +8,14 @@ const config = {
 }
 export const ADSPOSTING = 'ADSPOSTING';
 export const ADSPOSTINGERR = 'ADSPOSTINGERR';
+export const CLEARADSPOSTINGERR = 'CLEARADSPOSTINGERR';
+
+
+export function clearAdsPosting() {
+    return {
+        type:CLEARADSPOSTINGERR
+    }
+}
 
 
 function adsPosting(response) {
