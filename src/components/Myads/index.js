@@ -19,6 +19,7 @@ class MyAds extends Component {
     super(props);
 
     this.state = {
+      loading:true,
       data: [],
       page: 0,
       rowsPerPage: 5,
@@ -31,7 +32,7 @@ class MyAds extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    this.setState({data:nextProps.ads})
+    this.setState({data:nextProps.ads,loading:false})
   }
   
   handleChangePage = (event, page) => {
@@ -42,7 +43,7 @@ class MyAds extends Component {
     this.setState({rowsPerPage: event.target.value});
   };
     render() {
-      const {data, rowsPerPage, page,} = this.state;
+      const {data, rowsPerPage, page,loading} = this.state;
       
         return (
             <div>
@@ -53,7 +54,8 @@ class MyAds extends Component {
                    My Ads List
                  </Typography>
                    <Divider />
-             
+               {loading ? <img width="100%" src={require('../resource/images/adsloading.gif')} alt="Loading..."/>:
+              <div>
                   <Hidden only={['md', 'xl','lg']}>
                   {data.length>0 ?
               data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -62,7 +64,9 @@ class MyAds extends Component {
                <Card key={i} ad={ad} my="myad" />
                 );
               })
-              :<img width="100%" src={require('../resource/images/adsloading23.gif')} alt=""/> }
+              : <Typography variant="body2" align="center" className="paddingTop"> 
+              You have not any Ads yet, please go to Posting Fomrm and post an free Ads.
+            </Typography>}
                     <Table >
                     <TableFooter>
                       <TableRow>
@@ -92,7 +96,9 @@ class MyAds extends Component {
                   </div>
                 );
               })
-              : <img width="100%" src={require('../resource/images/adsloading.gif')} alt=""/> }
+              : <Typography variant="body2" align="center" className="paddingTop"> 
+              You have not any Ads yet, please go to Posting Fomrm and post an free Ads.
+            </Typography> }
                  <Table >
                     <TableFooter>
                       <TableRow>
@@ -110,7 +116,8 @@ class MyAds extends Component {
                     </TableFooter>
                  </Table>
                   </Hidden>
-
+                  </div>
+              }
               </Grid>
              
             </Grid>

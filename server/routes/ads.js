@@ -41,7 +41,7 @@ router.post('/posting',upload.any(),(req,res)=>{
        }
        else{
 
-        res.status(200).json('Add');
+        res.status(200).json('Your Ad Successfully Submitted!');
        }
      });
 

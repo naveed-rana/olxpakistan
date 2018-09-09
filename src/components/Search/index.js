@@ -31,6 +31,7 @@ class Search extends Component {
       locations:'',
       category:'',
       adsViewOf:true,
+      loading:true,
     };
   }
 
@@ -74,11 +75,12 @@ class Search extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    this.setState({data:nextProps.ads,copyData:nextProps.ads})
+
+    this.setState({data:nextProps.ads,copyData:nextProps.ads,loading:false})
   }
 
   onChangeHandler = (e) =>{
-    this.setState({category:e.target.value})
+    this.setState({category:e.target.value,loading:true});
     this.props.startGetAds({category:e.target.value});
   }
   getTitleSearch=(title)=>{
@@ -89,7 +91,7 @@ class Search extends Component {
       copyData = data.filter(item => item.title.includes(title) ||item.tag.includes(title));
       this.setState({copyData});
     }else{
-      copyData = data.filter(item => (item.title.includes(title) ||item.tag.includes(title)) && item.userlocations === locations );
+      copyData = data.filter(item => (item.title.includes(title) ||item.tag.includes(title)) && item.userlocations.startsWith(locations.toUpperCase()) );
       this.setState({copyData});
     }
   }
@@ -97,10 +99,10 @@ class Search extends Component {
     this.setState({locations});
     let {title,data,copyData} = this.state;
     if(title === ''){
-      copyData = data.filter(item =>item.userlocations === locations );
+      copyData = data.filter(item =>item.userlocations.startsWith(locations.toUpperCase()) );
       this.setState({copyData});
     }else{
-      copyData = data.filter(item => item.title.includes(title) ||item.tag.includes(title));
+      copyData = data.filter(item => (item.title.includes(title) ||item.tag.includes(title)) && item.userlocations.startsWith(locations.toUpperCase()));
       this.setState({copyData});
     }
   }
@@ -112,7 +114,7 @@ class Search extends Component {
     this.setState({rowsPerPage: event.target.value});
   };
     render() {
-      const {copyData, rowsPerPage, page,title,locations,adsViewOf} = this.state;
+      const {copyData, rowsPerPage, page,title,locations,adsViewOf,loading} = this.state;
         return (
             <div>
             <Grid container spacing={8}> 
@@ -186,7 +188,7 @@ class Search extends Component {
                 </Paper>
 
                 <Paper className="marginTop" elevation={5}>
-             
+              {loading?<img width="100%" src={require('../resource/images/adsloading.gif')} alt="Loading...."/> : <div>
                   <Hidden only={['md', 'xl','lg']}>
                   {copyData.length>0 ?
               copyData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -195,7 +197,9 @@ class Search extends Component {
                <Card key={i} ad={ad} />
                 );
               })
-              :<img width="100%" src={require('../resource/images/adsloading23.gif')} alt=""/> }
+              :<Typography variant="body2" align="center" className="paddingTop" > 
+              No ads related to your query! Please try to another query.
+            </Typography>  }
                     <Table >
                     <TableFooter>
                       <TableRow>
@@ -225,7 +229,9 @@ class Search extends Component {
                   </div>
                 );
               })
-              : <img width="100%" src={require('../resource/images/adsloading.gif')} alt=""/> }
+              : <Typography variant="body2" align="center" className="paddingTop" > 
+                No ads related to your query! Please try to another query.
+              </Typography> }
                  <Table >
                     <TableFooter>
                       <TableRow>
@@ -243,7 +249,7 @@ class Search extends Component {
                     </TableFooter>
                  </Table>
                   </Hidden>
-                    
+                  </div>}
                 </Paper>
                 
               </Grid>

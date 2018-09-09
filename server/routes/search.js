@@ -24,16 +24,17 @@ router.get('/getsuggestions',(req,res)=>{
 
 router.get('/getads',(req,res)=>{
     if(req.query.category === 'all'){
-        adsmodels.find({},(err,data)=>{
+        adsmodels.find({}).sort('-timestamp').exec((err,data)=>{
             if(err){
                 res.status(500).json("error has been occored!")
             }
             else{
                 res.status(200).json(data);
             }
-    });}
+        });
+    }
     else{
-    adsmodels.find({"category":req.query.category},(err,data)=>{
+    adsmodels.find({"category":req.query.category}).sort('-timestamp').exec((err,data)=>{
         if(err){
             res.status(500).json("error has been occored!")
         }
@@ -46,7 +47,7 @@ router.get('/getads',(req,res)=>{
 
 router.get('/getuserads',(req,res)=>{
     
-    adsmodels.find({"user":req.query.id},(err,data)=>{
+    adsmodels.find({"user":req.query.id}).sort('-timestamp').exec((err,data)=>{
         if(err){
             res.status(500).json("error has been occored!")
         }

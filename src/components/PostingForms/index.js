@@ -442,7 +442,7 @@ class VerticalLinearStepper extends Component {
     this.setState({
          [name]: URL.createObjectURL(event.target.files[0]),
          images:imagedata
-    })
+    });
   }
    }
 

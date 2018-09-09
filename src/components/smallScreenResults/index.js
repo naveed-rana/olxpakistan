@@ -28,6 +28,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import {compose} from 'recompose';
 import moment from 'moment';
+import Tooltip from '@material-ui/core/Tooltip';
 import {startSendMessage} from '../redux/actions/messageActions';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
@@ -237,7 +238,7 @@ close=()=>{
 
          
           title={this.props.ad.title}
-          subheader={`Category:${this.props.ad.category}. ${moment(this.props.ad.timestamp).format('ll')}`}
+          subheader={`${moment(this.props.ad.timestamp).format('ll')}`}
         />
         <CardMedia
           className={classes.media}
@@ -257,17 +258,24 @@ close=()=>{
         <CardActions className={classes.actions} disableActionSpacing>
           
           {viewlater ? 
+           <Tooltip title="Save for later View" placement="top">
            <IconButton aria-label="Add to favorites" onClick={this.onRemoveHandler}>
            <FavoriteIcon className="colorSet"/>
          </IconButton>
+          </Tooltip>
           :
+          <Tooltip title="Save for later View" placement="top">
           <IconButton aria-label="Add to favorites" onClick={this.onClickHandler}>
             <FavoriteIcon />
-          </IconButton>}
+          </IconButton>
+         </Tooltip>
+        }
+          <Tooltip title="Message" placement="right">
           <IconButton aria-label="Add to favorites" onClick={this.handleClickOpen}>
             <Icon >message</Icon>
           </IconButton>
-
+          </Tooltip>
+          <Tooltip title="Expand and get more details" placement="left">
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
@@ -278,6 +286,7 @@ close=()=>{
           >
             <ExpandMoreIcon />
           </IconButton>
+          </Tooltip>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>

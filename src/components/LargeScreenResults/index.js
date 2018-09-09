@@ -19,6 +19,7 @@ import MediaSlider from '../adsSlider';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {compose} from 'recompose';
+import Tooltip from '@material-ui/core/Tooltip';
 import {startSendMessage} from '../redux/actions/messageActions';
 import {connect} from 'react-redux';
 import {toast} from 'react-toastify';
@@ -254,23 +255,31 @@ onChangeHandler = (e) =>{
             <Grid container spacing={8}> 
               <Grid item xs={6} md={6} align="right" className="otherevent">
               {viewlater ?
+              <Tooltip title="Save for later view" placement="top">
                <i className="material-icons iconFix otherevent colorSet" onClick={this.onRemoveHandler}>
                favorite
                  </i>
+              </Tooltip>
               :
+              <Tooltip title="Save for later view" placement="top">
               <i className="material-icons iconFix otherevent" onClick={this.onClickHandler}>
               favorite
                 </i>
+                </Tooltip>
               }
+              <Tooltip title="Send Message" placement="top">
                 <i className="material-icons iconFix otherevent" onClick={this.handleClickOpen}>
                 message
                 </i>
+             </Tooltip>
               </Grid>
               <Grid item xs={6} md={6}>
               <Typography component="p" className="price">
+              <Tooltip title="Price" placement="top">
             <i className="material-icons iconFixpric">
               monetization_on
               </i>
+              </Tooltip>
           {this.props.ad.price} only
             </Typography>
               </Grid>

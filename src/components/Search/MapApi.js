@@ -1,8 +1,4 @@
 import React from 'react';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
@@ -15,40 +11,24 @@ class LocationSearchInput extends React.Component {
 
   componentDidMount() {
     this.setState({ address:this.props.locations });
+    this.props.getMapState(this.props.locations);
   }
   
 
-  handleChange = address => {
-    this.setState({ address:address });
-    this.props.getMapState(address);
-  };
-
-  handleSelect = address => {
-    this.setState({ address:address });
-    this.props.getMapState(address);
-    if(this.props.sendAddress){
-    this.props.sendAddress(address);
-  }
-    geocodeByAddress(address)
-      .then(results => {getLatLng(results[0])})
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
+  handleChange = e => {
+    this.setState({ address:e.target.value });
+    this.props.getMapState(e.target.value);
+  
   };
 
   render() {
       
     return (
       
-      <PlacesAutocomplete
-        value={this.state.address}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
+    
         
             <TextField
-         
+         onChange={this.handleChange}
          InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -60,41 +40,10 @@ class LocationSearchInput extends React.Component {
           }}
 
           fullWidth
-          {...getInputProps({
-            placeholder: 'Location ...',
-            className: 'location-search-input',
-          })}
+          placeholder="Location..."
         
         />   
 
-            <div style={{ position: 'absolute',zIndex:1100,marginTop:10,border:'1px solid #dbdbdb'}}>
-              {loading && <div style={{ backgroundColor: '#ffffff', cursor: 'pointer',padding:15,paddingBottom:15,borderBottom:'1px solid #fafafa',paddingRight:20  }}>Loading...</div>}
-              {suggestions.map(suggestion => {
-                const className = suggestion.active
-                  ? 'suggestion-item--active'
-                  : 'suggestion-item';
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                  ? { backgroundColor: '#dbdbdb', cursor: 'pointer',paddingTop:15,paddingBottom:15,borderBottom:'1px solid #fafafa',paddingRight:20 }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer',paddingTop:15,paddingBottom:15,borderBottom:'1px solid #fafafa',paddingRight:20  };
-                return (
-                  <div
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
-                    })}
-                  >  
-                    <i className="material-icons iconFix">
-                        location_on
-                        </i>
-                    <span>{suggestion.description}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </PlacesAutocomplete>
     );
   }
 }
