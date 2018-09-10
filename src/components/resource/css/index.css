@@ -164,3 +164,6 @@ padding: 60px 30px 20px 30px;
 .allPadding{
     padding: 30px 30px 0px 30px !important;
 }
+.width{
+    width:60vw;
+}

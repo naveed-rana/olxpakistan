@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {LocationOn} from '@material-ui/icons';
 import {getMapState} from '../redux/actions/searchActions';
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -50,9 +51,9 @@ class LocationSearchInput extends React.Component {
           disableUnderline:this.props.underline,
             startAdornment: (
               <InputAdornment position="start">
-                <i className="material-icons iconFixfield">
-                location_on
-                </i>
+              
+               <LocationOn className="iconFixfield"/>
+              
               </InputAdornment>
             ),
           }}
@@ -82,9 +83,7 @@ class LocationSearchInput extends React.Component {
                       style,
                     })}
                   >  
-                    <i className="material-icons iconFix">
-                        location_on
-                        </i>
+                        <LocationOn className="iconFix" />
                     <span>{suggestion.description}</span>
                   </div>
                 );

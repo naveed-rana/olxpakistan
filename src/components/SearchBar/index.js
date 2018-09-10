@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {compose} from 'recompose';
 import { connect } from 'react-redux';
+import {Search} from '@material-ui/icons';
 import {getTitleSearch} from '../redux/actions/searchActions';
 
 
@@ -25,9 +26,9 @@ function renderInputComponent(inputProps) {
         disableUnderline:true,
         startAdornment: (
           <InputAdornment position="start">
-            <i className="material-icons iconFixfield">
-            search
-            </i>
+             
+            <Search className="iconFixfield"/>
+           
           </InputAdornment>
         ),
         inputRef: node => {

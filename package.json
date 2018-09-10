@@ -54,6 +54,7 @@
     "redux-thunk": "^2.2.0",
     "slick-carousel": "^1.8.1",
     "style-loader": "^0.19.0",
+    "typeface-roboto": "0.0.54",
     "url-loader": "^0.6.2",
     "uuid": "^3.3.2"
   },
@@ -62,7 +63,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "workbox" : "workbox generateSW workbox-config.js"
+    "workbox": "workbox generateSW workbox-config.js"
   },
   "engines": {
     "node": "8.9.1",

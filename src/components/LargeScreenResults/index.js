@@ -10,6 +10,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Dialog from '@material-ui/core/Dialog';
+import {Favorite,MonetizationOn,Message} from '@material-ui/icons';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -256,29 +257,29 @@ onChangeHandler = (e) =>{
               <Grid item xs={6} md={6} align="right" className="otherevent">
               {viewlater ?
               <Tooltip title="Save for later view" placement="top">
-               <i className="material-icons iconFix otherevent colorSet" onClick={this.onRemoveHandler}>
-               favorite
-                 </i>
+  
+               <Favorite onClick={this.onRemoveHandler} className="iconFix otherevent colorSet"/>
+                
               </Tooltip>
               :
               <Tooltip title="Save for later view" placement="top">
-              <i className="material-icons iconFix otherevent" onClick={this.onClickHandler}>
-              favorite
-                </i>
+             
+              <Favorite onClick={this.onClickHandler} className="iconFix otherevent"/>
+                
                 </Tooltip>
               }
               <Tooltip title="Send Message" placement="top">
-                <i className="material-icons iconFix otherevent" onClick={this.handleClickOpen}>
-                message
-                </i>
+                
+                <Message className="iconFix otherevent" onClick={this.handleClickOpen}/>
+               
              </Tooltip>
               </Grid>
               <Grid item xs={6} md={6}>
               <Typography component="p" className="price">
               <Tooltip title="Price" placement="top">
-            <i className="material-icons iconFixpric">
-              monetization_on
-              </i>
+            
+              <MonetizationOn className="iconFixpric"/>
+             
               </Tooltip>
           {this.props.ad.price} only
             </Typography>

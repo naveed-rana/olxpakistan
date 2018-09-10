@@ -3,7 +3,7 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Icon from '@material-ui/core/Icon';
+import {AccountCircle,Dashboard,Home,NoteAdd,Message,YoutubeSearchedFor,Visibility,Lock} from '@material-ui/icons';
 import {Link} from 'react-router-dom';
 import * as routes from '../../constants';
 
@@ -13,25 +13,25 @@ export const mailFolderListItems = (
    
     <ListItem button component={Link} to={routes.ACCOUNT_HOME}>
       <ListItemIcon>
-        <Icon>account_circle</Icon>
+       <AccountCircle />
       </ListItemIcon>
       <ListItemText primary="My Account" />
     </ListItem>
     <ListItem button component={Link} to={routes.MYADS}>
       <ListItemIcon>
-      <Icon>dashboard</Icon>
+      <Dashboard />
       </ListItemIcon>
       <ListItemText primary="My ads" />
     </ListItem>
     <ListItem button component={Link} to={routes.MESSAGE}>
       <ListItemIcon>
-      <Icon>message</Icon>
+      <Message />
       </ListItemIcon>
       <ListItemText primary="Inbox" />
     </ListItem>
     <ListItem button component={Link} to={routes.POSTING}>
       <ListItemIcon>
-        <Icon>note_add</Icon>
+        <NoteAdd />
       </ListItemIcon>
       <ListItemText primary="Post an Ad" />
     </ListItem> 
@@ -43,32 +43,32 @@ export const otherMailFolderListItems = (
     
     <ListItem button component={Link} to={routes.HOME}>
       <ListItemIcon>
-      <Icon>home</Icon>
+      <Home />
       </ListItemIcon>
       <ListItemText primary="Home" />
     </ListItem>
     <ListItem button component={Link} to={routes.SAVEDADS}>
       <ListItemIcon>
-      <Icon>visibility</Icon>
+      <Visibility />
       </ListItemIcon>
       <ListItemText primary="View Later" />
     </ListItem>
     <ListItem button component={Link} to={routes.SEARCH}>
       <ListItemIcon>
-        <Icon>youtube_searched_for</Icon>
+        <YoutubeSearchedFor />
       </ListItemIcon>
       <ListItemText primary="Search An Ad" />
     </ListItem>
   
     <ListItem button component={Link} to={routes.LOGIN}>
       <ListItemIcon>
-        <Icon>lock</Icon>
+        <Lock />
       </ListItemIcon>
       <ListItemText primary="Login" />
     </ListItem>
     <ListItem button component={Link} to={routes.SIGNUP}>
       <ListItemIcon>
-        <Icon>account_circle</Icon>
+        <AccountCircle />
       </ListItemIcon>
       <ListItemText primary="Sign Up" />
     </ListItem>

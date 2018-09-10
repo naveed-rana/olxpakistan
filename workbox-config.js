@@ -1,7 +1,8 @@
 module.exports = {
+	"maximumFileSizeToCacheInBytes": 5000000,
 	"globDirectory": "build/",
 	"globPatterns": [
-		"**/*.{png,json,ico,svg,js,html,css,jpg}"
+		"**/*.{png,json,ico,svg,js,html,css,jpg,JPG,gif,woff,woff2}"
 	],
 	"swDest": "build\\service-worker.js",
 	"skipWaiting": true,

@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MediaSlider from '../adsSlider';
-import Icon from '@material-ui/core/Icon';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -24,6 +23,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import {compose} from 'recompose';
 import moment from 'moment';
+import {MonetizationOn,Delete} from '@material-ui/icons';
 import {startUserAdDelete} from '../redux/actions/searchActions';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
@@ -133,9 +133,9 @@ close=()=>{
 
           action={
             <Typography component="p" className="price">
-            <i className="material-icons iconFixpric">
-              monetization_on
-              </i>
+          
+              <MonetizationOn className="iconFixpric"/>
+          
           {this.props.ad.price} only &nbsp; &nbsp; &nbsp;  &nbsp;
             </Typography>
           }
@@ -158,12 +158,10 @@ close=()=>{
         <CardActions className={classes.actions} disableActionSpacing>
           
           <IconButton aria-label="Add to favorites" onClick={this.handleClickOpen}>
-            <Icon >delete</Icon>
+            <Delete />
           </IconButton>
 
-          <IconButton aria-label="Add to favorites" onClick={this.handleClickOpen}>
-            <Icon >status</Icon>
-          </IconButton>
+          
 
           <IconButton
             className={classnames(classes.expand, {

@@ -10,9 +10,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
+import {Search,NoteAdd}from '@material-ui/icons';
 import Grid from '@material-ui/core/Grid';
 import Map from '../googleMapApi';
-import Search from '../SearchBar';
+import SearchComp from '../SearchBar';
 import Button from '@material-ui/core/Button';
 import {BrowserRouter as Router,Link} from 'react-router-dom';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
@@ -110,13 +111,13 @@ class Navigation extends React.Component {
             <Hidden mdUp>
             <Grid item xs={6} md={1} align="right">
             
-           <Link to={SEARCH}><i className="material-icons iconFixOnSmile">
-            search
-            </i></Link>
+           <Link to={SEARCH}>
+            <Search className="iconFixOnSmile"/>
+          </Link>
            
-            <Link to={POSTING}><i className="material-icons iconFixOnSmile">
-            note_add
-            </i></Link>
+            <Link to={POSTING}>
+            <NoteAdd className="iconFixOnSmile"/>
+            </Link>
 
             <IconButton
               color="inherit"
@@ -136,20 +137,19 @@ class Navigation extends React.Component {
               </Grid>
              
               <Grid item xs={5} md={3} className="paddingTop">
-                <Search />
+                <SearchComp />
               </Grid>
                <Grid item xs={1} md={3} className="paddingTopButton">
                
                <Button component={Link} to={SEARCH} variant="outlined" size="small" color="primary" className={classes.button}>
-               <i className="material-icons iconSize">
-                search
-                </i>
+              
+                <Search className="iconSize"/>
                   Search
                 </Button>
                  <Button  component={Link} to={POSTING} variant="outlined" size="small" color="primary" className={classes.button}>
-                 <i className="material-icons iconSize">
-                  note_add
-                  </i>
+             
+                  <NoteAdd className="iconSize"/>
+               
                  Post an Ad
                 </Button>    
                </Grid>   

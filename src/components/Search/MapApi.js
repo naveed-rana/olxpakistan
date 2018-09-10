@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-
+import {EditLocation} from '@material-ui/icons';
 
 class LocationSearchInput extends React.Component {
   constructor(props) {
@@ -32,9 +32,9 @@ class LocationSearchInput extends React.Component {
          InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <i className="material-icons iconFixfield">
-                edit_location
-                </i>
+               
+                <EditLocation className="iconFixfield"/>
+                
               </InputAdornment>
             ),
           }}

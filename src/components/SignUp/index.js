@@ -16,6 +16,7 @@ import {startCreateUser,startEmailVerification} from '../redux/actions/userActio
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {LOGIN} from '../constants';
+import {AccountCircle,Email,Lock,Send,StarHalf,LocationCity,Phone,Add} from '@material-ui/icons';
 import pink from '@material-ui/core/colors/pink';
 import Avatar from '@material-ui/core/Avatar';
 
@@ -163,8 +164,9 @@ class SignUp extends Component {
                      
                    
                     <Avatar style={{color: '#fff',backgroundColor: pink[500],}} >
-                    <i className="material-icons largeIcon">account_circle
-                    </i>
+                   
+                    <AccountCircle className="largeIcon"/>
+                   
                           </Avatar>
                          <Typography variant="headline">Sign Up</Typography>
                      <Grid container spacing={8} className="LoginContainer"> 
@@ -174,9 +176,9 @@ class SignUp extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          account_circle
-                           </i>
+                       
+                          <AccountCircle className="iconFixfield" />
+                          
                         </InputAdornment>
                       ),
                     }}
@@ -197,9 +199,9 @@ class SignUp extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                              email
-                           </i>
+                       
+                              <Email className="iconFixfield"/>
+                          
                         </InputAdornment>
                       ),
                     }}
@@ -220,9 +222,9 @@ class SignUp extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                              lock
-                           </i>
+                       
+                              <Lock className="iconFixfield"/>
+                          
                         </InputAdornment>
                       ),
                     }}
@@ -245,9 +247,9 @@ class SignUp extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                              lock
-                           </i>
+                        
+                              <Lock className="iconFixfield"/>
+                          
                         </InputAdornment>
                       ),
                     }}
@@ -270,9 +272,9 @@ class SignUp extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                              phone
-                           </i>
+                      
+                              <Phone className="iconFixfield" />
+                        
                         </InputAdornment>
                       ),
                     }}
@@ -291,10 +293,10 @@ class SignUp extends Component {
                     
                     <Grid item xs={12} md={12} className="paddingTop">
                   
-                    <i className="material-icons iconFixfield mangaeWithSelect">
-                    add
+                  
+                    <Add className="iconFixfield mangaeWithSelect"/>
 
-                           </i>
+                          
                       <select name="province"
                       onChange={this.onSelectHandler}
                       className="selectSignUp">
@@ -331,9 +333,9 @@ class SignUp extends Component {
                      {cities.length>0 ? 
                      <Grid item xs={12} md={12} className="paddingTop">
                        
-                    <i className="material-icons iconFixfield mangaeWithSelect">
-                    location_city
-                     </i>
+                   
+                    <LocationCity className="iconFixfield mangaeWithSelect"/>
+                     
                       <select name="city" 
                       onChange={this.onChangeHandler}
                       className="selectSignUp">
@@ -358,9 +360,9 @@ class SignUp extends Component {
                       
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          star_half
-                           </i>
+                         
+                          <StarHalf className="iconFixfield"/>
+                          
                         </InputAdornment>
                       ),
                     }}
@@ -397,9 +399,9 @@ class SignUp extends Component {
                                             :
                                             <span>
                                             Submit
-                                            <i className="material-icons iconSize submitIcon">
-                                                send
-                                            </i>
+                                          
+                                                <Send className="iconSize submitIcon"/>
+                                           
                                             </span>
                                           }
                                         </Button>

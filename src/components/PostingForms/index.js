@@ -16,6 +16,7 @@ import Divider from '@material-ui/core/Divider';
 import {ACCOUNT} from '../constants';
 import { connect } from 'react-redux';
 import {compose} from 'recompose';
+import {Subtitles,Business,LocalAtm,CastConnected,Details,Attachment,AccountBox,LocationOn,Phone,Email} from '@material-ui/icons';
 import {withRouter} from 'react-router-dom';
 import {startAdsPosting,clearAdsPosting} from '../redux/actions/adsActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -84,9 +85,9 @@ class VerticalLinearStepper extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          subtitles
-                           </i>
+    
+                          <Subtitles className="iconFixfield"/>
+                        
                         </InputAdornment>
                       ),
                     }}
@@ -100,9 +101,9 @@ class VerticalLinearStepper extends Component {
             </Grid>
             <Grid item xs={12} md={12} className="paddingTop">
                   
-                    <i className="material-icons iconFixfield mangaeWithSelect">
-                    business
-                   </i>
+                     
+                    <Business className="iconFixfield mangaeWithSelect" />
+                  
                       <select name="category"
                       value={this.state.category}
                       onChange={this.onChangeHandler}
@@ -152,9 +153,9 @@ class VerticalLinearStepper extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          local_atm
-                           </i>
+                          
+                          <LocalAtm className="iconFixfield" />
+                           
                         </InputAdornment>
                       ),
                     }}
@@ -169,9 +170,9 @@ class VerticalLinearStepper extends Component {
             </Grid>
             <Grid item xs={12} md={12} className="paddingTop">
                   
-                    <i className="material-icons iconFixfield mangaeWithSelect">
-                    cast_connected
-                   </i>
+                    
+                    <CastConnected className="iconFixfield mangaeWithSelect"/>
+                  
                       <select name="condition"
                       value={this.state.condition}
                       onChange={this.onChangeHandler}
@@ -194,9 +195,9 @@ class VerticalLinearStepper extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          details
-                           </i>
+                         
+                          <Details className="material-icons iconFixfield"/>
+                         
                         </InputAdornment>
                       ),
                     }}
@@ -213,9 +214,9 @@ class VerticalLinearStepper extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          attachment
-                           </i>
+                       
+                          <Attachment className="iconFixfield"/>
+                          
                         </InputAdornment>
                       ),
                     }}
@@ -318,9 +319,9 @@ class VerticalLinearStepper extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                              account_box
-                           </i>
+                         
+                             <AccountBox className="iconFixfield"/>
+                          
                         </InputAdornment>
                       ),
                     }}
@@ -335,9 +336,9 @@ class VerticalLinearStepper extends Component {
                      InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          phone
-                          </i>
+                        
+                          <Phone className="iconFixfield"/>
+                       
                         </InputAdornment>
                       ),
                     }}
@@ -352,9 +353,9 @@ class VerticalLinearStepper extends Component {
                      InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          location_on
-                          </i>
+                          >
+                          <LocationOn className="iconFixfield" />
+                          
                         </InputAdornment>
                       ),
                     }}
@@ -368,9 +369,9 @@ class VerticalLinearStepper extends Component {
                      InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <i className="material-icons iconFixfield">
-                          email
-                          </i>
+                      
+                          <Email className="iconFixfield"/> 
+                         
                         </InputAdornment>
                       ),
                     }}

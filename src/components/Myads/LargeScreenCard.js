@@ -20,6 +20,7 @@ import Button from '@material-ui/core/Button';
 import {compose} from 'recompose';
 import {startUserAdDelete} from '../redux/actions/searchActions';
 import {connect} from 'react-redux';
+import  {MonetizationOn,Delete} from '@material-ui/icons';
 const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
 const styles = theme => ({
@@ -165,17 +166,17 @@ close=()=>{
           <Grid container spacing={8}> 
           <Grid item xs={6} md={3}>
               <Typography component="p" className="price">
-            <i className="material-icons iconFixpric">
-              monetization_on
-              </i>
+          
+              <MonetizationOn className="iconFixpric"/>
+            
           {this.props.ad.price} only
             </Typography>
               </Grid>
 
               <Grid item xs={6} md={9} className="otherevent">
-                <i className="material-icons iconFix otherevent" onClick={this.handleClickOpen}>
-                delete
-                </i>
+              
+                <Delete  className="iconFix otherevent" onClick={this.handleClickOpen}/>
+             
               </Grid>
            
             </Grid>

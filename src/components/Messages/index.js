@@ -11,6 +11,7 @@ import Table from '@material-ui/core/Table';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import Hidden from '@material-ui/core/Hidden';
+import {AccountCircle,Phone} from '@material-ui/icons';
 
 class Messages extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class Messages extends Component {
                :
                <div>
                {messages.length>0 ? messages.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((message,i)=>{return (
-                    <Grid item xs={12} md={12} key={i} className="paddingTop">
+                    <Grid item xs={12} md={12} key={i} className="paddingTop width">
                     <Divider />
                     <Typography variant="body2" className="paddingTop"> 
                      {message.title}
@@ -69,17 +70,17 @@ class Messages extends Component {
                     <Grid container spacing={8}> 
                       <Grid item xs={6} md={3}>
                        <Typography variant="caption" > 
-                       <i className="material-icons iconFix">
-                         account_circle
-                         </i> 
+                     
+                         <AccountCircle className="iconFix"/>
+                       
                          {message.username}
                        </Typography>
                       </Grid>
                       <Grid item xs={6} md={9}>
                       <Typography variant="caption" > 
-                       <i className="material-icons iconFix">
-                         phone
-                         </i>
+                     
+                         <Phone className="iconFix" />
+                      
                          {message.userphone}
                        </Typography>
                       </Grid> 

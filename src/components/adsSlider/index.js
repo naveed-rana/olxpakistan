@@ -5,6 +5,7 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import {AccountCircle,Phone,Email,LocationOn} from '@material-ui/icons';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
@@ -90,33 +91,33 @@ class SwipeableTextMobileStepper extends React.Component {
           <Grid container spacing={8}> 
             <Grid item  >
                      <Typography variant="caption" > 
-                    <i className="material-icons iconFix">
-                    account_circle
-                     </i>
+          
+                    <AccountCircle className="iconFix"/>
+                    
                      {this.props.username}
                      </Typography>
                     
             </Grid>
             <Grid item  >
             <Typography variant="caption" > 
-                    <i className="material-icons iconFix">
-                        phone
-                     </i>
+                   
+                        <Phone className="iconFix"/>
+                
                      {this.props.userphone}
                      </Typography>
             </Grid>
             <Grid item  >
             <Typography variant="caption" > 
-                    <i className="material-icons iconFix">
-                        email
-                     </i>
+                  
+                        <Email className="iconFix"></Email>
+                    
                      {this.props.useremail}
                      </Typography>
             </Grid>
             <Grid item >
             <Typography variant="caption" > 
-                    <i className="material-icons iconFix">
-                    location_on
+                    <i >
+                    <LocationOn className="iconFix" />
                      </i>
                      {this.props.userlocations}
                      </Typography>

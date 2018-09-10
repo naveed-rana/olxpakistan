@@ -14,11 +14,11 @@ import Avatar from '@material-ui/core/Avatar';
 import {SIGNUP} from '../constants';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {startLoginUser} from '../redux/actions/userAction';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import pink from '@material-ui/core/colors/pink';
 import {ACCOUNT} from '../constants';
 import {withRouter} from 'react-router-dom';
-
+import {Send,Email,Lock} from '@material-ui/icons';
 
 class Login extends Component {
     constructor(props) {
@@ -26,23 +26,24 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            loading:false
+            loading: false
         }
     }
-   
+
     componentDidMount() {
         document.title = "SignIn";
-      }
+    }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            loading:false
-        })
-      if(nextProps.user.email){
-        this.props.history.push(ACCOUNT);
-      }
-      
-      }
+        this.setState({loading: false})
+        if (nextProps.user.email) {
+            this
+                .props
+                .history
+                .push(ACCOUNT);
+        }
+
+    }
 
     onChangeHandler = (e) => {
         let name = e.target.name;
@@ -51,20 +52,22 @@ class Login extends Component {
     }
 
     onClickHandler = (e) => {
-      e.preventDefault();
-      this.setState({loading:true});
-      const {email,password} = this.state;
-      let data = {
-          email,
-          password
-      }
-      this.props.startLoginUser(data);
+        e.preventDefault();
+        this.setState({loading: true});
+        const {email, password} = this.state;
+        let data = {
+            email,
+            password
+        }
+        this
+            .props
+            .startLoginUser(data);
 
     }
 
     render() {
-        const {email,password,loading} = this.state;
-        const isnotValid = email ==='' || password ==='' || loading;  
+        const {email, password, loading} = this.state;
+        const isnotValid = email === '' || password === '' || loading;
         return (
             <div>
                 <Grid container spacing={8}>
@@ -74,85 +77,90 @@ class Login extends Component {
 
                     <Grid item xs={12} md={4}>
                         <Paper className="loginPaper" elevation={10} align="center">
-                 
-                          <Avatar style={{color: '#fff',backgroundColor: pink[500],}} >
-                          <LockIcon />
-                          </Avatar>
-                         <Typography variant="headline">Sign in</Typography>
+
+                            <Avatar
+                                style={{
+                                color: '#fff',
+                                backgroundColor: pink[500]
+                            }}>
+                                <LockIcon/>
+                            </Avatar>
+                            <Typography variant="headline">Sign in</Typography>
                             <Grid container spacing={8} className="LoginContainer">
-                              
-                                    <Grid item xs={12} md={12} className="paddingTop">
-                                        <TextField
-                                            type="email"
-                                            name="email"
-                                            InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <i className="material-icons iconFixfield">
-                                                        email
-                                                    </i>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                            autoFocus={true}
-                                            fullWidth={true}
-                                            required={true}
-                                            helperText=""
-                                            placeholder="Email"
-                                            onChange={this.onChangeHandler}
-                                            />
-                                    </Grid>
-                                    <Grid item xs={12} md={12} className="paddingTop">
-                                        <TextField
-                                            type="password"
-                                            name="password"
-                                            InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <i className="material-icons iconFixfield">
-                                                        lock
-                                                    </i>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                            fullWidth={true}
-                                            required={true}
-                                            placeholder="Password"
-                                            onChange={this.onChangeHandler}
-                                            />
-                                    </Grid>
 
-                                    <Grid item xs={12} md={12} align="right" className="paddingTop">
-                                        <FormControlLabel
-                                            control={< Checkbox value = "checkedB" color = "primary" />}
-                                            label="Remember Me"/>
-                                    </Grid>
+                                <Grid item xs={12} md={12} className="paddingTop">
+                                    <TextField
+                                        type="email"
+                                        name="email"
+                                        InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                               
+                                                    <Email className="iconFixfield" />
+                                               
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                        autoFocus={true}
+                                        fullWidth={true}
+                                        required={true}
+                                        helperText=""
+                                        placeholder="Email"
+                                        onChange={this.onChangeHandler}/>
+                                </Grid>
+                                <Grid item xs={12} md={12} className="paddingTop">
+                                    <TextField
+                                        type="password"
+                                        name="password"
+                                        InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                          
+                                                    <Lock  className="iconFixfield"/>
+                                                
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                        fullWidth={true}
+                                        required={true}
+                                        placeholder="Password"
+                                        onChange={this.onChangeHandler}/>
+                                </Grid>
 
-                                    <Grid item xs={12} md={12} align="center">
-                                        <Button
+                                <Grid item xs={12} md={12} align="right" className="paddingTop">
+                                    <FormControlLabel
+                                        control={< Checkbox value = "checkedB" color = "primary" />}
+                                        label="Remember Me"/>
+                                </Grid>
+
+                                <Grid item xs={12} md={12} align="center">
+                                    <Button
                                         onClick={this.onClickHandler}
                                         disabled={isnotValid}
-                                        variant="contained" size="small" color="primary" className="loginbtn">
-                                        {loading ?
-                                        <CircularProgress size={20} />:
-                                           <span>
-                                            Submit
-                                            <i className="material-icons iconSize submitIcon">
-                                                send
-                                            </i>
+                                        variant="contained"
+                                        size="small"
+                                        color="primary"
+                                        className="loginbtn">
+                                        {loading
+                                            ? <CircularProgress size={20}/>
+                                            : <span>
+                                                Submit
+                                                 
+                                                    <Send className="iconSize submitIcon" />
+                                              
                                             </span>
-                                            }
-                                        </Button>
-                                    </Grid>
-                                    <Grid container spacing={8} className="paddingTop"> 
+}
+                                    </Button>
+                                </Grid>
+                                <Grid container spacing={8} className="paddingTop">
                                     <Grid item xs={12} md={12} className="paddingTop" align="right">
                                         <Typography variant="body2">
                                             <Link to={SIGNUP}>Register</Link>
                                         </Typography>
                                     </Grid>
-                            
-                                    </Grid>
-                           
+
+                                </Grid>
+
                             </Grid>
 
                         </Paper>
@@ -167,9 +175,6 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    user:state.user.user,
-    error:state.user.error
-  })
+const mapStateToProps = state => ({user: state.user.user, error: state.user.error})
 
-export default withRouter(connect(mapStateToProps,{startLoginUser})(Login));
+export default withRouter(connect(mapStateToProps, {startLoginUser})(Login));

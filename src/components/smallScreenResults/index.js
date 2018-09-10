@@ -14,8 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Message from '@material-ui/icons/Message';
+import MonetizationOn from '@material-ui/icons/MonetizationOn';
 import MediaSlider from '../adsSlider';
-import Icon from '@material-ui/core/Icon';
 import {toast} from 'react-toastify';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -229,9 +230,7 @@ close=()=>{
 
           action={
             <Typography component="p" className="price">
-            <i className="material-icons iconFixpric">
-              monetization_on
-              </i>
+              <MonetizationOn className="iconFixpric"/>
           {this.props.ad.price} only &nbsp; &nbsp; &nbsp;  &nbsp;
             </Typography>
           }
@@ -272,7 +271,7 @@ close=()=>{
         }
           <Tooltip title="Message" placement="right">
           <IconButton aria-label="Add to favorites" onClick={this.handleClickOpen}>
-            <Icon >message</Icon>
+            <Message />
           </IconButton>
           </Tooltip>
           <Tooltip title="Expand and get more details" placement="left">

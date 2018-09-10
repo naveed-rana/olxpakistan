@@ -5,8 +5,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import logo from '../resource/images/logo.png';
 import Typography from '@material-ui/core/Typography';
-import Icon from '@material-ui/core/Icon';
 import Avatar from '@material-ui/core/Avatar';
+import {Email,Phone} from '@material-ui/icons';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 class Footer extends Component {
@@ -60,7 +60,7 @@ class Footer extends Component {
                        <ListItem>
                     <ListItemAvatar>
                       <Avatar>
-                        <Icon>email</Icon>
+                        <Email />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
@@ -70,7 +70,7 @@ class Footer extends Component {
                        <ListItem>
                     <ListItemAvatar>
                       <Avatar>
-                        <Icon>phone</Icon>
+                        <Phone />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText

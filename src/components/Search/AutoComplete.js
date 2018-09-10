@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {compose} from 'recompose';
 import { connect } from 'react-redux';
+import {FindInPage} from '@material-ui/icons';
 
 
 
@@ -24,9 +25,9 @@ function renderInputComponent(inputProps) {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <i className="material-icons iconFixfield">
-            find_in_page
-            </i>
+           
+            <FindInPage className="material-icons iconFixfield" />
+         
           </InputAdornment>
         ),
         inputRef: node => {

@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import * as routes from '../constants';
 import {Link,withRouter} from 'react-router-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Home from '../AccountsHome';
+import HomeComp from '../AccountsHome';
 import MyAds from '../Myads';
 import Messages  from '../Messages';
 import {connect} from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Icon from '@material-ui/core/Icon';
+import {Home,Visibility,Message} from '@material-ui/icons';
 import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import {startSendTocken} from '../redux/actions/messageActions';
@@ -60,14 +60,14 @@ class HomePage extends Component {
                 <BottomNavigationAction 
                 className="buttomNavigation"
                 label="HOME"
-                icon={<Icon>home</Icon>}
+                icon={<Home/>}
                 component={Link} to={routes.ACCOUNT_HOME}
                 />
 
                 <BottomNavigationAction 
                 className="buttomNavigation" 
                 label="My Ads" 
-                icon={<Icon>visibility</Icon>} 
+                icon={<Visibility />} 
                 component={Link} to={routes.MYADS}
                 />
 
@@ -76,13 +76,13 @@ class HomePage extends Component {
                 className="buttomNavigation"
                 label="Messages" 
                 component={Link} to={routes.MESSAGE}
-                icon={<Icon>message</Icon>} />
+                icon={<Message />} />
 
-                <BottomNavigationAction
+              {/*  <BottomNavigationAction
                 className="buttomNavigation"
                 label="Saved Ads" 
                 component={Link} to={routes.SAVEDADS}
-                icon={<Icon>streetview</Icon>} />
+              icon={<Icon>streetview</Icon>} /> */}
 
 </BottomNavigation>
 
@@ -94,7 +94,7 @@ class HomePage extends Component {
                         
             <Route exact path={routes.MYADS} component={() => <MyAds />}/>
             <Route exact path={routes.MESSAGE} component={() =><Messages />}/>
-            <Route exact path={routes.ACCOUNT_HOME} component={() =>< Home />}/>
+            <Route exact path={routes.ACCOUNT_HOME} component={() =>< HomeComp />}/>
         </Paper>
           
         </Grid>
