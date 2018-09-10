@@ -61,7 +61,8 @@
     "start": "node app.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "workbox" : "workbox generateSW workbox-config.js"
   },
   "engines": {
     "node": "8.9.1",

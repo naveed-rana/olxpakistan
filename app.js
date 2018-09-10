@@ -8,6 +8,7 @@ const cookieparser =require('cookie-parser');
 var setuppassport = require('./server/Passport');
 var usersRouter = require('./server/routes/users');
 var ads = require('./server/routes/ads');
+var tocken = require('./server/routes/tocken');
 var seachRoutes = require('./server/routes/search');
 var messageRoutes = require('./server/routes/messages');
 var app = express();
@@ -39,6 +40,7 @@ app.use('/user', usersRouter);
 app.use('/ads', ads);
 app.use('/search', seachRoutes);
 app.use('/message', messageRoutes);
+app.use('/tocken', tocken);
 
 app.use(express.static(path.join(__dirname, './build')));
 app.use('/static',express.static(path.join(__dirname, './uploads')));

@@ -12,6 +12,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Icon from '@material-ui/core/Icon';
 import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
+import {startSendTocken} from '../redux/actions/messageActions';
 
 class HomePage extends Component {
   state = {
@@ -22,6 +23,15 @@ class HomePage extends Component {
      if(!this.props.user){
        this.props.history.push(routes.LOGIN);
      }
+     else{
+       let tocken = localStorage.getItem('token');
+       if (tocken){
+      let data = {
+        tocken,
+        userid:this.props.user
+      }
+      this.props.startSendTocken(data);
+     }}
   }  
   handleChange = (event, value) => {
     this.setState({ value });
@@ -103,4 +113,4 @@ const mapStateToProps = state => ({
   user : state.user.user._id,
 })
 
-export default withRouter(connect(mapStateToProps,null)(HomePage));
+export default withRouter(connect(mapStateToProps,{startSendTocken})(HomePage));

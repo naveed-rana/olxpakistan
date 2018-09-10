@@ -1,12 +1,12 @@
-
+import {toast} from 'react-toastify';
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyDX8myqZhSBYg-DH13Cy4moZSnSh8Hxs6k",
-    authDomain: "olx-clone-app.firebaseapp.com",
-    databaseURL: "https://olx-clone-app.firebaseio.com",
-    projectId: "olx-clone-app",
-    storageBucket: "olx-clone-app.appspot.com",
-    messagingSenderId: "318699316380"
+    apiKey: "AIzaSyCu5FC9GkzqX7jaIzP_XOxqMLlpJxULFIw",
+    authDomain: "reactfirebase-aac85.firebaseapp.com",
+    databaseURL: "https://reactfirebase-aac85.firebaseio.com",
+    projectId: "reactfirebase-aac85",
+    storageBucket: "reactfirebase-aac85.appspot.com",
+    messagingSenderId: "571909973565"
   };
   firebase.initializeApp(config);
   // Retrieve Firebase Messaging object.
@@ -18,13 +18,13 @@ var messaging = firebase.messaging();
 // }
 messaging.onMessage(function(payload) {
   console.log('Message received. ', payload);
+  toast.success(`New Message \n ${payload.notification
+    .body}`);
 });
 
 
 messaging.requestPermission().then(function() {
     console.log('Notification permission granted.');
-    // TODO(developer): Retrieve an Instance ID token for use with FCM.
-    // ...
     return messaging.getToken();
   }).then((token) => {
     // Simple ajax call to send user token to server for saving

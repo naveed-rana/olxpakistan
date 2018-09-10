@@ -44,3 +44,15 @@ export function startGetMessage(id) {
 
 
 }
+
+export function startSendTocken(data) {
+    
+    return (dispatch) => {
+        axios.post(baseURL+'/tocken/post',data).then((response=>{
+           console.log(response);
+           
+        }));
+    }
+
+
+}

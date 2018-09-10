@@ -9,12 +9,12 @@ importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
    // Initialize Firebase
    var config = {
-    apiKey: "AIzaSyDX8myqZhSBYg-DH13Cy4moZSnSh8Hxs6k",
-    authDomain: "olx-clone-app.firebaseapp.com",
-    databaseURL: "https://olx-clone-app.firebaseio.com",
-    projectId: "olx-clone-app",
-    storageBucket: "olx-clone-app.appspot.com",
-    messagingSenderId: "318699316380"
+    apiKey: "AIzaSyCu5FC9GkzqX7jaIzP_XOxqMLlpJxULFIw",
+    authDomain: "reactfirebase-aac85.firebaseapp.com",
+    databaseURL: "https://reactfirebase-aac85.firebaseio.com",
+    projectId: "reactfirebase-aac85",
+    storageBucket: "reactfirebase-aac85.appspot.com",
+    messagingSenderId: "571909973565"
   };
   firebase.initializeApp(config);
 
@@ -23,12 +23,15 @@ var messaging = firebase.messaging();
 // - a message is received while the app has focus
 // - the user clicks on an app notification created by a service worker
 //   `messaging.setBackgroundMessageHandler` handler.
+
+
 messaging.setBackgroundMessageHandler(function(payload) {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here
   var notificationTitle = 'Background Message Title';
   var notificationOptions = {
     body: 'Background Message body.',
+    icon: './192x192.png'
   };
 
   return self.registration.showNotification(notificationTitle,

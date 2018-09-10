@@ -1,2 +1,76 @@
-"use strict";var precacheConfig=[["/index.html","d0ecf0d8d98e7e138a3805f10aa53122"],["/static/css/main.42d112d6.css","7e1b41a25c2783088453a0b51eb69b2b"],["/static/js/main.af7b50bf.js","57646f51414926cf918bb46628f83a4d"],["/static/media/250618-AdmissionAdPostgraduate-1.0e4793d3.jpg","0e4793d343286e4bf97d9b70753b3a76"],["/static/media/MaterialIcons-Regular.012cf6a1.woff","012cf6a10129e2275d79d6adac7f3b02"],["/static/media/MaterialIcons-Regular.570eb838.woff2","570eb83859dc23dd0eec423a49e147fe"],["/static/media/MaterialIcons-Regular.a37b0c01.ttf","a37b0c01c0baf1888ca812cc0508f6e2"],["/static/media/MaterialIcons-Regular.e79bfd88.eot","e79bfd88537def476913f3ed52f4f4b3"],["/static/media/ads1.1ea444e5.JPG","1ea444e51adad5ab792ccc31d0eb264b"],["/static/media/ads3.b5973dbf.JPG","b5973dbffba39cd36c3a45ce8c399916"],["/static/media/adsheight.274f0c9a.JPG","274f0c9a01e825530f0f76c335596397"],["/static/media/adsloading.4eae82b8.gif","4eae82b88fc8274917f03dad4e851e4d"],["/static/media/adsloading23.3775a0f3.gif","3775a0f3b74f9c0427d4a7e3e627d8fd"],["/static/media/animals.1638d0ad.JPG","1638d0ade8716e311dc42d175744ab31"],["/static/media/bike.fd6e7d33.JPG","fd6e7d33b248d32ddd3cf37f7d8967c4"],["/static/media/books.b06fbf4a.JPG","b06fbf4a5482af81ea75f6a4df731d0b"],["/static/media/car.7d0d664f.JPG","7d0d664fef74262fcd5fcda2c0665554"],["/static/media/furniture.7861ba3b.JPG","7861ba3bd9c2c7e3855f5af14ed4d9c5"],["/static/media/jobs.dec6cefb.JPG","dec6cefb411061cd80825a9cbe855f46"],["/static/media/mob.e800c409.JPG","e800c4093e3d43d2417b46f64cb47fe1"],["/static/media/postloader.716c8923.gif","716c8923d475911a2d11558f4c04ad52"],["/static/media/property1JPG.cc2244ef.JPG","cc2244ef44cdce5d4dbb7fa96f92d90d"]],cacheName="sw-precache-v3-sw-precache-webpack-plugin-"+(self.registration?self.registration.scope:""),ignoreUrlParametersMatching=[/^utm_/],addDirectoryIndex=function(e,t){var a=new URL(e);return"/"===a.pathname.slice(-1)&&(a.pathname+=t),a.toString()},cleanResponse=function(t){return t.redirected?("body"in t?Promise.resolve(t.body):t.blob()).then(function(e){return new Response(e,{headers:t.headers,status:t.status,statusText:t.statusText})}):Promise.resolve(t)},createCacheKey=function(e,t,a,n){var r=new URL(e);return n&&r.pathname.match(n)||(r.search+=(r.search?"&":"")+encodeURIComponent(t)+"="+encodeURIComponent(a)),r.toString()},isPathWhitelisted=function(e,t){if(0===e.length)return!0;var a=new URL(t).pathname;return e.some(function(e){return a.match(e)})},stripIgnoredUrlParameters=function(e,a){var t=new URL(e);return t.hash="",t.search=t.search.slice(1).split("&").map(function(e){return e.split("=")}).filter(function(t){return a.every(function(e){return!e.test(t[0])})}).map(function(e){return e.join("=")}).join("&"),t.toString()},hashParamName="_sw-precache",urlsToCacheKeys=new Map(precacheConfig.map(function(e){var t=e[0],a=e[1],n=new URL(t,self.location),r=createCacheKey(n,hashParamName,a,/\.\w{8}\./);return[n.toString(),r]}));function setOfCachedUrls(e){return e.keys().then(function(e){return e.map(function(e){return e.url})}).then(function(e){return new Set(e)})}self.addEventListener("install",function(e){e.waitUntil(caches.open(cacheName).then(function(n){return setOfCachedUrls(n).then(function(a){return Promise.all(Array.from(urlsToCacheKeys.values()).map(function(t){if(!a.has(t)){var e=new Request(t,{credentials:"same-origin"});return fetch(e).then(function(e){if(!e.ok)throw new Error("Request for "+t+" returned a response with status "+e.status);return cleanResponse(e).then(function(e){return n.put(t,e)})})}}))})}).then(function(){return self.skipWaiting()}))}),self.addEventListener("activate",function(e){var a=new Set(urlsToCacheKeys.values());e.waitUntil(caches.open(cacheName).then(function(t){return t.keys().then(function(e){return Promise.all(e.map(function(e){if(!a.has(e.url))return t.delete(e)}))})}).then(function(){return self.clients.claim()}))}),self.addEventListener("fetch",function(t){if("GET"===t.request.method){var e,a=stripIgnoredUrlParameters(t.request.url,ignoreUrlParametersMatching),n="index.html";(e=urlsToCacheKeys.has(a))||(a=addDirectoryIndex(a,n),e=urlsToCacheKeys.has(a));var r="/index.html";!e&&"navigate"===t.request.mode&&isPathWhitelisted(["^(?!\\/__).*"],t.request.url)&&(a=new URL(r,self.location).toString(),e=urlsToCacheKeys.has(a)),e&&t.respondWith(caches.open(cacheName).then(function(e){return e.match(urlsToCacheKeys.get(a)).then(function(e){if(e)return e;throw Error("The cached response that was expected is missing.")})}).catch(function(e){return console.warn('Couldn\'t serve response for "%s" from cache: %O',t.request.url,e),fetch(t.request)}))}});
+/**
+ * Welcome to your Workbox-powered service worker!
+ *
+ * You'll need to register this file in your web app and you should
+ * disable HTTP caching for this file too.
+ * See https://goo.gl/nhQhGp
+ *
+ * The rest of the code is auto-generated. Please don't update this file
+ * directly; instead, make changes to your Workbox build configuration
+ * and re-run your build process.
+ * See https://goo.gl/2aRDsh
+ */
 
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js");
+
+workbox.skipWaiting();
+workbox.clientsClaim();
+
+/**
+ * The workboxSW.precacheAndRoute() method efficiently caches and responds to
+ * requests for URLs in the manifest.
+ * See https://goo.gl/S9QRab
+ */
+self.__precacheManifest = [
+  {
+    "url": "16x16.ico",
+    "revision": "1621d279edd4a9d24aa7d3e7aeff8bc5"
+  },
+  {
+    "url": "192x192.png",
+    "revision": "ad1cb65aab445431880c825c63ac5ee1"
+  },
+  {
+    "url": "246x0w.jpg",
+    "revision": "a6cccd47dbd7dba3c63857fa32188c41"
+  },
+  {
+    "url": "24x24.ico",
+    "revision": "f225628d426759a9c6ae8b5195fe264d"
+  },
+  {
+    "url": "512x512.png",
+    "revision": "80e52287cf63185f67d3f007e285eadc"
+  },
+  {
+    "url": "app.js",
+    "revision": "39c805cd4605c7e0325cb207efedb3d0"
+  },
+  {
+    "url": "favicon.ico",
+    "revision": "a7f9d4ddd9ac3f4d04293521afa1620e"
+  },
+  {
+    "url": "index.html",
+    "revision": "c2c86b11c5cdee9c602cefb80d529460"
+  },
+  {
+    "url": "static/css/main.42d112d6.css",
+    "revision": "7e1b41a25c2783088453a0b51eb69b2b"
+  },
+  {
+    "url": "static/js/main.a5def8b6.js",
+    "revision": "7096656680f70f33ca8ffe1f292fd510"
+  },
+  {
+    "url": "static/media/250618-AdmissionAdPostgraduate-1.0e4793d3.jpg",
+    "revision": "0e4793d343286e4bf97d9b70753b3a76"
+  }
+].concat(self.__precacheManifest || []);
+workbox.precaching.suppressWarnings();
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+workbox.routing.registerRoute(/\.(?:png|jpg|jpeg|svg)$/, workbox.strategies.cacheFirst({ cacheName: "images", plugins: [new workbox.expiration.Plugin({"maxEntries":500,"purgeOnQuotaError":false})] }), 'GET');
+workbox.routing.registerRoute(/^https:\/\/fonts.(?:googleapis|gstatic).com\/(.*)/, workbox.strategies.cacheFirst({ cacheName: "fonts", plugins: [] }), 'GET');
+workbox.routing.registerRoute(/^https:\/\/graph.facebook.com\/(.*)/, workbox.strategies.cacheFirst({ cacheName: "avatars", plugins: [] }), 'GET');
+workbox.routing.registerRoute(/search/, workbox.strategies.networkFirst({ networkTimeoutSeconds: 10, cacheName: "api-cache", plugins: [] }), 'GET');
