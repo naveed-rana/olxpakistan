@@ -22,5 +22,6 @@
   "start_url": "/",
   "display": "olx pakistan",
   "theme_color": "#ffffff",
-  "background_color": "#8e24aa"
+  "background_color": "#8e24aa",
+  "gcm_sender_id": "103953800507"
 }
