@@ -6,6 +6,7 @@ var userSchemea = require('../models/usersSchema');
 
 
 router.post('/signup',(req,res)=>{
+    
           let newUser = new userSchemea(req.body);
           newUser.save((err,user)=>{
               if(err){
